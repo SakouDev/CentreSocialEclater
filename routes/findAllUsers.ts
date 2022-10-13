@@ -3,7 +3,7 @@ import { Error } from "sequelize"
 import { ApiException } from "../types/exception"
 import { wowUser } from "../types/user"
 
-const {User} = require('../database/connect')
+const {Person} = require('../database/connect')
 
 /**
  * @openapi
@@ -17,7 +17,7 @@ const {User} = require('../database/connect')
  */
 module.exports = (app : Application) => {
     app.get('/api/users', (req,res) => {
-        User.findAll()
+        Person.findAll()
         .then((users: wowUser) => {
             const message : string = 'La liste des users à bien était récuperée.'
             res.json({message, data: users})

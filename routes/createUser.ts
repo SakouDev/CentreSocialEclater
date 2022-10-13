@@ -3,7 +3,7 @@ import { UniqueConstraintError, ValidationError } from "sequelize";
 import { ApiException } from "../types/exception";
 import { wowUser } from "../types/user";
 
-const { User } = require("../database/connect");
+const { Person } = require("../database/connect");
 
 /**
  * @swagger
@@ -25,14 +25,14 @@ const { User } = require("../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"name": "User","mail": "User@gmail.com","description": "User","image": "https://picsum.photos/200/300"}
+  *         default: {"name": "Person","mail": "Person@gmail.com","description": "Person","image": "https://picsum.photos/200/300"}
   *      responses:
   *        200:
   *          description: Returns a mysterious string.
   */
 module.exports = (app: Application) => {
   app.post("/api/users", (req, res) => {
-    User.create(req.body)
+    Person.create(req.body)
       .then((user: wowUser) => {
         const message: string = `Le user ${req.body.name} a bien été crée.`;
         res.json({ message, data: user });

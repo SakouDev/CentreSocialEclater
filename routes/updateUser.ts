@@ -3,7 +3,7 @@ import { ValidationError } from "sequelize";
 import { ApiException } from "../types/exception";
 import { wowUser } from "../types/user";
 
-const { User } = require("../database/connect");
+const { Person } = require("../database/connect");
 
 /**
   * @openapi
@@ -23,7 +23,7 @@ const { User } = require("../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"name": "User","mail": "User@gmail.com","description": "User","image": "https://picsum.photos/200/300"}
+  *         default: {"name": "Person","mail": "Person@gmail.com","description": "Person","image": "https://picsum.photos/200/300"}
   *      responses:
   *        200:
   *          description: Returns a mysterious string.
@@ -31,11 +31,11 @@ const { User } = require("../database/connect");
 module.exports = (app: Application) => {
   app.put("/api/users/:id", (req, res) => {
     const id = req.params.id;
-    User.update(req.body, {
+    Person.update(req.body, {
       where: { id: id },
     })
       .then(() => {
-       return User.findByPk(id).then((user: wowUser) => {
+       return Person.findByPk(id).then((user: wowUser) => {
           if (user === null){
             const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})

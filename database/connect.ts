@@ -3,26 +3,23 @@ let users = require('../database/mock-user')
 const {Sequelize} = require('sequelize')
 const UserModel = require('../models/users')
 
-const sequelize = new Sequelize (
-    'CentreSocialEclater',
-    'AdminEclater',
-    '1019910897116101114',
-    {
-        host:'localhost',
-        dialect:'postgres',
-        port: 5432,
-        dialectOptions: {
-            timezone: 'Etc/GMT-2'
-        }
-    }
-)
+const DBlogs = {
+    dialect: "postgres",
+    user: "cdrhvogb",
+    host: "lucky.db.elephantsql.com",
+    database: "cdrhvogb",
+    password: "rFfb3frDZJJaKvCgXX3IOwv1Euzh09Lr",
+    port: 5432,
+}
+
+const sequelize = new Sequelize(`${DBlogs.dialect}://${DBlogs.user}:${DBlogs.password}@${DBlogs.host}:${DBlogs.port}/${DBlogs.database}`);
 
 sequelize.authenticate()
     .then(() => console.log("La connextion à la base de donnée à bien était établie"))
     .catch((error : Error) => console.error(`Impossible de se connecter à la base de données ${error}`)
     )
 
-const User = UserModel(sequelize, DataTypes)
+const Person = UserModel(sequelize, DataTypes)
 
    
 const initDb = () => {
@@ -30,7 +27,7 @@ const initDb = () => {
         return sequelize.sync({force: true}).then(()=> {
             
             users.map((user: { name: string; mail: string; description: string; image: string; }) => {
-                User.create({
+                Person.create({
                     name: user.name,
                     mail: user.mail,
                     description: user.description,
@@ -42,5 +39,5 @@ const initDb = () => {
 }
 
 module.exports = {
-    initDb, User
+    initDb, Person
 }

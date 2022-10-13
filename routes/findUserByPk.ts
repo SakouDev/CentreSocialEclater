@@ -2,7 +2,7 @@ import { Application } from "express"
 import { ApiException } from "../types/exception"
 import { wowUser } from "../types/user"
 
-const { User } = require('../database/connect')
+const { Person } = require('../database/connect')
   
 /**
   * @openapi
@@ -22,7 +22,7 @@ const { User } = require('../database/connect')
   */
 module.exports = (app : Application) => {
   app.get('/api/users/:id', (req, res) => {
-    User.findByPk(req.params.id)
+    Person.findByPk(req.params.id)
       .then((user : wowUser )=> {
         if (user === null){
           const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
