@@ -20,7 +20,7 @@ app.listen(port, () => {
 })
 
 app.get("/", (req :Request, res: Response) => {
-    res.send("Ceci est la racine")
+    res.send("Pour obtenir le swagger, rendez-vous sur localhost:5000/api/docs")
 })
 const swaggerOptions = {
     swaggerDefinition: {
