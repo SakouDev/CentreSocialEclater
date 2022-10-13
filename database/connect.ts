@@ -4,9 +4,9 @@ const {Sequelize} = require('sequelize')
 const UserModel = require('../models/users')
 
 const sequelize = new Sequelize (
-    'TestForUsers',
-    'Test',
-    '12344',
+    'CentreSocialEclater',
+    'AdminEclater',
+    '1019910897116101114',
     {
         host:'localhost',
         dialect:'postgres',
