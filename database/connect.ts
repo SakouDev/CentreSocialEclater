@@ -24,7 +24,7 @@ sequelize.authenticate()
 
 const User = UserModel(sequelize, DataTypes)
 
-   
+
 const initDb = () => {
 
         return sequelize.sync({force: true}).then(()=> {
