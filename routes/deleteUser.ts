@@ -1,6 +1,6 @@
 import { Application } from "express";
 import { ApiException } from "../types/exception";
-import { Wow } from "../types/user";
+import { userId } from "../types/user";
 
 const { User } = require('../database/connect')
   
@@ -9,8 +9,8 @@ const { User } = require('../database/connect')
   * @openapi
   * /api/users/{id}:
   *  delete:
-  *      tags: [Users]
-  *      description: Delete an user
+  *      tags: [Templates]
+  *      description: Delete an template
   *      parameters:
   *       - name: id
   *         in: path
@@ -22,14 +22,14 @@ const { User } = require('../database/connect')
   */
 module.exports = (app :Application) => {
   app.delete('/api/users/:id', (req, res) => {
-    User.findByPk(req.params.id).then((user: Wow) => {
+    User.findByPk(req.params.id).then((user: userId) => {
       if (user === null){
         const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
         return res.status(404).json({message})
       }
 
       const userDeleted = user;
-     return  User.destroy({
+      return  User.destroy({
         where: { id: user.id }
       })
       .then(() => {

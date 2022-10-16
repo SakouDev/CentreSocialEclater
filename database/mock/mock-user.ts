@@ -7,6 +7,7 @@ const users = [
     zipCode : "62200",
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
   {
     mail: "test2@test.com",
@@ -16,6 +17,7 @@ const users = [
     zipCode : "62200",
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
   {
     mail: "test3@test.com",
@@ -25,6 +27,7 @@ const users = [
     zipCode : "62200",
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
   {
     mail: "test4@test.com",
@@ -34,6 +37,7 @@ const users = [
     zipCode : "62200",
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
   {
     mail: "test5@test.com",
@@ -43,6 +47,7 @@ const users = [
     zipCode : 62200,
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
   {
     mail: "test6@test.com",
@@ -52,6 +57,7 @@ const users = [
     zipCode : 62200,
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
   {
     mail: "test7@test.com",
@@ -61,6 +67,7 @@ const users = [
     zipCode : 62200,
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
   {
     mail: "manfou@test.com",
@@ -70,6 +77,7 @@ const users = [
     zipCode : "62200",
     city : "Boulogne-sur Mer",
     role : "",
+    image: "http://www.rien.com",
   },
 ];
 

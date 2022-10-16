@@ -26,7 +26,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     },
     password: {
         type: dataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate:{
             notNull: {msg : 'Le mot de passe est requis'},
         }
@@ -42,7 +42,15 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     },
     role: {
         type:dataTypes.STRING,
+        allowNull: true,
     },
+    image: {
+        type: dataTypes.STRING,
+        allowNull: true,
+        validate : {
+            isUrl:true
+        }
+    }, 
 
 })
 }

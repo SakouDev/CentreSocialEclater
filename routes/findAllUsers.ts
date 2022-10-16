@@ -1,7 +1,7 @@
 import { Application } from "express"
 import { Error } from "sequelize"
 import { ApiException } from "../types/exception"
-import { wowUser } from "../types/user"
+import { user } from "../types/user"
 
 const {User} = require('../database/connect')
 
@@ -9,8 +9,8 @@ const {User} = require('../database/connect')
  * @openapi
  * /api/users:
  *   get:
- *      tags: [Users]
- *      description: Menfou
+ *      tags: [Templates]
+ *      description: Welcome to swagger-jsdoc!
  *      responses:
  *        200:
  *          description: Returns a mysterious string.
@@ -18,7 +18,7 @@ const {User} = require('../database/connect')
 module.exports = (app : Application) => {
     app.get('/api/users', (req,res) => {
         User.findAll()
-        .then((users: wowUser) => {
+        .then((users: user) => {
             const message : string = 'La liste des users à bien était récuperée.'
             res.json({message, data: users})
         })

@@ -1,7 +1,7 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../types/exception";
-import { wowUser } from "../types/user";
+import { user } from "../types/user";
 
 const { User } = require("../database/connect");
 
@@ -9,8 +9,8 @@ const { User } = require("../database/connect");
   * @openapi
   * /api/users/{id}:
   *  put:
-  *      tags: [Users]
-  *      description: Update an user
+  *      tags: [Templates]
+  *      description: Update an template
   *      consumes:
   *       - application/json
   *      parameters:
@@ -22,8 +22,8 @@ const { User } = require("../database/connect");
   *       - name: JSON
   *         in: body
   *         required: true
-  *         type: object
-  *         default: {"name": "User","mail": "User@gmail.com","description": "User","image": "https://picsum.photos/200/300"}
+  *         type: formData
+  *         default: {"name": "Template","mail": "Template@gmail.com","description": "Template","image": "https://picsum.photos/200/300"}
   *      responses:
   *        200:
   *          description: Returns a mysterious string.
@@ -35,12 +35,12 @@ module.exports = (app: Application) => {
       where: { id: id },
     })
       .then(() => {
-       return User.findByPk(id).then((user: wowUser) => {
+       return User.findByPk(id).then((user: user) => {
           if (user === null){
             const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
           }
-            const message = `L'utilisateur ${user.name} a bien été modifié.`;
+            const message = `L'utilisateur ${user.mail} a bien été modifié.`;
             res.json({ message, data: user });
           })
       })

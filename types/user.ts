@@ -1,4 +1,4 @@
-export interface wowUser{
+export interface user{
 
     mail : string;
 
@@ -18,7 +18,7 @@ export interface wowUser{
 
 }
 
-export interface Wow extends wowUser {
+export interface userId extends user {
 
     id : number;
 
