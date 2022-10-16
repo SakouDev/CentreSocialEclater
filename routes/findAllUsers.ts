@@ -1,7 +1,7 @@
 import { Application } from "express"
 import { Error } from "sequelize"
 import { ApiException } from "../types/exception"
-import { wowTemplate } from "../types/template"
+import { user } from "../types/user"
 
 const {User} = require('../database/connect')
 
@@ -18,7 +18,7 @@ const {User} = require('../database/connect')
 module.exports = (app : Application) => {
     app.get('/api/users', (req,res) => {
         User.findAll()
-        .then((users: wowTemplate) => {
+        .then((users: user) => {
             const message : string = 'La liste des users à bien était récuperée.'
             res.json({message, data: users})
         })

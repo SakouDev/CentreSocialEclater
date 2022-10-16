@@ -2,16 +2,20 @@
 
 import { stringify } from "querystring"
 import { DataTypes } from "sequelize"
-import { candidat } from "../types/candidat"
-import { wowTemplate } from "../types/template"
 const {Sequelize} = require('sequelize')
 
 
+import { user } from "../types/user"
+const UserModel = require('../models/user')
 let users = require('../database/mock/mock-user')
+
+import { candidat } from "../types/candidat"
+const CandidatModel = require('../models/candidat')
 let candidats = require('../database/mock/mock-candidat')
 
-const UserModel = require('../models/users')
-const CandidatModel = require('../models/candidat')
+import { employeur } from "../types/employeur"
+const EmployeurModel = require('../models/employeur')
+let employeurs = require('../database/mock/mock-employeur')
 
 const sequelize = new Sequelize (
     'TestForVincent',
@@ -34,12 +38,13 @@ sequelize.authenticate()
 
 const User = UserModel(sequelize, DataTypes)
 const Candidat = CandidatModel(sequelize, DataTypes)
+const Employeur = EmployeurModel(sequelize, DataTypes)
 
 const initDb = () => {
 
         return sequelize.sync({force: true}).then(()=> {
             
-            users.map((user: wowTemplate) => {
+            users.map((user: user) => {
                 User.create({
                     name: user.name,
                     mail: user.mail,
@@ -55,11 +60,22 @@ const initDb = () => {
                     birthday: candidat.birthday
                 }).then((Luc: { toJSON: () => string }) => console.log(Luc.toJSON()))
             })
+
+            employeurs.map((employeur: employeur) => {
+                Employeur.create({
+                    name: employeur.name,
+                    siret: employeur.siret
+                }).then((Luc: { toJSON: () => string }) => console.log(Luc.toJSON()))
+            })
+
+
+
+
             console.log('La base de donné user a bien été initialisée !')
     })
 }
 
 
 module.exports = {
-    initDb, User, Candidat
+    initDb, User, Candidat, Employeur
 }

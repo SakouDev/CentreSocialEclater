@@ -1,7 +1,7 @@
 import { Application } from "express";
 import { UniqueConstraintError, ValidationError } from "sequelize";
 import { ApiException } from "../types/exception";
-import { wowTemplate } from "../types/template";
+import { user } from "../types/user";
 
 const { User } = require("../database/connect");
 
@@ -33,7 +33,7 @@ const { User } = require("../database/connect");
 module.exports = (app: Application) => {
   app.post("/api/users", (req, res) => {
     User.create(req.body)
-      .then((user: wowTemplate) => {
+      .then((user: user) => {
         const message: string = `Le user ${req.body.name} a bien été crée.`;
         res.json({ message, data: user });
       })

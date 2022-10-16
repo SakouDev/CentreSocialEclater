@@ -1,7 +1,7 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../types/exception";
-import { wowTemplate } from "../types/template";
+import { user } from "../types/user";
 
 const { User } = require("../database/connect");
 
@@ -35,7 +35,7 @@ module.exports = (app: Application) => {
       where: { id: id },
     })
       .then(() => {
-       return User.findByPk(id).then((user: wowTemplate) => {
+       return User.findByPk(id).then((user: user) => {
           if (user === null){
             const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})

@@ -1,6 +1,6 @@
 import { Application } from "express";
 import { ApiException } from "../types/exception";
-import { Wow } from "../types/template";
+import { userId } from "../types/user";
 
 const { User } = require('../database/connect')
   
@@ -22,7 +22,7 @@ const { User } = require('../database/connect')
   */
 module.exports = (app :Application) => {
   app.delete('/api/users/:id', (req, res) => {
-    User.findByPk(req.params.id).then((user: Wow) => {
+    User.findByPk(req.params.id).then((user: userId) => {
       if (user === null){
         const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
         return res.status(404).json({message})

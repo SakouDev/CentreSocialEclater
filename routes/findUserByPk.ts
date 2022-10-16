@@ -1,6 +1,6 @@
 import { Application } from "express"
 import { ApiException } from "../types/exception"
-import { wowTemplate } from "../types/template"
+import { user } from "../types/user"
 
 const { User } = require('../database/connect')
   
@@ -23,7 +23,7 @@ const { User } = require('../database/connect')
 module.exports = (app : Application) => {
   app.get('/api/users/:id', (req, res) => {
     User.findByPk(req.params.id)
-      .then((user : wowTemplate )=> {
+      .then((user : user )=> {
         if (user === null){
           const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
           return res.status(404).json({message})
