@@ -14,6 +14,14 @@ import { employeur } from "../types/employeur"
 const EmployeurModel = require('../models/employeur')
 let employeurs = require('../database/mock/mock-employeur')
 
+import { diplome } from "../types/diplome"
+const DiplomeModel = require('../models/diplome')
+let diplomes = require('../database/mock/mock-diplome')
+
+import { disponibilite } from "../types/disponibilite"
+const DisponibiliteModel = require('../models/disponibilite')
+let disponibilites = require('../database/mock/mock-disponibilite')
+
 const sequelize = new Sequelize (
     'TestForVincent',
     'Test',
@@ -36,6 +44,8 @@ sequelize.authenticate()
 const User = UserModel(sequelize, DataTypes)
 const Candidat = CandidatModel(sequelize, DataTypes)
 const Employeur = EmployeurModel(sequelize, DataTypes)
+const Diplome = DiplomeModel(sequelize, DataTypes)
+const Disponibilite = DisponibiliteModel(sequelize, DataTypes)
 
 const initDb = () => {
 
@@ -69,7 +79,17 @@ const initDb = () => {
                 }).then((Luc: { toJSON: () => string }) => console.log(Luc.toJSON()))
             })
 
+            diplomes.map((diplome: diplome) => {
+                Diplome.create({
+                    certificate: diplome.certificate
+                }).then((Luc: { toJSON: () => string}) => console.log(Luc.toJSON()))
+            })
 
+            disponibilites.map((disponibilite: disponibilite) => {
+                Disponibilite.create({
+                    namePeriod: disponibilite.namePeriod
+                }).then((Luc: { toJSON: () => string}) => console.log(Luc.toJSON()))
+            })
 
 
             console.log('La base de donné user a bien été initialisée !')

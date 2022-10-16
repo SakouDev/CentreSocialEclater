@@ -1,5 +1,5 @@
 export interface disponibilite{
 
     id : number;
-    nomPeriod : string;
+    namePeriod : string;
 }

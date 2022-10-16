@@ -41,7 +41,7 @@ const disponibilite  = [
     },
     {
         id: 11,
-        namePeriod: "Vacances d'ocotbre",
+        namePeriod: "Vacances d'Octobre",
     },
     {
         id: 12,
