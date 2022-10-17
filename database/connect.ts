@@ -54,6 +54,7 @@ const Token = TokenModel(sequelize, DataTypes)
 
 const initDb = () => {
 
+
         User.belongsToMany(Disponibilite, {through: 'Menfou'})
         Disponibilite.belongsToMany(User, {through: 'Menfou'})
 
@@ -114,5 +115,5 @@ const initDb = () => {
 
 
 module.exports = {
-    initDb, User, Candidat, Employeur
+    initDb, User, Candidat, Employeur, Diplome, Token
 }

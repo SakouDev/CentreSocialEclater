@@ -9,7 +9,7 @@ const {User} = require('../../database/connect')
  * @openapi
  * /api/users:
  *   get:
- *      tags: [Templates]
+ *      tags: [User]
  *      description: Welcome to swagger-jsdoc!
  *      responses:
  *        200:

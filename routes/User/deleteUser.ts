@@ -9,7 +9,7 @@ const { User } = require('../../database/connect')
   * @openapi
   * /api/users/{id}:
   *  delete:
-  *      tags: [Templates]
+  *      tags: [User]
   *      description: Delete an template
   *      parameters:
   *       - name: id
