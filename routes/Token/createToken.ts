@@ -1,22 +1,22 @@
 import { Application } from "express";
 import { UniqueConstraintError, ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception"
-import { diplome } from "../../types/diplome"
+import { token } from "../../types/token"
 
-const { Diplome } = require("../database/connect");
+const { Token } = require("../database/connect");
 
 /**
  * @swagger
  * tags:
- *      name: Diplome
+ *      name: Token
  *      description: Manage template
  */
 
 /**
   * @openapi
-  * /api/diplomes:
+  * /api/tokens:
   *  post:
-  *      tags: [Diplome]
+  *      tags: [Token]
   *      description: Crée un utilisateur dans la BDD
   *      consumes:
   *       - application/json
@@ -31,17 +31,17 @@ const { Diplome } = require("../database/connect");
   *          description: La requête s'est bien déroulé
   */
 module.exports = (app: Application) => {
-  app.post("/api/diplomes", (req, res) => {
-    Diplome.create(req.body)
-      .then((diplome: diplome) => {
-        const message: string = `Le diplome ${req.body.name} a bien été crée.`;
-        res.json({ message, data: diplome });
+  app.post("/api/tokens", (req, res) => {
+    Token.create(req.body)
+      .then((token: token) => {
+        const message: string = `Le token ${req.body.name} a bien été crée.`;
+        res.json({ message, data: token });
       })
       .catch((error : ApiException) => {
         if(error instanceof ValidationError){
           return res.status(400).json({message: error.message, data : error})
         }
-        const message = `Le diplome n'a pas pu être ajouté. Réessayer dans quelques instants.`
+        const message = `Le token n'a pas pu être ajouté. Réessayer dans quelques instants.`
         res.status(500).json({message, data : error})
     })
   });
