@@ -10,7 +10,7 @@ const { Diplome } = require("../../database/connect");
   * /api/diplomes/{id}:
   *  put:
   *      tags: [Diplomes]
-  *      description: Update an template
+  *      description: Modifier un diplome
   *      consumes:
   *       - application/json
   *      parameters:
@@ -23,10 +23,10 @@ const { Diplome } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: formData
-  *         default: {"name": "Template","mail": "Template@gmail.com","description": "Template","image": "https://picsum.photos/200/300"}
+  *         default: {"certificate": "BAFA"}
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé
   */
 module.exports = (app: Application) => {
   app.put("/api/diplomes/:id", (req, res) => {
@@ -35,7 +35,7 @@ module.exports = (app: Application) => {
       where: { id: id },
     })
       .then(() => {
-       return Diplome.findByPk(id).then((diplome: diplome) => {
+        return Diplome.findByPk(id).then((diplome: diplome) => {
           if (diplome === null){
             const message = "Le diplome demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})

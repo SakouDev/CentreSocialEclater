@@ -9,10 +9,10 @@ const { Candidat } = require('../../database/connect')
  * /api/candidats:
  *   get:
  *      tags: [Candidats]
- *      description: Return all candidats
+ *      description: récupérer tous les candidats
  *      responses:
  *        200:
- *          description: Returns a mysterious string.
+ *          description: La requête s'est bien déroulé.
  */
 module.exports = (app : Application) => {
     app.get('/api/candidats', (req,res) => {

@@ -10,7 +10,7 @@ const { Diplome } = require("../../database/connect");
   * /api/diplomes/{id}:
   *  delete:
   *      tags: [Diplomes]
-  *      description: Delete an template
+  *      description: Supprimer un diplome
   *      parameters:
   *       - name: id
   *         in: path
@@ -18,7 +18,7 @@ const { Diplome } = require("../../database/connect");
   *         type: integer
   *      responses:
   *        200:
-  *          description: Returns a mysterious string. 
+  *          description: La requête s'est bien déroulé
   */
 module.exports = (app :Application) => {
   app.delete('/api/diplomes/:id', (req, res) => {

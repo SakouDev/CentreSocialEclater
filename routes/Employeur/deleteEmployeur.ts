@@ -11,7 +11,7 @@ const { Employeur } = require('../../database/connect')
   * /api/employeurs/{id}:
   *  delete:
   *      tags: [Employeurs]
-  *      description: Delete Employeur
+  *      description: Supprimer un Employeur
   *      parameters:
   *       - name: id
   *         in: path
@@ -19,7 +19,7 @@ const { Employeur } = require('../../database/connect')
   *         type: integer
   *      responses:
   *        200:
-  *          description: Returns a mysterious string. 
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app :Application) => {
   app.delete('/api/employeurs/:id', (req, res) => {

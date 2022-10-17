@@ -9,10 +9,10 @@ const { Employeur } = require('../../database/connect')
  * /api/employeurs:
  *   get:
  *      tags: [Employeurs]
- *      description: Return all employeurs
+ *      description: Liste des Employeurs
  *      responses:
  *        200:
- *          description: Returns a mysterious string.
+ *          description: La requête s'est bien déroulé.
  */
 module.exports = (app : Application) => {
     app.get('/api/employeurs', (req,res) => {

@@ -10,7 +10,7 @@ const { Candidat } = require('../../database/connect')
   * /api/candidats/{id}:
   *  delete:
   *      tags: [Candidats]
-  *      description: Delete a Candidat
+  *      description: Supprimer un Candidat
   *      parameters:
   *       - name: id
   *         in: path
@@ -18,7 +18,7 @@ const { Candidat } = require('../../database/connect')
   *         type: integer
   *      responses:
   *        200:
-  *          description: Returns a mysterious string. 
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app :Application) => {
   app.delete('/api/candidats/:id', (req, res) => {

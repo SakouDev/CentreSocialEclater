@@ -9,7 +9,7 @@ const { User } = require("../../database/connect");
  * @swagger
  * tags:
  *      name: User
- *      description: Gérer les routes utilisateurs
+ *      description: Gérer les routes Utilisateur (User)
  */
  
 /**
