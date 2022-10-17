@@ -3,12 +3,12 @@ import { UniqueConstraintError, ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception"
 import { diplome } from "../../types/diplome"
 
-const { Diplome } = require("../database/connect");
+const { Diplome } = require("../../database/connect");
 
 /**
  * @swagger
  * tags:
- *      name: Diplomes
+ *      name: Diplomes../
  *      description: Manage template
  */
 
@@ -25,7 +25,7 @@ const { Diplome } = require("../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"mail": "Menfou@gmail.com","visibility": true,"password": "menfou","address": "9 rue du régiment de la chaudière","zipCode": "62200", "city": "Boulogne-sur-Mer", "role": "", "image": "https://picsum.photos/200/300"}
+  *         default: {"certificate": "Menfou"}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé

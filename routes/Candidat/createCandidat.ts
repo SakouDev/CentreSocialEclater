@@ -25,7 +25,7 @@ const { Candidat } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"mail": "Menfou@gmail.com","visibility": true,"password": "menfou","address": "9 rue du régiment de la chaudière","zipCode": "62200", "city": "Boulogne-sur-Mer", "role": "", "image": "https://picsum.photos/200/300"}
+  *         default: {"lastName": "Menfou","firstName": "MenfouAussi","birthday": "pareil"}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé

@@ -3,7 +3,7 @@ import { Error } from "sequelize"
 import { ApiException } from "../../types/exception"
 import { token } from "../../types/token"
 
-const {Token} = require('../database/connect')
+const {Token} = require('../../database/connect')
 
 /**
  * @openapi
