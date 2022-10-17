@@ -1,14 +1,15 @@
 import { Application } from "express"
+import { candidat } from "../../types/candidat"
 import { ApiException } from "../../types/exception"
 import { user } from "../../types/user"
 
-const { User } = require('../../database/connect')
+const { Candidat } = require('../../database/connect')
   
 /**
   * @openapi
-  * /api/users/{id}:
+  * /api/candidats/{id}:
   *  get:
-  *      tags: [User]
+  *      tags: [Candidats]
   *      description: Get an template by id
   *      parameters:
   *       - name: id
@@ -21,16 +22,16 @@ const { User } = require('../../database/connect')
   *          description: Returns a mysterious string.
   */
 module.exports = (app : Application) => {
-  app.get('/api/users/:id', (req, res) => {
-    User.findByPk(req.params.id)
-      .then((user : user )=> {
-        if (user === null){
+  app.get('/api/candidats/:id', (req, res) => {
+    Candidat.findByPk(req.params.id)
+      .then((candidat : candidat )=> {
+        if (candidat === null){
           const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
           return res.status(404).json({message})
         }
 
         const message : string = 'Un utilisateur a bien été trouvé.'
-        res.json({ message, data: user })
+        res.json({ message, data: candidat })
       })
       .catch((error : ApiException ) => {
         const message = "Le user demander n'a pas pu être récuperer. Réessayer dans quelques instants."

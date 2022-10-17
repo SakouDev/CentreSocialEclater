@@ -54,8 +54,8 @@ const Token = TokenModel(sequelize, DataTypes)
 
 const initDb = () => {
 
-        User.belongsToMany(Disponibilite, {through: 'Menfou'})
-        Disponibilite.belongsToMany(User, {through: 'Menfou'})
+        User.belongsToMany(Disponibilite, {through: 'LucF'})
+        Disponibilite.belongsToMany(User, {through: 'LucF'})
 
 
 

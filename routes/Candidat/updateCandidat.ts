@@ -1,15 +1,16 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
+import { candidat } from "../../types/candidat";
 import { ApiException } from "../../types/exception";
 import { user } from "../../types/user";
 
-const { User } = require("../../database/connect");
+const { Candidat } = require("../../database/connect");
 
 /**
   * @openapi
-  * /api/users/{id}:
+  * /api/candidats/{id}:
   *  put:
-  *      tags: [User]
+  *      tags: [Candidats]
   *      description: Update an template
   *      consumes:
   *       - application/json
@@ -29,19 +30,19 @@ const { User } = require("../../database/connect");
   *          description: Returns a mysterious string.
   */
 module.exports = (app: Application) => {
-  app.put("/api/users/:id", (req, res) => {
+  app.put("/api/candidats/:id", (req, res) => {
     const id = req.params.id;
-    User.update(req.body, {
+    Candidat.update(req.body, {
       where: { id: id },
     })
       .then(() => {
-       return User.findByPk(id).then((user: user) => {
-          if (user === null){
+       return Candidat.findByPk(id).then((candidat: candidat) => {
+          if (candidat === null){
             const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
           }
-            const message = `L'utilisateur ${user.mail} a bien été modifié.`;
-            res.json({ message, data: user });
+            const message = `L'utilisateur ${candidat.lastName} ${candidat.firstName} a bien été modifié.`;
+            res.json({ message, data: candidat });
           })
       })
       .catch((error: ApiException) => {
