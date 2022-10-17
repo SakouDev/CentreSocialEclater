@@ -2,7 +2,7 @@ import { Application } from "express";
 import { ApiException } from "../../types/exception"
 import { diplome } from "../../types/diplome"
 
-const { Diplome } = require("../database/connect");
+const { Diplome } = require("../../database/connect");
   
 
 /**
