@@ -49,6 +49,12 @@ require('./routes/User/createUser')(app)
 require('./routes/User/updateUser')(app)
 require('./routes/User/deleteUser')(app)
 
+require('./routes/User/findAllDisponibilites')(app)
+require('./routes/User/findDisponibiliteByPk')(app)
+require('./routes/User/createDisponibilite')(app)
+require('./routes/User/updateDisponibilite')(app)
+require('./routes/User/deleteDisponibilite')(app)
+
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'
     return ApiException.status(404).json({message})
