@@ -1,6 +1,15 @@
 export interface candidat {
-    id : number,
+    
     lastName : string,
+    
     firstName : string,
+    
     birthday : string
+
+}
+
+export interface candidatId extends candidat {
+
+    id : number
+
 }

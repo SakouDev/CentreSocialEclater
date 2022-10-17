@@ -1,15 +1,15 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception"
-import { token } from "../../types/token"
+import { diplome } from "../../types/diplome"
 
-const { Token } = require("../../database/connect");
+const { Diplome } = require("../../database/connect");
 
 /**
   * @openapi
-  * /api/tokens/{id}:
+  * /api/diplomes/{id}:
   *  put:
-  *      tags: [Token]
+  *      tags: [Diplomes]
   *      description: Update an template
   *      consumes:
   *       - application/json
@@ -29,26 +29,26 @@ const { Token } = require("../../database/connect");
   *          description: Returns a mysterious string.
   */
 module.exports = (app: Application) => {
-  app.put("/api/tokens/:id", (req, res) => {
+  app.put("/api/diplomes/:id", (req, res) => {
     const id = req.params.id;
-    Token.update(req.body, {
+    Diplome.update(req.body, {
       where: { id: id },
     })
       .then(() => {
-       return Token.findByPk(id).then((token: token) => {
-          if (token === null){
-            const message = "Le token demandé n'existe pas. Réessayer avec un autre identifiant."
+       return Diplome.findByPk(id).then((diplome: diplome) => {
+          if (diplome === null){
+            const message = "Le diplome demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
           }
-            const message = `Le token ${token.token} a bien été modifié.`;
-            res.json({ message, data: token });
+            const message = `Le diplome ${diplome.certificate} a bien été modifié.`;
+            res.json({ message, data: diplome });
           })
       })
       .catch((error: ApiException) => {
         if(error instanceof ValidationError){
           return res.status(400).json({message: error.message, data : error})
         }
-        const message = `Le token n'a pas pu être modifié. Réessayer dans quelques instants.`;
+        const message = `Le diplome n'a pas pu être modifié. Réessayer dans quelques instants.`;
         res.status(500).json({ message, data: error });
       });
   });

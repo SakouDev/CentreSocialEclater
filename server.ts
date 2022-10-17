@@ -12,7 +12,7 @@ const sequelize = require('./database/connect')
 import {Response, Request} from 'express'
 
 app.use(express.json())
-sequelize.initDb()
+// sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -37,17 +37,59 @@ const swaggerOptions = {
             },],
         },
     },
-    apis: [`./routes/*.ts`]
+    apis: [`./routes/*/*.ts`]
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-require('./routes/findAllUsers')(app)
-require('./routes/findUserByPk')(app)
-require('./routes/createUser')(app)
-require('./routes/updateUser')(app)
-require('./routes/deleteUser')(app)
+//Users
+
+require('./routes/User/findAllUsers')(app)
+require('./routes/User/findUserByPk')(app)
+require('./routes/User/createUser')(app)
+require('./routes/User/updateUser')(app)
+require('./routes/User/deleteUser')(app)
+
+//Disponibilite
+
+require('./routes/Disponibilite/findAllDisponibilites')(app)
+require('./routes/Disponibilite/findDisponibiliteByPk')(app)
+require('./routes/Disponibilite/createDisponibilite')(app)
+require('./routes/Disponibilite/updateDisponibilite')(app)
+require('./routes/Disponibilite/deleteDisponibilite')(app)
+
+//Candidats
+
+require('./routes/Candidat/findAllCandidats')(app)
+require('./routes/Candidat/findCandidatByPk')(app)
+require('./routes/Candidat/createCandidat')(app)
+require('./routes/Candidat/updateCandidat')(app)
+require('./routes/Candidat/deleteCandidat')(app)
+
+// Employeur
+
+require('./routes/Employeur/findAllEmployeurs')(app)
+require('./routes/Employeur/findEmployeurByPk')(app)
+require('./routes/Employeur/createEmployeur')(app)
+require('./routes/Employeur/updateEmployeur')(app)
+require('./routes/Employeur/deleteEmployeur')(app)
+
+//Diplome 
+
+require('./routes/Diplome/findAllDiplomes')(app)
+require('./routes/Diplome/findDiplomeByPk')(app)
+require('./routes/Diplome/createDiplome')(app)
+require('./routes/Diplome/updateDiplome')(app)
+require('./routes/Diplome/deleteDiplome')(app)
+
+//Token 
+
+require('./routes/Token/findAllTokens')(app)
+require('./routes/Token/findTokenByPk')(app)
+require('./routes/Token/createToken')(app)
+require('./routes/Token/updateToken')(app)
+require('./routes/Token/deleteToken')(app)
 
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'

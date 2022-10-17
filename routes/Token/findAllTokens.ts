@@ -3,13 +3,13 @@ import { Error } from "sequelize"
 import { ApiException } from "../../types/exception"
 import { token } from "../../types/token"
 
-const {Token} = require('../database/connect')
+const {Token} = require('../../database/connect')
 
 /**
  * @openapi
  * /api/tokens:
  *   get:
- *      tags: [Templates]
+ *      tags: [Token]
  *      description: Welcome to swagger-jsdoc!
  *      responses:
  *        200:

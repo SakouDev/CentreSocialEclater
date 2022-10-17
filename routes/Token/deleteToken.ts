@@ -2,14 +2,14 @@ import { Application } from "express";
 import { ApiException } from "../../types/exception"
 import { token } from "../../types/token"
 
-const { Token } = require("../database/connect");
+const { Token } = require("../../database/connect");
   
 
 /**
   * @openapi
   * /api/tokens/{id}:
   *  delete:
-  *      tags: [Templates]
+  *      tags: [Token]
   *      description: Delete an template
   *      parameters:
   *       - name: id
