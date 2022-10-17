@@ -1,5 +1,5 @@
 
-import {  DataTypes, Sequelize, STRING } from "sequelize"
+import {  DataTypes, Sequelize, } from "sequelize"
 
 
 module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
@@ -7,17 +7,9 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
 
     
     id: {
-       type: dataTypes.INTEGER,
-       autoIncrement: true,
-       primaryKey: true, 
-    },
-    name: {
-        type: dataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notNull: { msg : 'Veuillez entrer votre nom cette valeur est requise'},
-            notEmpty : {msg : 'Le nom ne peut être vide'}
-        }
+        type: dataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true, 
     },
     mail: {
         type: dataTypes.STRING,
@@ -27,18 +19,38 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             isEmail:true, 
             notNull: {msg : 'Le mail est requis'},
             notEmpty: {msg :" L'email est une propriété requise"}
-
-
         }
     },
-    description: {
+    visibility: {
+        type: dataTypes.BOOLEAN,
+    },
+    password: {
         type: dataTypes.STRING,
+        allowNull: false,
+        validate:{
+            notNull: {msg : 'Le mot de passe est requis'},
+        }
+    },
+    address: {
+        type: dataTypes.STRING,
+    },
+    zipCode: {
+        type: dataTypes.INTEGER,
+    },
+    city: {
+        type: dataTypes.STRING,
+    },
+    role: {
+        type:dataTypes.STRING,
+        allowNull: true,
     },
     image: {
         type: dataTypes.STRING,
+        allowNull: true,
         validate : {
             isUrl:true
         }
     }, 
+
 })
 }

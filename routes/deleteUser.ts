@@ -29,7 +29,7 @@ module.exports = (app :Application) => {
       }
 
       const userDeleted = user;
-     return  User.destroy({
+      return  User.destroy({
         where: { id: user.id }
       })
       .then(() => {

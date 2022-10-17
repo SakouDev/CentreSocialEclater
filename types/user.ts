@@ -1,10 +1,18 @@
 export interface user{
 
-    name : string;
-
     mail : string;
 
-    description : string;
+    visibility : boolean;
+    
+    password: string;
+
+    address: string;
+
+    zipCode: string;
+
+    city : string;
+
+    role : string;
 
     image : string;
 

@@ -40,7 +40,7 @@ module.exports = (app: Application) => {
             const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
           }
-            const message = `L'utilisateur ${user.name} a bien été modifié.`;
+            const message = `L'utilisateur ${user.mail} a bien été modifié.`;
             res.json({ message, data: user });
           })
       })
