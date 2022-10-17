@@ -1,7 +1,7 @@
 import { Application } from "express";
 import { UniqueConstraintError, ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import { user } from "../types/user";
+import { ApiException } from "../../types/exception";
+import { user } from "../../types/user";
 
 const { User } = require("../database/connect");
 
