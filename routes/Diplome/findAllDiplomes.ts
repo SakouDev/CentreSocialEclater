@@ -10,10 +10,10 @@ const {Diplome} = require('../../database/connect')
  * /api/diplomes:
  *   get:
  *      tags: [Diplomes]
- *      description: Welcome to swagger-jsdoc!
+ *      description: Liste des diplomes
  *      responses:
  *        200:
- *          description: Returns a mysterious string.
+ *          description: La requête s'est bien déroulé
  */
 module.exports = (app : Application) => {
     app.get('/api/diplomes', (req,res) => {

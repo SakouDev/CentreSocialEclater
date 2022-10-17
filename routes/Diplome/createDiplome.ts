@@ -9,7 +9,7 @@ const { Diplome } = require("../../database/connect");
  * @swagger
  * tags:
  *      name: Diplomes
- *      description: Manage template
+ *      description: Manage les routes Diplome
  */
 
 /**
@@ -17,7 +17,7 @@ const { Diplome } = require("../../database/connect");
   * /api/diplomes:
   *  post:
   *      tags: [Diplomes]
-  *      description: Crée un utilisateur dans la BDD
+  *      description: Crée un diplome 
   *      consumes:
   *       - application/json
   *      parameters:
@@ -34,7 +34,7 @@ module.exports = (app: Application) => {
   app.post("/api/diplomes", (req, res) => {
     Diplome.create(req.body)
       .then((diplome: diplome) => {
-        const message: string = `Le diplome ${req.body.name} a bien été crée.`;
+        const message: string = `Le diplome ${req.body.certificate} a bien été crée.`;
         res.json({ message, data: diplome });
       })
       .catch((error : ApiException) => {

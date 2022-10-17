@@ -10,7 +10,7 @@ const { Token } = require("../../database/connect");
   * /api/tokens/{id}:
   *  delete:
   *      tags: [Token]
-  *      description: Delete an template
+  *      description: Supprimer un token
   *      parameters:
   *       - name: id
   *         in: path
@@ -18,7 +18,7 @@ const { Token } = require("../../database/connect");
   *         type: integer
   *      responses:
   *        200:
-  *          description: Returns a mysterious string. 
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app :Application) => {
   app.delete('/api/tokens/:id', (req, res) => {

@@ -9,7 +9,7 @@ const { Token } = require("../../database/connect");
  * @swagger
  * tags:
  *      name: Token
- *      description: Manage template
+ *      description: Manage les routes Token
  */
 
 /**
@@ -17,7 +17,7 @@ const { Token } = require("../../database/connect");
   * /api/tokens:
   *  post:
   *      tags: [Token]
-  *      description: Crée un utilisateur dans la BDD
+  *      description: Crée un token
   *      consumes:
   *       - application/json
   *      parameters:
@@ -25,10 +25,10 @@ const { Token } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"mail": "Menfou@gmail.com","visibility": true,"password": "menfou","address": "9 rue du régiment de la chaudière","zipCode": "62200", "city": "Boulogne-sur-Mer", "role": "", "image": "https://picsum.photos/200/300"}
+  *         default: {"token": "fegdfg5g5dfg5dfg5dfgf5gdfg6fd6gf6g.55gsdf65gf65gfgf5dgdf5g5g5dfg5dg5f.dg5dfg5dg5dg5dfg5ffffgfdg2dfg5sfdg5", "tokenPush": "menfou"}
   *      responses:
   *        200:
-  *          description: La requête s'est bien déroulé
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app: Application) => {
   app.post("/api/tokens", (req, res) => {

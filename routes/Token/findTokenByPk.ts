@@ -9,7 +9,7 @@ const { Token } = require('../../database/connect')
   * /api/tokens/{id}:
   *  get:
   *      tags: [Token]
-  *      description: Get an template by id
+  *      description: Trouver un Token par son Id
   *      parameters:
   *       - name: id
   *         in: path
@@ -18,7 +18,7 @@ const { Token } = require('../../database/connect')
   *         default: 1
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app : Application) => {
   app.get('/api/tokens/:id', (req, res) => {

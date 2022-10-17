@@ -9,7 +9,7 @@ const { Candidat } = require("../../database/connect");
  * @swagger
  * tags:
  *      name: Candidats
- *      description: Manage Candidat
+ *      description: Manage les routes Candidat
  */
 
 /**
@@ -17,7 +17,7 @@ const { Candidat } = require("../../database/connect");
   * /api/candidats:
   *  post:
   *      tags: [Candidats]
-  *      description: Crée un candidat dans la BDD
+  *      description: Crée un candidat
   *      consumes:
   *       - application/json
   *      parameters:
@@ -25,7 +25,7 @@ const { Candidat } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"lastName": "Menfou","firstName": "MenfouAussi","birthday": "pareil"}
+  *         default: {"lastName": "Menfou","firstName": "MenfouAussi","birthday": "14/02/2001"}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé
@@ -34,7 +34,7 @@ module.exports = (app: Application) => {
   app.post("/api/candidats", (req, res) => {
     Candidat.create(req.body)
       .then((candidat: candidat) => {
-        const message: string = `Le Candidat ${req.body.name} a bien été crée.`;
+        const message: string = `Le Candidat ${candidat.lastName} ${candidat.firstName} a bien été crée.`;
         res.json({ message, data: candidat });
       })
       .catch((error : ApiException) => {

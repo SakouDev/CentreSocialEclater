@@ -12,7 +12,7 @@ const { Employeur } = require("../../database/connect");
   * /api/employeurs/{id}:
   *  put:
   *      tags: [Employeurs]
-  *      description: Update an template
+  *      description: Modifier un Employeur
   *      consumes:
   *       - application/json
   *      parameters:
@@ -25,10 +25,10 @@ const { Employeur } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: formData
-  *         default: {"name": "Template","mail": "Template@gmail.com","description": "Template","image": "https://picsum.photos/200/300"}
+  *         default: {"name": "ECLATER", "siret": "231564156D125"}
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app: Application) => {
   app.put("/api/employeurs/:id", (req, res) => {
@@ -37,7 +37,7 @@ module.exports = (app: Application) => {
       where: { id: id },
     })
       .then(() => {
-       return Employeur.findByPk(id).then((employeur: employeur) => {
+        return Employeur.findByPk(id).then((employeur: employeur) => {
           if (employeur === null){
             const message = "L'employeur demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
