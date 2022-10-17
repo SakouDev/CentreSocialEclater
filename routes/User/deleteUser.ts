@@ -1,8 +1,8 @@
 import { Application } from "express";
-import { ApiException } from "../types/exception";
-import { userId } from "../types/user";
+import { ApiException } from "../../types/exception";
+import { userId } from "../../types/user";
 
-const { User } = require('../database/connect')
+const { User } = require('../../database/connect')
   
 
 /**
