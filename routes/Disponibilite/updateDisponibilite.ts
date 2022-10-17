@@ -23,7 +23,7 @@ const { Disponibilite } = require("../../database/connect");
  *         in: body
  *         required: true
  *         type: formData
- *         default: {"mail": "Menfou@gmail.com","visibility": true,"password": "menfou","address": "9 rue du régiment de la chaudière","zipCode": "62200", "city": "Boulogne-sur-Mer", "role": "", "image": "https://picsum.photos/200/300"}
+ *         default: {"namePeriod": "Dimanche"}
  *      responses:
  *        200:
  *          description: La requête s'est bien déroulée.
