@@ -26,12 +26,6 @@ import { token } from "../types/token"
 const TokenModel = require('../models/token')
 let tokens = require('../database/mock/mock-token')
 
-// LIAISON 
-
-import { userDispo } from '../types/users-disponibilites'
-const UserDispoModel = require("../models/user-disponibilite")
-let userDispos = require('../database/mock/mock-users-disponibilites')
-
 const sequelize = new Sequelize (
     'TestForVincent',
     'Test',
@@ -57,9 +51,9 @@ const Employeur = EmployeurModel(sequelize, DataTypes)
 const Diplome = DiplomeModel(sequelize, DataTypes)
 const Disponibilite = DisponibiliteModel(sequelize, DataTypes)
 const Token = TokenModel(sequelize, DataTypes)
-const UserDispo = UserDispoModel(sequelize, DataTypes)
 
 const initDb = () => {
+
 
         User.belongsToMany(Disponibilite, {through: 'Menfou'})
         Disponibilite.belongsToMany(User, {through: 'Menfou'})
@@ -121,5 +115,5 @@ const initDb = () => {
 
 
 module.exports = {
-    initDb, User, Candidat, Employeur, Disponibilite
+    initDb, User, Candidat, Employeur, Diplome, Token, Disponibilite
 }

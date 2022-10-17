@@ -4,6 +4,7 @@ import { user } from "../../types/user";
 
 const { User } = require("../../database/connect");
 
+
 /**
  * @openapi
  * /api/users:

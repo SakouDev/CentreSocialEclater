@@ -11,7 +11,7 @@ const { User } = require("../../database/connect");
  *      name: User
  *      description: Gérer les routes utilisateurs
  */
-
+ 
 /**
  * @openapi
  * /api/users:
