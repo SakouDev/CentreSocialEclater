@@ -47,6 +47,12 @@ const users = [
     image: "http://www.rien.com",
     description: "menfou",
   },
+  {
+    name: "WOW WOW OWWOWOWOOWOWOWOWOWOOWOWO",
+    mail: "sasasasa@test.com",
+    image: "http://www.sasasa.com",
+    description: "menfosasasasasau",
+  }
 ];
 
 module.exports = users;

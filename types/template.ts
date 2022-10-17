@@ -1,4 +1,4 @@
-export interface wowUser{
+export interface wowTemplate{
 
     name : string;
 
@@ -10,7 +10,7 @@ export interface wowUser{
 
 }
 
-export interface Wow extends wowUser {
+export interface Wow extends wowTemplate {
 
     id : number;
 

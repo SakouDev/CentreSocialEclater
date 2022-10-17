@@ -43,11 +43,11 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-require('./routes/findAllUsers')(app)
-require('./routes/findUserByPk')(app)
-require('./routes/createUser')(app)
-require('./routes/updateUser')(app)
-require('./routes/deleteUser')(app)
+require('./routes/User/findAllUsers')(app)
+require('./routes/User/findUserByPk')(app)
+require('./routes/User/createUser')(app)
+require('./routes/User/updateUser')(app)
+require('./routes/User/deleteUser')(app)
 
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'

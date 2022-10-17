@@ -1,15 +1,15 @@
 import { Application } from "express"
-import { ApiException } from "../types/exception"
-import { wowUser } from "../types/user"
+import { ApiException } from "../../types/exception"
+import { user } from "../../types/user"
 
-const { Person } = require('../database/connect')
+const { User } = require('../../database/connect')
   
 /**
   * @openapi
   * /api/users/{id}:
   *  get:
-  *      tags: [Users]
-  *      description: Get an user by id
+  *      tags: [Templates]
+  *      description: Get an template by id
   *      parameters:
   *       - name: id
   *         in: path
@@ -22,8 +22,8 @@ const { Person } = require('../database/connect')
   */
 module.exports = (app : Application) => {
   app.get('/api/users/:id', (req, res) => {
-    Person.findByPk(req.params.id)
-      .then((user : wowUser )=> {
+    User.findByPk(req.params.id)
+      .then((user : user )=> {
         if (user === null){
           const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
           return res.status(404).json({message})

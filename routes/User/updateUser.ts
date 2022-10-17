@@ -1,16 +1,16 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import { wowUser } from "../types/user";
+import { ApiException } from "../../types/exception";
+import { user } from "../../types/user";
 
-const { Person } = require("../database/connect");
+const { User } = require("../../database/connect");
 
 /**
   * @openapi
   * /api/users/{id}:
   *  put:
-  *      tags: [Users]
-  *      description: Update an user
+  *      tags: [Templates]
+  *      description: Update an template
   *      consumes:
   *       - application/json
   *      parameters:
@@ -22,8 +22,8 @@ const { Person } = require("../database/connect");
   *       - name: JSON
   *         in: body
   *         required: true
-  *         type: object
-  *         default: {"name": "Person","mail": "Person@gmail.com","description": "Person","image": "https://picsum.photos/200/300"}
+  *         type: formData
+  *         default: {"name": "Template","mail": "Template@gmail.com","description": "Template","image": "https://picsum.photos/200/300"}
   *      responses:
   *        200:
   *          description: Returns a mysterious string.
@@ -31,11 +31,11 @@ const { Person } = require("../database/connect");
 module.exports = (app: Application) => {
   app.put("/api/users/:id", (req, res) => {
     const id = req.params.id;
-    Person.update(req.body, {
+    User.update(req.body, {
       where: { id: id },
     })
       .then(() => {
-       return Person.findByPk(id).then((user: wowUser) => {
+       return User.findByPk(id).then((user: user) => {
           if (user === null){
             const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})

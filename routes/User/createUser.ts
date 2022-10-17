@@ -1,23 +1,23 @@
 import { Application } from "express";
 import { UniqueConstraintError, ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import { wowUser } from "../types/user";
+import { ApiException } from "../../types/exception";
+import { user } from "../../types/user";
 
-const { Person } = require("../database/connect");
+const { User } = require("../../database/connect");
 
 /**
  * @swagger
  * tags:
- *      name: Users
- *      description: Manage user
+ *      name: User
+ *      description: Manage template
  */
 
 /**
   * @openapi
   * /api/users:
   *  post:
-  *      tags: [Users]
-  *      description: Add an user
+  *      tags: [User]
+  *      description: Crée un utilisateur dans la BDD
   *      consumes:
   *       - application/json
   *      parameters:
@@ -25,15 +25,15 @@ const { Person } = require("../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"name": "Person","mail": "Person@gmail.com","description": "Person","image": "https://picsum.photos/200/300"}
+  *         default: {"name": "Flo","mail": "Menfou@gmail.com","description": "SWAGGER TEST","image": "https://picsum.photos/200/300"}
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé
   */
 module.exports = (app: Application) => {
   app.post("/api/users", (req, res) => {
-    Person.create(req.body)
-      .then((user: wowUser) => {
+    User.create(req.body)
+      .then((user: user) => {
         const message: string = `Le user ${req.body.name} a bien été crée.`;
         res.json({ message, data: user });
       })
