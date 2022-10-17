@@ -5,16 +5,11 @@ import { disponibilite } from "../../types/disponibilite";
 
 const { Disponibilite } = require("../../database/connect");
 
-/**
- * @swagger
- * tags:
- *      name: Disponibilite
- *      description: Gérer les routes des diponibilitées
- */
+
 
 /**
  * @openapi
- * /api/users:
+ * /api/disponibilite:
  *  post:
  *      tags: [Disponibilite]
  *      description: Crée une disponibilite

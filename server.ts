@@ -37,7 +37,7 @@ const swaggerOptions = {
             },],
         },
     },
-    apis: [`./routes/*.ts`]
+    apis: [`./routes/*/*.ts`]
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
@@ -49,11 +49,11 @@ require('./routes/User/createUser')(app)
 require('./routes/User/updateUser')(app)
 require('./routes/User/deleteUser')(app)
 
-require('./routes/User/findAllDisponibilites')(app)
-require('./routes/User/findDisponibiliteByPk')(app)
-require('./routes/User/createDisponibilite')(app)
-require('./routes/User/updateDisponibilite')(app)
-require('./routes/User/deleteDisponibilite')(app)
+require('./routes/Disponibilite/findAllDisponibilites')(app)
+require('./routes/Disponibilite/findDisponibiliteByPk')(app)
+require('./routes/Disponibilite/createDisponibilite')(app)
+require('./routes/Disponibilite/updateDisponibilite')(app)
+require('./routes/Disponibilite/deleteDisponibilite')(app)
 
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'

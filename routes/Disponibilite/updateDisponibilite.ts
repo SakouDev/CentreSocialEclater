@@ -9,7 +9,7 @@ const { Disponibilite } = require("../../database/connect");
  * @openapi
  * /api/disponibilite/{id}:
  *  put:
- *      tags: [User]
+ *      tags: [Disponibilite]
  *      description: Modifier une disponibilité
  *      consumes:
  *       - application/json

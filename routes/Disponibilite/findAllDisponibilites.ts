@@ -6,7 +6,7 @@ const { Disponibilite } = require("../../database/connect");
 
 /**
  * @openapi
- * /api/users:
+ * /api/disponibilite:
  *   get:
  *      tags: [Disponibilite]
  *      description: Liste des disponibilités
