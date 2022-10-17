@@ -1,16 +1,16 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception";
-import { user } from "../../types/user";
+import { disponibilite } from "../../types/disponibilite";
 
-const { User } = require("../../database/connect");
+const { Disponibilite } = require("../../database/connect");
 
 /**
  * @openapi
- * /api/users/{id}:
+ * /api/disponibilite/{id}:
  *  put:
- *      tags: [User]
- *      description: Modifier un utilisateur
+ *      tags: [Disponibilite]
+ *      description: Modifier une disponibilité
  *      consumes:
  *       - application/json
  *      parameters:
@@ -23,33 +23,33 @@ const { User } = require("../../database/connect");
  *         in: body
  *         required: true
  *         type: formData
- *         default: {"mail": "Menfou@gmail.com","visibility": true,"password": "menfou","address": "9 rue du régiment de la chaudière","zipCode": "62200", "city": "Boulogne-sur-Mer", "role": "", "image": "https://picsum.photos/200/300"}
+ *         default: {"namePeriod": "Dimanche"}
  *      responses:
  *        200:
  *          description: La requête s'est bien déroulée.
  */
 module.exports = (app: Application) => {
-	app.put("/api/users/:id", (req, res) => {
+	app.put("/api/disponibilite/:id", (req, res) => {
 		const id = req.params.id;
-		User.update(req.body, {
+		Disponibilite.update(req.body, {
 			where: { id: id },
 		})
 			.then(() => {
-				return User.findByPk(id).then((user: user) => {
-					if (user === null) {
+				return Disponibilite.findByPk(id).then((disponibilite: disponibilite) => {
+					if (disponibilite === null) {
 						const message =
-							"L'utilisateur demandé n'existe pas. Réessayer avec un autre identifiant.";
+							"La disponibilité demandé n'existe pas. Réessayer avec un autre identifiant.";
 						return res.status(404).json({ message });
 					}
-					const message = `L'utilisateur ${user.mail} a bien été modifié.`;
-					res.json({ message, data: user });
+					const message = `La disponibilité ${disponibilite.namePeriod} a bien été modifié.`;
+					res.json({ message, data: disponibilite });
 				});
 			})
 			.catch((error: ApiException) => {
 				if (error instanceof ValidationError) {
 					return res.status(400).json({ message: error.message, data: error });
 				}
-				const message = `L'utilisateur' n'a pas pu être modifié. Réessayer dans quelques instants.`;
+				const message = `La 'disponibilite' n'a pas pu être modifié. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
 	});

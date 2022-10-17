@@ -115,5 +115,5 @@ const initDb = () => {
 
 
 module.exports = {
-    initDb, User, Candidat, Employeur, Diplome, Token
+    initDb, User, Candidat, Employeur, Diplome, Token, Disponibilite
 }

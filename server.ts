@@ -12,7 +12,7 @@ const sequelize = require('./database/connect')
 import {Response, Request} from 'express'
 
 app.use(express.json())
-sequelize.initDb()
+// sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -50,6 +50,14 @@ require('./routes/User/findUserByPk')(app)
 require('./routes/User/createUser')(app)
 require('./routes/User/updateUser')(app)
 require('./routes/User/deleteUser')(app)
+
+//Disponibilite
+
+require('./routes/Disponibilite/findAllDisponibilites')(app)
+require('./routes/Disponibilite/findDisponibiliteByPk')(app)
+require('./routes/Disponibilite/createDisponibilite')(app)
+require('./routes/Disponibilite/updateDisponibilite')(app)
+require('./routes/Disponibilite/deleteDisponibilite')(app)
 
 //Candidats
 
