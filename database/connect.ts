@@ -22,6 +22,16 @@ import { disponibilite } from "../types/disponibilite"
 const DisponibiliteModel = require('../models/disponibilite')
 let disponibilites = require('../database/mock/mock-disponibilite')
 
+import { token } from "../types/token"
+const TokenModel = require('../models/token')
+let tokens = require('../database/mock/mock-token')
+
+// LIAISON 
+
+import { userDispo } from '../types/users-disponibilites'
+const UserDispoModel = require("../models/user-disponibilite")
+let userDispos = require('../database/mock/mock-users-disponibilites')
+
 const sequelize = new Sequelize (
     'TestForVincent',
     'Test',
@@ -46,8 +56,15 @@ const Candidat = CandidatModel(sequelize, DataTypes)
 const Employeur = EmployeurModel(sequelize, DataTypes)
 const Diplome = DiplomeModel(sequelize, DataTypes)
 const Disponibilite = DisponibiliteModel(sequelize, DataTypes)
+const Token = TokenModel(sequelize, DataTypes)
+const UserDispo = UserDispoModel(sequelize, DataTypes)
 
 const initDb = () => {
+
+        User.belongsToMany(Disponibilite, {through: 'Menfou'})
+        Disponibilite.belongsToMany(User, {through: 'Menfou'})
+
+
 
         return sequelize.sync({force: true}).then(()=> {
             
@@ -91,6 +108,12 @@ const initDb = () => {
                 }).then((Luc: { toJSON: () => string}) => console.log(Luc.toJSON()))
             })
 
+            tokens.map((token: token) => {
+                Token.create({
+                    token: token.token,
+                    tokenPush : token.tokenPush
+                }).then((Luc: { toJSON: () => string}) => console.log(Luc.toJSON()))
+            })
 
             console.log('La base de donné user a bien été initialisée !')
     })

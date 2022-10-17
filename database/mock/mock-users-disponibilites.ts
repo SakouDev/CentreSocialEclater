@@ -1,31 +1,31 @@
 const usersDisponibilites = [ 
     {
-        user_id: 1,
-        disponibilite_id:2
+        userId: 1,
+        disponibiliteId:2
     },
     {
-        user_id: 2,
-        disponibilite_id:5
+        userId: 2,
+        disponibiliteId:5
     },
     {
-        user_id: 3,
-        disponibilite_id: 2
+        userId: 3,
+        disponibiliteId: 2
     },
     {
-        user_id: 3,
+        userId: 3,
         disponibilite_id: 5
     },
     {
-        user_id: 6,
-        disponibilite_id:2
+        userId: 6,
+        disponibiliteId:2
     },
     {
-        user_id: 7,
-        disponibilite_id:5
+        userId: 7,
+        disponibiliteId:5
     },
     {
-        user_id: 8,
-        disponibilite_id:9
+        userId: 8,
+        disponibiliteId:9
     },
 ];
 

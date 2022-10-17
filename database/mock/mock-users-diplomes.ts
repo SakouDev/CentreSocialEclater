@@ -1,31 +1,31 @@
 const usersdiplomes = [ 
     {
-        user_id: 1,
-        diplome_id:2
+        userId: 1,
+        diplomeId:2
     },
     {
-        user_id: 2,
-        diplome_id:5
+        userId: 2,
+        diplomeId:5
     },
     {
-        user_id: 3,
-        diplome_id: 2
+        userId: 3,
+        diplomeId: 2
     },
     {
-        user_id: 3,
-        diplome_id: 5
+        userId: 3,
+        diplomeId: 5
     },
     {
-        user_id: 6,
-        diplome_id:2
+        userId: 6,
+        diplomeId:2
     },
     {
-        user_id: 7,
-        diplome_id:5
+        userId: 7,
+        diplomeId:5
     },
     {
-        user_id: 8,
-        diplome_id:9
+        userId: 8,
+        diplomeId:9
     },
 ];
 
