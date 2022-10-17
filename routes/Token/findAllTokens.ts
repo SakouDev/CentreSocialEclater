@@ -10,10 +10,10 @@ const {Token} = require('../../database/connect')
  * /api/tokens:
  *   get:
  *      tags: [Token]
- *      description: Welcome to swagger-jsdoc!
+ *      description: Liste des tokens
  *      responses:
  *        200:
- *          description: Returns a mysterious string.
+ *          description: La requête s'est bien déroulé.
  */
 module.exports = (app : Application) => {
     app.get('/api/tokens', (req,res) => {

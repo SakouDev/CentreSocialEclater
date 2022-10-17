@@ -9,7 +9,7 @@ const { Diplome } = require('../../database/connect')
   * /api/diplomes/{id}:
   *  get:
   *      tags: [Diplomes]
-  *      description: Get an template by id
+  *      description: Trouver un diplome par son id
   *      parameters:
   *       - name: id
   *         in: path
@@ -18,7 +18,7 @@ const { Diplome } = require('../../database/connect')
   *         default: 1
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé
   */
 module.exports = (app : Application) => {
   app.get('/api/diplomes/:id', (req, res) => {

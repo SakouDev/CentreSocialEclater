@@ -10,7 +10,7 @@ const { Candidat } = require('../../database/connect')
   * /api/candidats/{id}:
   *  get:
   *      tags: [Candidats]
-  *      description: Get an template by id
+  *      description: Trouver un candidat par son Id
   *      parameters:
   *       - name: id
   *         in: path
@@ -19,7 +19,7 @@ const { Candidat } = require('../../database/connect')
   *         default: 1
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app : Application) => {
   app.get('/api/candidats/:id', (req, res) => {

@@ -11,7 +11,7 @@ const { Candidat } = require("../../database/connect");
   * /api/candidats/{id}:
   *  put:
   *      tags: [Candidats]
-  *      description: Update an template
+  *      description: Modifier un candidat
   *      consumes:
   *       - application/json
   *      parameters:
@@ -24,10 +24,10 @@ const { Candidat } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: formData
-  *         default: {"name": "Template","mail": "Template@gmail.com","description": "Template","image": "https://picsum.photos/200/300"}
+  *         default: {"lastName": "Menfou","firstName": "MenfouAussi","birthday": "14/02/2001"}
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app: Application) => {
   app.put("/api/candidats/:id", (req, res) => {
@@ -36,7 +36,7 @@ module.exports = (app: Application) => {
       where: { id: id },
     })
       .then(() => {
-       return Candidat.findByPk(id).then((candidat: candidat) => {
+        return Candidat.findByPk(id).then((candidat: candidat) => {
           if (candidat === null){
             const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})

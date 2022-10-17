@@ -10,7 +10,7 @@ const { Token } = require("../../database/connect");
   * /api/tokens/{id}:
   *  put:
   *      tags: [Token]
-  *      description: Update an template
+  *      description: Modifier un token
   *      consumes:
   *       - application/json
   *      parameters:
@@ -23,10 +23,10 @@ const { Token } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: formData
-  *         default: {"name": "Template","mail": "Template@gmail.com","description": "Template","image": "https://picsum.photos/200/300"}
+  *         default: {"token": "fegdfg5g5dfg5dfg5dfgf5gdfg6fd6gf6g.55gsdf65gf65gfgf5dgdf5g5g5dfg5dg5f.dg5dfg5dg5dg5dfg5ffffgfdg2dfg5sfdg5", "tokenPush": "menfou"}
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app: Application) => {
   app.put("/api/tokens/:id", (req, res) => {
@@ -35,7 +35,7 @@ module.exports = (app: Application) => {
       where: { id: id },
     })
       .then(() => {
-       return Token.findByPk(id).then((token: token) => {
+        return Token.findByPk(id).then((token: token) => {
           if (token === null){
             const message = "Le token demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
