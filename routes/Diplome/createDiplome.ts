@@ -8,7 +8,7 @@ const { Diplome } = require("../../database/connect");
 /**
  * @swagger
  * tags:
- *      name: Diplomes../
+ *      name: Diplomes
  *      description: Manage template
  */
 
