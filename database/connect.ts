@@ -74,8 +74,8 @@ Diplome.belongsToMany(User, {through: UserDiplome})
 User.hasOne(Token)
 Token.belongsTo(User)
 
-User.hasOne(Candidat)
-Candidat.belongsTo(User)
+User.hasOne(Candidat, { onDelete : 'CASCADE' })
+Candidat.belongsTo(User, { onDelete : 'CASCADE' })
 
 User.hasOne(Employeur)
 Employeur.belongsTo(User)
@@ -117,10 +117,10 @@ const initDb = () => {
             }).then(async(req : any) => {
 
                 console.log(req.toJSON())
-
-                const DisponibiliteRow = await Disponibilite.findByPk(index + 1);
-                await req.addDisponibilite(DisponibiliteRow, { through: UserDispo })
-
+                for (let i=0; i<10; i++){
+                    const DisponibiliteRow = await Disponibilite.findByPk(Math.floor(Math.random() * (Object.keys(Disponibilite).length - 1 + 1) + 1));
+                    await req.addDisponibilite(DisponibiliteRow, { through: UserDispo })
+                }
                 const DiplomeRow = await Diplome.findByPk( index + 1 );
                 await req.addDiplome(DiplomeRow, { through: UserDiplome })
             })
@@ -154,5 +154,5 @@ const initDb = () => {
 }
 
 module.exports = {
-    initDb, User, Candidat, Employeur, Diplome, Token, Disponibilite
+    initDb, User, Candidat, Employeur, Diplome, Token, Disponibilite, UserDispo, UserDiplome
 }
