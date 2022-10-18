@@ -10,6 +10,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         },
         namePeriod: {
             type: dataTypes.STRING,
+            allowNull: false,
         }
 
     })
