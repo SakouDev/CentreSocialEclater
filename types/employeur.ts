@@ -1,5 +1,7 @@
 export interface employeur {
 
+    UserId : number,
+
     name : string,
     
     siret : number

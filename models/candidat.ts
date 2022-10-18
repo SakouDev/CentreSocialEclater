@@ -34,5 +34,10 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : {msg : 'La Date de naissance ne peut être vide'}
             }
         },
+        UserId: {
+            type: dataTypes.INTEGER,
+            autoIncrement: false,
+            primaryKey: false, 
+        },
     })
 }

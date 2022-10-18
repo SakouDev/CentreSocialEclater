@@ -2,7 +2,7 @@ import { Application } from "express"
 import { employeur } from "../../types/employeur"
 import { ApiException } from "../../types/exception"
 
-const { Employeur } = require('../../database/connect')
+const { Employeur, User, Diplome, Disponibilite } = require('../../database/connect')
 
 /**
  * @openapi
@@ -16,7 +16,22 @@ const { Employeur } = require('../../database/connect')
  */
 module.exports = (app : Application) => {
     app.get('/api/employeurs', (req,res) => {
-        Employeur.findAll()
+        Employeur.findAll({include: [
+			{
+				model : User,
+				required : false,
+                include: [
+                    {
+                        model : Diplome,
+                        required : false
+                    },
+                    {
+                        model : Disponibilite,
+                        required : false
+                    }
+                ]
+			}
+		]})
         .then((employeurs : employeur) => {
             const message : string = 'La liste des employeurs à bien était récuperée.'
             res.json({message, data: employeurs})

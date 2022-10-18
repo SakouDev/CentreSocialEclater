@@ -1,5 +1,7 @@
 export interface candidat {
     
+    UserId : number,
+
     lastName : string,
     
     firstName : string,
