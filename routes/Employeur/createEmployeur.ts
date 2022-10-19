@@ -5,6 +5,7 @@ import { disponibilite } from "../../types/disponibilite";
 import { employeur } from "../../types/employeur";
 import { ApiException } from "../../types/exception";
 
+const bcrypt = require('bcrypt')
 const { Employeur, User, Disponibilite, UserDispo } = require("../../database/connect");
 
 /**
@@ -33,7 +34,8 @@ const { Employeur, User, Disponibilite, UserDispo } = require("../../database/co
   *          description: La requête s'est bien déroulé.
   */
  module.exports = (app: Application) => {
-  app.post("/api/employeurs", (req, res) => {
+  app.post("/api/employeurs", async (req, res) => {
+    req.body.User.password = await bcrypt.hash(req.body.User.password, 10)
     User.create(req.body.User).then((user : any) => {
       Employeur.create(req.body.Employeur).then ((employeur : any) => {
         employeur.setUser(user)
