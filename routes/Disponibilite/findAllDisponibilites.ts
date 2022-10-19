@@ -19,11 +19,11 @@ module.exports = (app: Application) => {
 		Disponibilite.findAll()
 			.then((disponibilite: disponibilite) => {
 				const message: string =
-					"La liste des disponibilités à bien était récuperée.";
+					"La liste des Disponibilités à bien était récuperée.";
 				res.json({ message, data: disponibilite });
 			})
 			.catch((error: ApiException) => {
-				const message = `La liste des disponibilités n'a pas pu être récupérée. Réessayer dans quelques instants.`;
+				const message = `La liste des Disponibilités n'a pas pu être récupérée. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
 	});

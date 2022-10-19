@@ -41,9 +41,9 @@ const { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } = requi
 module.exports = (app: Application) => {
     app.put("/api/form/candidat/:id", async (req, res) => {
         req.body.User.password = await bcrypt.hash(req.body.User.password, 10)
-        Candidat.update(req.body.Candidat, {where : {id : req.params.id}}).then ((candidatmenfou : any) => {        
+        Candidat.update(req.body.Candidat, {where : {id : req.params.id}}).then (() => {        
             Candidat.findByPk(req.params.id).then((candidat: candidat) => {
-                User.update(req.body.User, {where : {id : candidat.UserId}}).then((usermenfou : any) => {
+                User.update(req.body.User, {where : {id : candidat.UserId}}).then(() => {
                     User.findByPk(req.params.id).then((user: any) => {
 
                         UserDispo.destroy({where: { UserId: user.id }})
@@ -79,7 +79,7 @@ module.exports = (app: Application) => {
                 }
             ]
         }).then((candidats: candidat) => {
-        const message : string = 'Le candidat à bien été mis à jour'
+        const message : string = 'Le Candidat à bien été mis à jour'
         res.json({message, data: candidats})
         })
         .catch((error : ApiException) => {

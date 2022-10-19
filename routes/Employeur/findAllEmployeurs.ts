@@ -23,11 +23,11 @@ module.exports = (app : Application) => {
 			}
 		]})
         .then((employeurs : employeur) => {
-            const message : string = 'La liste des employeurs à bien était récuperée.'
+            const message : string = 'La liste des Employeurs à bien était récuperée.'
             res.json({message, data: employeurs})
         })
         .catch((error : ApiException) => {
-            const message = `La liste des employeurs n'a pas pu être récupérée. Réessayer dans quelques instants.`
+            const message = `La liste des Employeurs n'a pas pu être récupérée. Réessayer dans quelques instants.`
             res.status(500).json({message, data : error})
         })
     })

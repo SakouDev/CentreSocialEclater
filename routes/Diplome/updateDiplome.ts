@@ -37,10 +37,10 @@ module.exports = (app: Application) => {
       .then(() => {
         return Diplome.findByPk(id).then((diplome: diplome) => {
           if (diplome === null){
-            const message = "Le diplome demandé n'existe pas. Réessayer avec un autre identifiant."
+            const message = "Le Diplome demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
           }
-            const message = `Le diplome ${diplome.certificate} a bien été modifié.`;
+            const message = `Le Diplome ${diplome.certificate} a bien été modifié.`;
             res.json({ message, data: diplome });
           })
       })
@@ -48,7 +48,7 @@ module.exports = (app: Application) => {
         if(error instanceof ValidationError){
           return res.status(400).json({message: error.message, data : error})
         }
-        const message = `Le diplome n'a pas pu être modifié. Réessayer dans quelques instants.`;
+        const message = `Le Diplome n'a pas pu être modifié. Réessayer dans quelques instants.`;
         res.status(500).json({ message, data: error });
       });
   });

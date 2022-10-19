@@ -74,14 +74,14 @@ module.exports = (app: Application) => {
                 }
             ]
         }).then((employeurs: employeur) => {
-        const message : string = `L'employeur à bien été mis à jour`
+        const message : string = `L'Employeur à bien été mis à jour`
         res.json({message, data: employeurs})
         })
         .catch((error : ApiException) => {
         if(error instanceof ValidationError){
             return res.status(400).json({message: error.message, data : error})
         }
-        const message = `L'employeur n'a pas pu être ajouté. Réessayer dans quelques instants.`
+        const message = `L'Employeur n'a pas pu être ajouté. Réessayer dans quelques instants.`
         res.status(500).json({message, data : error})
         })
     });

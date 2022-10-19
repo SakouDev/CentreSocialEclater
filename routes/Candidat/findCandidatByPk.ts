@@ -43,15 +43,15 @@ module.exports = (app : Application) => {
         })
         .then((candidat : candidat )=> {
             if (candidat === null){
-                const message = "Le user demandé n'existe pas. Réessayer avec un autre identifiant."
+                const message = "Le Candidat demandé n'existe pas. Réessayer avec un autre identifiant."
                 return res.status(404).json({message})
             }
 
-            const message : string = 'Un utilisateur a bien été trouvé.'
+            const message : string = 'Un Candidat à bien été trouvé.'
             res.json({ message, data: candidat })
         })
         .catch((error : ApiException ) => {
-            const message = "Le user demander n'a pas pu être récuperer. Réessayer dans quelques instants."
+            const message = "Le Candidat demander n'a pas pu être récuperer. Réessayer dans quelques instants."
             res.status(500).json({message, data: error})
         })
     })

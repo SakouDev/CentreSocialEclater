@@ -14,16 +14,16 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : "Veuillez entrer votre nom d'entreprise. Cette valeur est requise"},
-                notEmpty : {msg : "Le nom d'entreprise ne peut être vide"}
+                notNull: { msg : "Veuillez entrer votre Token. Cette valeur est requise"},
+                notEmpty : {msg : "Le Token ne peut être vide"}
             }
         },
         tokenPush: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : 'Veuillez entrer votre SIRET. Cette valeur est requise'},
-                notEmpty : {msg : 'La SIRET ne peut être vide'}
+                notNull: { msg : 'Veuillez entrer votre Token. Cette valeur est requise'},
+                notEmpty : {msg : 'Le Token ne peut être vide'}
             }
         },
     })

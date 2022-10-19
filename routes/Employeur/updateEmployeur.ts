@@ -39,10 +39,10 @@ module.exports = (app: Application) => {
     .then(() => {
       return Employeur.findByPk(id).then((employeur: employeur) => {
         if (employeur === null){
-          const message = "L'employeur demandé n'existe pas. Réessayer avec un autre identifiant."
+          const message = "L'Employeur demandé n'existe pas. Réessayer avec un autre identifiant."
           return res.status(404).json({message})
         }
-          const message = `L'employeur ${employeur.name} a bien été modifié.`;
+          const message = `L'Employeur ${employeur.name} a bien été modifié.`;
           res.json({ message, data: employeur });
         })
     })
@@ -50,7 +50,7 @@ module.exports = (app: Application) => {
       if(error instanceof ValidationError){
         return res.status(400).json({message: error.message, data : error})
       }
-      const message = `L'employeur n'a pas pu être modifié. Réessayer dans quelques instants.`;
+      const message = `L'Employeur n'a pas pu être modifié. Réessayer dans quelques instants.`;
       res.status(500).json({ message, data: error });
     });
   });
