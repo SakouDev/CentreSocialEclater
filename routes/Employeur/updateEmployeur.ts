@@ -36,22 +36,22 @@ module.exports = (app: Application) => {
     Employeur.update(req.body, {
       where: { id: id },
     })
-      .then(() => {
-        return Employeur.findByPk(id).then((employeur: employeur) => {
-          if (employeur === null){
-            const message = "L'employeur demandé n'existe pas. Réessayer avec un autre identifiant."
-            return res.status(404).json({message})
-          }
-            const message = `L'employeur ${employeur.name} a bien été modifié.`;
-            res.json({ message, data: employeur });
-          })
-      })
-      .catch((error: ApiException) => {
-        if(error instanceof ValidationError){
-          return res.status(400).json({message: error.message, data : error})
+    .then(() => {
+      return Employeur.findByPk(id).then((employeur: employeur) => {
+        if (employeur === null){
+          const message = "L'employeur demandé n'existe pas. Réessayer avec un autre identifiant."
+          return res.status(404).json({message})
         }
-        const message = `L'employeur n'a pas pu être modifié. Réessayer dans quelques instants.`;
-        res.status(500).json({ message, data: error });
-      });
+          const message = `L'employeur ${employeur.name} a bien été modifié.`;
+          res.json({ message, data: employeur });
+        })
+    })
+    .catch((error: ApiException) => {
+      if(error instanceof ValidationError){
+        return res.status(400).json({message: error.message, data : error})
+      }
+      const message = `L'employeur n'a pas pu être modifié. Réessayer dans quelques instants.`;
+      res.status(500).json({ message, data: error });
+    });
   });
 };

@@ -95,6 +95,12 @@ require('./routes/Token/createToken')(app)
 require('./routes/Token/updateToken')(app)
 require('./routes/Token/deleteToken')(app)
 
+//Forms
+
+require('./routes/Forms/formCandidatUpdate')(app)
+require('./routes/Forms/formEmployeurUpdate')(app)
+
+
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'
     return ApiException.status(404).json({message})

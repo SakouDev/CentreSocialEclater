@@ -1,9 +1,8 @@
 import { Application } from "express";
-import { candidatId } from "../../types/candidat";
 import { employeurId } from "../../types/employeur";
 import { ApiException } from "../../types/exception";
 
-const { Employeur } = require('../../database/connect')
+const { Employeur, User } = require('../../database/connect')
   
 
 /**
@@ -30,8 +29,8 @@ module.exports = (app :Application) => {
       }
 
       const employeurDeleted = employeur;
-      return  Employeur.destroy({
-        where: { id: employeur.id }
+      return  User.destroy({
+        where: { id : employeur.UserId }
       })
       .then(() => {
         const message = `L'Employeur avec l'identifiant n°${employeurDeleted.id} a bien été supprimé.`
