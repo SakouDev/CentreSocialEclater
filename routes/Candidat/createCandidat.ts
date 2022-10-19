@@ -50,7 +50,7 @@ module.exports = (app: Application) => {
       })
     })
     .then((candidats: candidat) => {
-      const message : string = 'Le candidat à bien été crée'
+      const message : string = "La création du Candidat s'est bien déroulé"
       res.json({message, data: candidats})
     })
     .catch((error : ApiException) => {

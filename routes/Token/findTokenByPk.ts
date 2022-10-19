@@ -25,15 +25,15 @@ module.exports = (app : Application) => {
     Token.findByPk(req.params.id)
       .then((token : token )=> {
         if (token === null){
-          const message = "Le token demandé n'existe pas. Réessayer avec un autre identifiant."
+          const message = "Le Token demandé n'existe pas. Réessayer avec un autre identifiant."
           return res.status(404).json({message})
         }
 
-        const message : string = 'Un token a bien été trouvé.'
+        const message : string = 'Un Token a bien été trouvé.'
         res.json({ message, data: token })
       })
       .catch((error : ApiException ) => {
-        const message = "Le token demander n'a pas pu être récuperer. Réessayer dans quelques instants."
+        const message = "Le Token demander n'a pas pu être récuperer. Réessayer dans quelques instants."
         res.status(500).json({message, data: error})
       })
   })

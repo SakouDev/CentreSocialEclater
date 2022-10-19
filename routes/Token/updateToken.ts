@@ -37,10 +37,10 @@ module.exports = (app: Application) => {
       .then(() => {
         return Token.findByPk(id).then((token: token) => {
           if (token === null){
-            const message = "Le token demandé n'existe pas. Réessayer avec un autre identifiant."
+            const message = "Le Token demandé n'existe pas. Réessayer avec un autre identifiant."
             return res.status(404).json({message})
           }
-            const message = `Le token ${token.token} a bien été modifié.`;
+            const message = `Le Token ${token.token} a bien été modifié.`;
             res.json({ message, data: token });
           })
       })
@@ -48,7 +48,7 @@ module.exports = (app: Application) => {
         if(error instanceof ValidationError){
           return res.status(400).json({message: error.message, data : error})
         }
-        const message = `Le token n'a pas pu être modifié. Réessayer dans quelques instants.`;
+        const message = `Le Token n'a pas pu être modifié. Réessayer dans quelques instants.`;
         res.status(500).json({ message, data: error });
       });
   });

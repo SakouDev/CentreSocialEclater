@@ -19,11 +19,11 @@ module.exports = (app : Application) => {
     app.get('/api/diplomes', (req,res) => {
         Diplome.findAll()
         .then((diplomes: diplome) => {
-            const message : string = 'La liste des diplomes à bien était récuperée.'
+            const message : string = 'La liste des Diplomes à bien était récuperée.'
             res.json({message, data: diplomes})
         })
         .catch((error : ApiException) => {
-            const message = `La liste des diplomes n'a pas pu être récupérée. Réessayer dans quelques instants.`
+            const message = `La liste des Diplomes n'a pas pu être récupérée. Réessayer dans quelques instants.`
             res.status(500).json({message, data : error})
         })
     })

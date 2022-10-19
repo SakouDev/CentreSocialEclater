@@ -33,12 +33,27 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     },
     address: {
         type: dataTypes.STRING,
+        allowNull: false,
+        validate : {
+            notNull: {msg : "L'Adresse est requise"},
+            notEmpty: {msg :" L'Adresse est une propriété requise"}
+        }
     },
     zipCode: {
-        type: dataTypes.INTEGER,
+        type: dataTypes.STRING,
+        allowNull: false,
+        validate : { 
+            notNull: {msg : 'Le Zipcode est requis'},
+            notEmpty: {msg : "Le Zipcode est une propriété requise"}
+        }
     },
     city: {
         type: dataTypes.STRING,
+        allowNull: false,
+        validate : {
+            notNull: {msg : 'La Ville est requise'},
+            notEmpty: {msg :" La Ville est une propriété requise"}
+        }
     },
     role: {
         type:dataTypes.STRING,

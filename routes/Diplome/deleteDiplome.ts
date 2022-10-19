@@ -24,7 +24,7 @@ module.exports = (app :Application) => {
   app.delete('/api/diplomes/:id', (req, res) => {
     Diplome.findByPk(req.params.id).then((diplome: diplome) => {
       if (diplome === null){
-        const message = "Le diplome demandé n'existe pas. Réessayer avec un autre identifiant."
+        const message = "Le Diplome demandé n'existe pas. Réessayer avec un autre identifiant."
         return res.status(404).json({message})
       }
 
@@ -33,7 +33,7 @@ module.exports = (app :Application) => {
         where: { id: diplome.id }
       })
       .then(() => {
-        const message = `Le diplome avec l'identifiant n°${diplomeDeleted.id} a bien été supprimé.`
+        const message = `Le Diplome avec l'identifiant n°${diplomeDeleted.id} a bien été supprimé.`
         res.json({message, data: diplomeDeleted })
       })
     })

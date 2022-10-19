@@ -17,24 +17,15 @@ const { User, Diplome, Disponibilite } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
 	app.get("/api/users", (req, res) => {
-		User.findAll({include: [
-			{
-				model : Diplome,
-				required : false
-			},
-			{
-				model : Disponibilite,
-				required : false
-			}
-		]})
-			.then((users: user) => {
-				const message: string =
-					"La liste des utilisateurs à bien était récuperée.";
-				res.json({ message, data: users });
-			})
-			.catch((error: ApiException) => {
-				const message = `La liste des utilisateurs n'a pas pu être récupérée. Réessayer dans quelques instants.`;
-				res.status(500).json({ message, data: error });
-			});
+		User.findAll()
+		.then((users: user) => {
+			const message: string =
+				"La liste des Utilisateurs à bien était récuperée.";
+			res.json({ message, data: users });
+		})
+		.catch((error: ApiException) => {
+			const message = `La liste des Utilisateurs n'a pas pu être récupérée. Réessayer dans quelques instants.`;
+			res.status(500).json({ message, data: error });
+		});
 	});
 };

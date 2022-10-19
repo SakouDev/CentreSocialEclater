@@ -19,11 +19,11 @@ module.exports = (app : Application) => {
     app.get('/api/tokens', (req,res) => {
         Token.findAll()
         .then((tokens: token) => {
-            const message : string = 'La liste des tokens à bien était récuperée.'
+            const message : string = 'La liste des Tokens à bien était récuperée.'
             res.json({message, data: tokens})
         })
         .catch((error : ApiException) => {
-            const message = `La liste des tokens n'a pas pu être récupérée. Réessayer dans quelques instants.`
+            const message = `La liste des Tokens n'a pas pu être récupérée. Réessayer dans quelques instants.`
             res.status(500).json({message, data : error})
         })
     })

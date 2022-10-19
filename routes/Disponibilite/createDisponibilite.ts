@@ -34,14 +34,14 @@ module.exports = (app: Application) => {
 	app.post("/api/disponibilite", (req, res) => {
 		Disponibilite.create(req.body)
 			.then((disponibilite: disponibilite) => {
-				const message: string = `La disponibilité ${req.body.namePeriod} a bien été crée.`;
+				const message: string = `La Disponibilité ${req.body.namePeriod} a bien été crée.`;
 				res.json({ message, data: disponibilite });
 			})
 			.catch((error: ApiException) => {
 				if (error instanceof ValidationError) {
 					return res.status(400).json({ message: error.message, data: error });
 				}
-				const message = `La disponibilité n'a pas pu être ajouté. Réessayer dans quelques instants.`;
+				const message = `La Disponibilité n'a pas pu être ajouté. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
 	});

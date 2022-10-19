@@ -38,7 +38,7 @@ module.exports = (app : Application) => {
     })
     .then((employeur : employeur )=> {
       if (employeur === null){
-        const message = "L'employeur demandé n'existe pas. Réessayer avec un autre identifiant."
+        const message = "L'Employeur demandé n'existe pas. Réessayer avec un autre identifiant."
         return res.status(404).json({message})
       }
 
@@ -46,7 +46,7 @@ module.exports = (app : Application) => {
       res.json({ message, data: employeur })
     })
     .catch((error : ApiException ) => {
-      const message = "L'employeur demander n'a pas pu être récuperer. Réessayer dans quelques instants."
+      const message = "L'Employeur demander n'a pas pu être récuperer. Réessayer dans quelques instants."
       res.status(500).json({message, data: error})
     })
   })

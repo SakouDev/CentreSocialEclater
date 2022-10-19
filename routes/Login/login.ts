@@ -1,12 +1,12 @@
 import "dotenv/config";
 import { Application } from "express";
 import { ValidationError } from "sequelize";
-import { user } from "../../types/user";
+import { user, userId } from "../../types/user";
 import { token } from "../../types/token";
 import { ApiException } from "../../types/exception";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const bcrypt = require("bcrypt")
 const { User } = require("../../database/connect");
 
 export interface ProcessEnv {
@@ -41,7 +41,7 @@ export interface ProcessEnv {
 module.exports = (app: Application) => {
 	app.post("/api/login", (req, res) => {
 		User.findOne({ where: { mail: req.body.mail } })
-			.then(async (user: user) => {
+			.then(async (user: userId) => {
 				const checkPassword = await bcrypt.compare(
 					req.body.password,
 					user.password
@@ -57,14 +57,14 @@ module.exports = (app: Application) => {
 						process.env.JWT_TOKEN as string,
 						{ expiresIn: "30min" }
 					);
-					const message: string = `L'utilisateur a été touvé.`;
+					const message: string = `L'Utilisateur a été touvé.`;
 					res.json({
 						message,
 						refreshToken: refreshToken,
 						accessToken: accessToken,
 					});
 				} else {
-					res.status(400).json({ message: "mot de passe Invalide" });
+					res.status(400).json({ message: "Mot de passe Invalide" });
 				}
 			})
 			.catch((error: ApiException) => {
