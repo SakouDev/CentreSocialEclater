@@ -74,8 +74,8 @@ Diplome.belongsToMany(User, {through: UserDiplome})
 User.hasOne(Token)
 Token.belongsTo(User)
 
-User.hasOne(Candidat, { onDelete : 'CASCADE' })
-Candidat.belongsTo(User, { onDelete : 'CASCADE' })
+User.hasOne(Candidat, { onDelete : 'CASCADE', onUpdate : 'CASCADE' })
+Candidat.belongsTo(User, { onDelete : 'CASCADE', onUpdate : 'CASCADE' })
 
 User.hasOne(Employeur)
 Employeur.belongsTo(User)

@@ -32,11 +32,11 @@ module.exports = (app :Application) => {
 
       const candidatDeleted = candidat;
       return(
-        Candidat.beforeDestroy(async(candidats : any)=> {          
-          await User.destroy({ where: { id : candidat.dataValues.UserId } })
-        }),
-        Candidat.destroy({
-          where: { id: candidat.id }
+        // Candidat.beforeDestroy(async(candidats : any)=> {          
+        //   await User.destroy({ where: { id : candidat.dataValues.UserId } })
+        // }),
+        User.destroy({
+          where: { id: candidat.UserId }
         })
       )
       .then(() => {
