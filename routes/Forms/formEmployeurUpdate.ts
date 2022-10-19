@@ -1,25 +1,25 @@
 import { Application } from "express";
 import { UniqueConstraintError, ValidationError } from "sequelize";
-import { candidat } from "../../types/candidat";
+import { employeur } from "../../types/employeur";
 import { diplome } from "../../types/diplome";
 import { disponibilite } from "../../types/disponibilite";
 import { ApiException } from "../../types/exception";
 
-const { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } = require("../../database/connect");
+const { Employeur, User, Disponibilite, UserDispo, Diplome } = require("../../database/connect");
 
 /**
  * @swagger
  * tags:
  *      name: Form
- *      description: Manage les routes Candidat
+ *      description: Manage les routes Employeur
  */
 
 /**
   * @openapi
-  * /api/form/candidat/{id}:
+  * /api/form/employeur/{id}:
   *  put:
   *      tags: [Form]
-  *      description: Crée un candidat
+  *      description: Crée un employeur
   *      consumes:
   *       - application/json
   *      parameters:
@@ -32,17 +32,17 @@ const { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } = requi
   *         in: body
   *         required: true  
   *         type: object
-  *         default: {"Candidat" : {"firstName": "Luc","lastName": "Vigneron","birthday": "27/04/1999"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "YEAH","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}],"Diplome" : [{"id" : 2},{"id" : 4}]}
+  *         default: {"Employeur" : {"name": "Simplon","siret": "12356894100789"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "YEAH","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}]}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé
   */
 module.exports = (app: Application) => {
-    app.put("/api/form/candidat/:id", (req, res) => {
+    app.put("/api/form/employeur/:id", (req, res) => {
       
-        Candidat.update(req.body.Candidat, {where : {id : req.params.id}}).then ((candidatmenfou : any) => {        
-            Candidat.findByPk(req.params.id).then((candidat: candidat) => {
-                User.update(req.body.User, {where : {id : candidat.UserId}}).then((usermenfou : any) => {
+        Employeur.update(req.body.Employeur, {where : {id : req.params.id}}).then ((employeurmenfou : any) => {        
+            Employeur.findByPk(req.params.id).then((employeur: employeur) => {
+                User.update(req.body.User, {where : {id : employeur.UserId}}).then((usermenfou : any) => {
                     User.findByPk(req.params.id).then((user: any) => {
 
                         UserDispo.destroy({where: { UserId: user.id }})
@@ -50,17 +50,11 @@ module.exports = (app: Application) => {
                             const DisponibiliteRow = await Disponibilite.findByPk(DispoMap.id);
                             await user.addDisponibilite(DisponibiliteRow, { through: UserDispo })
                         })
-                
-                        UserDiplome.destroy({ where: { UserId: user.id }})
-                        req.body.Diplome?.map( async (DiploMap : diplome) => {
-                            const DiplomeRow = await Diplome.findByPk(DiploMap.id);
-                            await user.addDiplome(DiplomeRow, { through: UserDiplome })
-                        })
                     })
                 })
             }) 
         })
-        Candidat.findByPk(req.params.id, {
+        Employeur.findByPk(req.params.id, {
             include : [
                 {
                     model : User,
@@ -77,15 +71,15 @@ module.exports = (app: Application) => {
                     ]
                 }
             ]
-        }).then((candidats: candidat) => {
-        const message : string = 'Le candidat à bien été mis à jour'
-        res.json({message, data: candidats})
+        }).then((employeurs: employeur) => {
+        const message : string = `L'employeur à bien été mis à jour`
+        res.json({message, data: employeurs})
         })
         .catch((error : ApiException) => {
         if(error instanceof ValidationError){
             return res.status(400).json({message: error.message, data : error})
         }
-        const message = `Le Candidat n'a pas pu être ajouté. Réessayer dans quelques instants.`
+        const message = `L'employeur n'a pas pu être ajouté. Réessayer dans quelques instants.`
         res.status(500).json({message, data : error})
         })
     });

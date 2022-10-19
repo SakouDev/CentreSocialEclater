@@ -20,16 +20,6 @@ module.exports = (app : Application) => {
 			{
 				model : User,
 				required : false,
-                include: [
-                    {
-                        model : Diplome,
-                        required : false
-                    },
-                    {
-                        model : Disponibilite,
-                        required : false
-                    }
-                ]
 			}
 		]})
         .then((employeurs : employeur) => {

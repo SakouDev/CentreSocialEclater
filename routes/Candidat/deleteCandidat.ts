@@ -23,18 +23,14 @@ const { Candidat, User } = require('../../database/connect')
 module.exports = (app :Application) => {
   app.delete('/api/candidats/:id', (req, res) => {
     Candidat.findByPk(req.params.id).then((candidat: any) => {
+      
       if (candidat === null){
         const message = "Le Candidat demandé n'existe pas. Réessayer avec un autre identifiant."
         return res.status(404).json({message})
       }
 
-      console.log("ICI",candidat.dataValues.UserId)
-
       const candidatDeleted = candidat;
       return(
-        // Candidat.beforeDestroy(async(candidats : any)=> {          
-        //   await User.destroy({ where: { id : candidat.dataValues.UserId } })
-        // }),
         User.destroy({
           where: { id: candidat.UserId }
         })

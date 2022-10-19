@@ -94,6 +94,7 @@ require('./routes/Token/deleteToken')(app)
 //Forms
 
 require('./routes/Forms/formCandidatUpdate')(app)
+require('./routes/Forms/formEmployeurUpdate')(app)
 
 
 app.use(({res : ApiException}: any) => {

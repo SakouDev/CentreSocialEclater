@@ -1,8 +1,7 @@
 {
-    "Candidat" : {
-        "firstName": "Luc",
-        "lastName": "Vigneron",
-        "birthday": "27/04/1999"
+    "Employeur" : {
+        "name": "Luc",
+        "siret": "27/04/1999"
     },
     "User": {
       "mail": "menfou@test.com",
@@ -24,16 +23,6 @@
       {
         "id": 7
       }
-    ],
-    "Diplome" : [
-      {
-        "id" : 2
-      },
-      {
-        "id" : 4
-      }
     ]
 }
-
-{"Candidat" : {"firstName": "Luc","lastName": "Vigneron","birthday": "27/04/1999"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "YEAH","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}],"Diplome" : [{"id" : 2},{"id" : 4}]}
 
