@@ -5,6 +5,7 @@ import { diplome } from "../../types/diplome";
 import { disponibilite } from "../../types/disponibilite";
 import { ApiException } from "../../types/exception";
 
+const bcrypt = require('bcrypt')
 const { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } = require("../../database/connect");
 
 /**
@@ -38,8 +39,8 @@ const { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } = requi
   *          description: La requête s'est bien déroulé
   */
 module.exports = (app: Application) => {
-    app.put("/api/form/candidat/:id", (req, res) => {
-      
+    app.put("/api/form/candidat/:id", async (req, res) => {
+        req.body.User.password = await bcrypt.hash(req.body.User.password, 10)
         Candidat.update(req.body.Candidat, {where : {id : req.params.id}}).then ((candidatmenfou : any) => {        
             Candidat.findByPk(req.params.id).then((candidat: candidat) => {
                 User.update(req.body.User, {where : {id : candidat.UserId}}).then((usermenfou : any) => {
