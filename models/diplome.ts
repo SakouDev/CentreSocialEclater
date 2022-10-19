@@ -10,6 +10,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         },
         certificate: {
             type: dataTypes.STRING,
+            allowNull: false,
         }
 
     })

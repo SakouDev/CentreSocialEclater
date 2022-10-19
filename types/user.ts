@@ -3,6 +3,8 @@ export interface user{
 
     mail : string;
 
+    phone : string;
+
     visibility : boolean;
     
     password: string;
