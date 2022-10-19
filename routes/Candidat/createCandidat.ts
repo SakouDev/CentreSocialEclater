@@ -1,9 +1,12 @@
 import { Application } from "express";
 import { UniqueConstraintError, ValidationError } from "sequelize";
 import { candidat } from "../../types/candidat";
+import { diplome } from "../../types/diplome";
+import { disponibilite } from "../../types/disponibilite";
 import { ApiException } from "../../types/exception";
 
-const { Candidat } = require("../../database/connect");
+const bcrypt = require('bcrypt')
+const { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } = require("../../database/connect");
 
 /**
  * @swagger
@@ -25,24 +28,37 @@ const { Candidat } = require("../../database/connect");
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"lastName": "Menfou","firstName": "MenfouAussi","birthday": "14/02/2001"}
+  *         default: {"Candidat" : {"firstName": "Luc","lastName": "Vigneron","birthday": "27/04/1999"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "YEAH","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}],"Diplome" : [{"id" : 2},{"id" : 4}]}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé
   */
 module.exports = (app: Application) => {
-  app.post("/api/candidats", (req, res) => {
-    Candidat.create(req.body)
-      .then((candidat: candidat) => {
-        const message: string = `Le Candidat ${candidat.lastName} ${candidat.firstName} a bien été crée.`;
-        res.json({ message, data: candidat });
+  app.post("/api/candidats", async (req, res) => {
+    req.body.User.password = await bcrypt.hash(req.body.User.password, 10)
+    User.create(req.body.User).then((user : any) => {
+      Candidat.create(req.body.Candidat).then ((candidat : any) => {
+        candidat.setUser(user)
       })
-      .catch((error : ApiException) => {
-        if(error instanceof ValidationError){
-          return res.status(400).json({message: error.message, data : error})
-        }
-        const message = `Le Candidat n'a pas pu être ajouté. Réessayer dans quelques instants.`
-        res.status(500).json({message, data : error})
+      req.body.Disponibilite.map( async (DispoMap : disponibilite) => {
+        const DisponibiliteRow = await Disponibilite.findByPk(DispoMap.id);
+        await user.addDisponibilite(DisponibiliteRow, { through: UserDispo })
+      })
+      req.body.Diplome.map( async (DiploMap : diplome) => {
+        const DiplomeRow = await Diplome.findByPk(DiploMap.id);
+        await user.addDiplome(DiplomeRow, { through: UserDiplome })
+      })
+    })
+    .then((candidats: candidat) => {
+      const message : string = "La création du Candidat s'est bien déroulé"
+      res.json({message, data: candidats})
+    })
+    .catch((error : ApiException) => {
+      if(error instanceof ValidationError){
+        return res.status(400).json({message: error.message, data : error})
+      }
+      const message = `Le Candidat n'a pas pu être ajouté. Réessayer dans quelques instants.`
+      res.status(500).json({message, data : error})
     })
   });
 };

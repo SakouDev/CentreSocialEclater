@@ -36,23 +36,23 @@ module.exports = (app: Application) => {
 		User.update({...req.body, password: hashedPassword}, {
 			where: { id: id },
 		})
-			.then(() => {
-				return User.findByPk(id).then((user: user) => {
-					if (user === null) {
-						const message =
-							"L'utilisateur demandé n'existe pas. Réessayer avec un autre identifiant.";
-						return res.status(404).json({ message });
-					}
-					const message = `L'utilisateur ${user.mail} a bien été modifié.`;
-					res.json({ message, data: user });
-				});
-			})
-			.catch((error: ApiException) => {
-				if (error instanceof ValidationError) {
-					return res.status(400).json({ message: error.message, data: error });
+		.then(() => {
+			return User.findByPk(id).then((user: user) => {
+				if (user === null) {
+					const message =
+						"L'Utilisateur demandé n'existe pas. Réessayer avec un autre identifiant.";
+					return res.status(404).json({ message });
 				}
-				const message = `L'utilisateur' n'a pas pu être modifié. Réessayer dans quelques instants.`;
-				res.status(500).json({ message, data: error });
+				const message = `L'Utilisateur ${user.mail} a bien été modifié.`;
+				res.json({ message, data: user });
 			});
+		})
+		.catch((error: ApiException) => {
+			if (error instanceof ValidationError) {
+				return res.status(400).json({ message: error.message, data: error });
+			}
+			const message = `L'Utilisateur' n'a pas pu être modifié. Réessayer dans quelques instants.`;
+			res.status(500).json({ message, data: error });
+		});
 	});
 };

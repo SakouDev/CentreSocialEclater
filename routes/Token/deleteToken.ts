@@ -24,7 +24,7 @@ module.exports = (app :Application) => {
   app.delete('/api/tokens/:id', (req, res) => {
     Token.findByPk(req.params.id).then((token: token) => {
       if (token === null){
-        const message = "Le token demandé n'existe pas. Réessayer avec un autre identifiant."
+        const message = "Le Token demandé n'existe pas. Réessayer avec un autre identifiant."
         return res.status(404).json({message})
       }
 
@@ -33,7 +33,7 @@ module.exports = (app :Application) => {
         where: { id: token.id }
       })
       .then(() => {
-        const message = `Le token avec l'identifiant n°${tokenDeleted.id} a bien été supprimé.`
+        const message = `Le Token avec l'identifiant n°${tokenDeleted.id} a bien été supprimé.`
         res.json({message, data: tokenDeleted })
       })
     })

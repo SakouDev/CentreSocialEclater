@@ -49,6 +49,7 @@ sequelize.authenticate()
     .then(() => console.log("La connextion à la base de donnée à bien était établie"))
     .catch((error : Error) => console.error(`Impossible de se connecter à la base de données ${error}`))
 
+
 //Table
 const User = UserModel(sequelize, DataTypes)
 const Candidat = CandidatModel(sequelize, DataTypes)
@@ -61,33 +62,29 @@ const Token = TokenModel(sequelize, DataTypes)
 const UserDispo = UserDispoModel(sequelize, DataTypes)
 const UserDiplome = UserDiplomeModel(sequelize, DataTypes)
 
+
+//UserDispo --> Jointure entre Disponibilite et User
+User.belongsToMany(Disponibilite, {through: UserDispo})
+Disponibilite.belongsToMany(User, {through: UserDispo})
+
+//UserDiplome --> Jointure entre Diplome et User
+User.belongsToMany(Diplome, {through: UserDiplome})
+Diplome.belongsToMany(User, {through: UserDiplome})
+
+User.hasOne(Token)
+Token.belongsTo(User)
+
+User.hasOne(Candidat, { onDelete : 'CASCADE', onUpdate : 'CASCADE' })
+Candidat.belongsTo(User, { onDelete : 'CASCADE', onUpdate : 'CASCADE' })
+
+User.hasOne(Employeur)
+Employeur.belongsTo(User)
+
 const initDb = () => {
-
-    //UserDispo --> Jointure entre Disponibilite et User
-    User.belongsToMany(Disponibilite, {through: UserDispo})
-    Disponibilite.belongsToMany(User, {through: UserDispo})
-
-    //UserDiplome --> Jointure entre Diplome et User
-    User.belongsToMany(Diplome, {through: UserDiplome})
-    Diplome.belongsToMany(User, {through: UserDiplome})
 
     return sequelize.sync({force: true}).then(()=> {
 
-        candidats.map((candidat: candidat) => {
-            Candidat.create({
-                firstName: candidat.firstName,
-                lastName: candidat.lastName,
-                birthday: candidat.birthday
-            }).then((Luc: { toJSON: () => string }) => console.log(Luc.toJSON()))
-        })
-
-        employeurs.map((employeur: employeur) => {
-            Employeur.create({
-                name: employeur.name,
-                siret: employeur.siret
-            }).then((Luc: { toJSON: () => string }) => console.log(Luc.toJSON()))
-        })
-
+        
         diplomes.map((diplome: diplome) => {
             Diplome.create({
                 certificate: diplome.certificate
@@ -120,13 +117,36 @@ const initDb = () => {
             }).then(async(req : any) => {
 
                 console.log(req.toJSON())
-
-                const DisponibiliteRow = await Disponibilite.findByPk(index+1);
-                await req.addDisponibilite(DisponibiliteRow, { through: UserDispo })
-
+                for (let i=0; i<10; i++){
+                    const DisponibiliteRow = await Disponibilite.findByPk(Math.floor(Math.random() * (Object.keys(Disponibilite).length - 1 + 1) + 1));
+                    await req.addDisponibilite(DisponibiliteRow, { through: UserDispo })
+                }
                 const DiplomeRow = await Diplome.findByPk( index + 1 );
                 await req.addDiplome(DiplomeRow, { through: UserDiplome })
             })
+        })
+
+        candidats.map((candidat: candidat) => {
+            Candidat.create({
+                UserId : candidat.UserId,
+                firstName: candidat.firstName,
+                lastName: candidat.lastName,
+                birthday: candidat.birthday
+            }).then(async(req : any, index : number) => {
+                console.log(req.toJSON())
+
+                // const UserRow = await User.findByPk(candidat.userId);
+                // await req.addUser(UserRow)
+
+            })
+        })
+
+        employeurs.map((employeur: employeur) => {
+            Employeur.create({
+                UserId : employeur.UserId,
+                name: employeur.name,
+                siret: employeur.siret
+            }).then((Luc: { toJSON: () => string }) => console.log(Luc.toJSON()))
         })
 
         console.log('La base de donné user a bien été initialisée !')
@@ -134,5 +154,5 @@ const initDb = () => {
 }
 
 module.exports = {
-    initDb, User, Candidat, Employeur, Diplome, Token, Disponibilite
+    initDb, User, Candidat, Employeur, Diplome, Token, Disponibilite, UserDispo, UserDiplome
 }

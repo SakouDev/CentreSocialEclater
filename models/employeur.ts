@@ -26,5 +26,10 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : {msg : 'La SIRET ne peut être vide'}
             }
         },
+        UserId: {
+            type: dataTypes.INTEGER,
+            autoIncrement: false,
+            primaryKey: false, 
+            },
     })
 }

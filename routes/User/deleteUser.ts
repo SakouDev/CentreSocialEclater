@@ -25,7 +25,7 @@ module.exports = (app: Application) => {
 			.then((user: userId) => {
 				if (user === null) {
 					const message =
-						"L'utilisateur demandé n'existe pas. Réessayer avec un autre identifiant.";
+						"L'Utilisateur demandé n'existe pas. Réessayer avec un autre identifiant.";
 					return res.status(404).json({ message });
 				}
 
@@ -33,12 +33,12 @@ module.exports = (app: Application) => {
 				return User.destroy({
 					where: { id: user.id },
 				}).then(() => {
-					const message = `L'utilisateur avec l'identifiant n°${userDeleted.id} a bien été supprimé.`;
+					const message = `L'Utilisateur avec l'identifiant n°${userDeleted.id} a bien été supprimé.`;
 					res.json({ message, data: userDeleted });
 				});
 			})
 			.catch((error: ApiException) => {
-				const message = `L'utilisateur' n'a pas pu être supprimé. Réessayer dans quelques instants.`;
+				const message = `L'Utilisateur' n'a pas pu être supprimé. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
 	});

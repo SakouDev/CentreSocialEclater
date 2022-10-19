@@ -11,6 +11,10 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         certificate: {
             type: dataTypes.STRING,
             allowNull: false,
+            validate: {
+                notNull: { msg : 'Veuillez entrer un Certificat. Cette valeur est requise'},
+                notEmpty : {msg : 'Le Certificat ne peut être vide'}
+            }
         }
 
     })

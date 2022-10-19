@@ -1,8 +1,10 @@
 export interface employeur {
 
-    name : string,
+    UserId : number;
+
+    name : string;
     
-    siret : number
+    siret : number;
 
 }
 

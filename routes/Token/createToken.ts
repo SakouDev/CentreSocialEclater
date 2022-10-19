@@ -34,14 +34,14 @@ module.exports = (app: Application) => {
   app.post("/api/tokens", (req, res) => {
     Token.create(req.body)
       .then((token: token) => {
-        const message: string = `Le token ${req.body.name} a bien été crée.`;
+        const message: string = `Le Token ${req.body.name} a bien été crée.`;
         res.json({ message, data: token });
       })
       .catch((error : ApiException) => {
         if(error instanceof ValidationError){
           return res.status(400).json({message: error.message, data : error})
         }
-        const message = `Le token n'a pas pu être ajouté. Réessayer dans quelques instants.`
+        const message = `Le Token n'a pas pu être ajouté. Réessayer dans quelques instants.`
         res.status(500).json({message, data : error})
     })
   });
