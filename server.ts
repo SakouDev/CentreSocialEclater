@@ -12,7 +12,7 @@ const sequelize = require('./database/connect')
 import {Response, Request} from 'express'
 
 app.use(express.json())
-// sequelize.initDb()
+sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -42,6 +42,10 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
+//Login
+
+require('./routes/Login/login')(app)
 
 //Users
 
@@ -90,6 +94,12 @@ require('./routes/Token/findTokenByPk')(app)
 require('./routes/Token/createToken')(app)
 require('./routes/Token/updateToken')(app)
 require('./routes/Token/deleteToken')(app)
+
+//Forms
+
+require('./routes/Forms/formCandidatUpdate')(app)
+require('./routes/Forms/formEmployeurUpdate')(app)
+
 
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'

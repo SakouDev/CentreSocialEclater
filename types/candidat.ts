@@ -1,15 +1,17 @@
 export interface candidat {
     
-    lastName : string,
+    UserId : number;
+
+    lastName : string;
     
-    firstName : string,
+    firstName : string;
     
-    birthday : string
+    birthday : string;
 
 }
 
 export interface candidatId extends candidat {
 
-    id : number
+    id : number;
 
 }

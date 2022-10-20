@@ -26,7 +26,7 @@ module.exports = (app: Application) => {
 			.then((disponibilite: userId) => {
 				if (disponibilite === null) {
 					const message =
-						"La disponibilité demandée n'existe pas. Réessayer avec un autre identifiant.";
+						"La Disponibilité demandée n'existe pas. Réessayer avec un autre identifiant.";
 					return res.status(404).json({ message });
 				}
 
@@ -34,12 +34,12 @@ module.exports = (app: Application) => {
 				return Disponibilite.destroy({
 					where: { id: disponibilite.id },
 				}).then(() => {
-					const message = `La disponibilité avec l'identifiant n°${dispoDeleted.id} a bien été supprimé.`;
+					const message = `La Disponibilité avec l'identifiant n°${dispoDeleted.id} a bien été supprimé.`;
 					res.json({ message, data: dispoDeleted });
 				});
 			})
 			.catch((error: ApiException) => {
-				const message = `La 'disponibilite' n'a pas pu être supprimé. Réessayer dans quelques instants.`;
+				const message = `La 'Disponibilite' n'a pas pu être supprimé. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
 	});

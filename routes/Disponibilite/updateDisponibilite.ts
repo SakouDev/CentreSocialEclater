@@ -38,10 +38,10 @@ module.exports = (app: Application) => {
 				return Disponibilite.findByPk(id).then((disponibilite: disponibilite) => {
 					if (disponibilite === null) {
 						const message =
-							"La disponibilité demandé n'existe pas. Réessayer avec un autre identifiant.";
+							"La Disponibilité demandé n'existe pas. Réessayer avec un autre identifiant.";
 						return res.status(404).json({ message });
 					}
-					const message = `La disponibilité ${disponibilite.namePeriod} a bien été modifié.`;
+					const message = `La Disponibilité ${disponibilite.namePeriod} a bien été modifié.`;
 					res.json({ message, data: disponibilite });
 				});
 			})
@@ -49,7 +49,7 @@ module.exports = (app: Application) => {
 				if (error instanceof ValidationError) {
 					return res.status(400).json({ message: error.message, data: error });
 				}
-				const message = `La 'disponibilite' n'a pas pu être modifié. Réessayer dans quelques instants.`;
+				const message = `La 'Disponibilite' n'a pas pu être modifié. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
 	});

@@ -2,7 +2,7 @@ const users = [
   {
     mail: "test@test.com",
     visibility: true,
-    password : "blabla",
+    password : "test",
     address : "9 rue du régiment de la chaudière",
     zipCode : "62200",
     city : "Boulogne-sur Mer",

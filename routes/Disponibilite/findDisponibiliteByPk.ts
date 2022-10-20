@@ -26,16 +26,16 @@ module.exports = (app: Application) => {
 			.then((disponibilite: disponibilite) => {
 				if (disponibilite === null) {
 					const message =
-						"La disponibilité demandé n'existe pas. Réessayer avec un autre identifiant.";
+						"La Disponibilité demandé n'existe pas. Réessayer avec un autre identifiant.";
 					return res.status(404).json({ message });
 				}
 
-				const message: string = "Une disponibilité a bien été trouvé.";
+				const message: string = "Une Disponibilité a bien été trouvé.";
 				res.json({ message, data: disponibilite });
 			})
 			.catch((error: ApiException) => {
 				const message =
-					"La disponibilité demandé n'a pas pu être récuperé. Réessayer dans quelques instants.";
+					"La Disponibilité demandé n'a pas pu être récuperé. Réessayer dans quelques instants.";
 				res.status(500).json({ message, data: error });
 			});
 	});

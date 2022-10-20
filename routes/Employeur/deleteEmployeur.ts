@@ -1,9 +1,8 @@
 import { Application } from "express";
-import { candidatId } from "../../types/candidat";
 import { employeurId } from "../../types/employeur";
 import { ApiException } from "../../types/exception";
 
-const { Employeur } = require('../../database/connect')
+const { Employeur, User } = require('../../database/connect')
   
 
 /**
@@ -11,7 +10,7 @@ const { Employeur } = require('../../database/connect')
   * /api/employeurs/{id}:
   *  delete:
   *      tags: [Employeurs]
-  *      description: Delete Employeur
+  *      description: Supprimer un Employeur
   *      parameters:
   *       - name: id
   *         in: path
@@ -19,7 +18,7 @@ const { Employeur } = require('../../database/connect')
   *         type: integer
   *      responses:
   *        200:
-  *          description: Returns a mysterious string. 
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app :Application) => {
   app.delete('/api/employeurs/:id', (req, res) => {
@@ -30,8 +29,8 @@ module.exports = (app :Application) => {
       }
 
       const employeurDeleted = employeur;
-      return  Employeur.destroy({
-        where: { id: employeur.id }
+      return  User.destroy({
+        where: { id : employeur.UserId }
       })
       .then(() => {
         const message = `L'Employeur avec l'identifiant n°${employeurDeleted.id} a bien été supprimé.`

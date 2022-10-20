@@ -9,7 +9,7 @@ const { Token } = require('../../database/connect')
   * /api/tokens/{id}:
   *  get:
   *      tags: [Token]
-  *      description: Get an template by id
+  *      description: Trouver un Token par son Id
   *      parameters:
   *       - name: id
   *         in: path
@@ -18,22 +18,22 @@ const { Token } = require('../../database/connect')
   *         default: 1
   *      responses:
   *        200:
-  *          description: Returns a mysterious string.
+  *          description: La requête s'est bien déroulé.
   */
 module.exports = (app : Application) => {
   app.get('/api/tokens/:id', (req, res) => {
     Token.findByPk(req.params.id)
       .then((token : token )=> {
         if (token === null){
-          const message = "Le token demandé n'existe pas. Réessayer avec un autre identifiant."
+          const message = "Le Token demandé n'existe pas. Réessayer avec un autre identifiant."
           return res.status(404).json({message})
         }
 
-        const message : string = 'Un token a bien été trouvé.'
+        const message : string = 'Un Token a bien été trouvé.'
         res.json({ message, data: token })
       })
       .catch((error : ApiException ) => {
-        const message = "Le token demander n'a pas pu être récuperer. Réessayer dans quelques instants."
+        const message = "Le Token demander n'a pas pu être récuperer. Réessayer dans quelques instants."
         res.status(500).json({message, data: error})
       })
   })

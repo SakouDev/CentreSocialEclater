@@ -2,21 +2,26 @@ import { Application } from "express"
 import { candidat } from "../../types/candidat"
 import { ApiException } from "../../types/exception"
 
-const { Candidat } = require('../../database/connect')
+const { Candidat, User, Diplome, Disponibilite } = require('../../database/connect')
 
 /**
  * @openapi
  * /api/candidats:
  *   get:
  *      tags: [Candidats]
- *      description: Return all candidats
+ *      description: récupérer tous les candidats
  *      responses:
  *        200:
- *          description: Returns a mysterious string.
+ *          description: La requête s'est bien déroulé.
  */
 module.exports = (app : Application) => {
     app.get('/api/candidats', (req,res) => {
-        Candidat.findAll()
+        Candidat.findAll({include: [
+			{
+				model : User,
+				required : false,
+			}
+		]})
         .then((candidats: candidat) => {
             const message : string = 'La liste des candidats à bien était récuperée.'
             res.json({message, data: candidats})
