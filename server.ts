@@ -12,7 +12,7 @@ const sequelize = require('./database/connect')
 import {Response, Request} from 'express'
 
 app.use(express.json())
-sequelize.initDb()
+// sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -43,9 +43,11 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-//Login
+//Security
 
-require('./routes/Login/login')(app)
+require('./routes/Security/login')(app)
+require('./routes/Security/logout')(app)
+require('./routes/Security/protected')(app)
 
 //Users
 
