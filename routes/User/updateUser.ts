@@ -2,6 +2,7 @@ import { Application } from "express";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception";
 import { user } from "../../types/user";
+import bcrypt from "bcrypt";
 
 const { User } = require("../../database/connect");
 
@@ -29,9 +30,10 @@ const { User } = require("../../database/connect");
  *          description: La requête s'est bien déroulée.
  */
 module.exports = (app: Application) => {
-	app.put("/api/users/:id", (req, res) => {
+	app.put("/api/users/:id", async (req, res) => {
 		const id = req.params.id;
-		User.update(req.body, {
+		const hashedPassword = await bcrypt.hash(req.body.password, 10);
+		User.update({...req.body, password: hashedPassword}, {
 			where: { id: id },
 		})
 		.then(() => {

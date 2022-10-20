@@ -23,6 +23,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     },
     visibility: {
         type: dataTypes.BOOLEAN,
+        defaultValue: true
     },
     password: {
         type: dataTypes.STRING,
@@ -43,6 +44,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         type: dataTypes.STRING,
         allowNull: false,
         validate : { 
+            isNumeric:true,
             notNull: {msg : 'Le Zipcode est requis'},
             notEmpty: {msg : "Le Zipcode est une propriété requise"}
         }
@@ -51,13 +53,14 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         type: dataTypes.STRING,
         allowNull: false,
         validate : {
+            isAlpha:true,
             notNull: {msg : 'La Ville est requise'},
             notEmpty: {msg :" La Ville est une propriété requise"}
         }
     },
     role: {
         type:dataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     image: {
         type: dataTypes.STRING,
