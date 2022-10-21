@@ -39,7 +39,7 @@ export interface ProcessEnv {
  */
 module.exports = (app: Application) => {
 	app.post("/api/login", (req, res, next) => {
-		User.findOne({ where: { mail: req.body.mail } })
+		User.scope('withPassword').findOne({ where: { mail: req.body.mail } })
 			.then(async (user: userId) => {
 				const checkPassword = await bcrypt.compare(
 					req.body.password,
