@@ -54,9 +54,9 @@ module.exports = (app: Application) => {
 					const accessToken: any = jwt.sign(
 						payload,
 						process.env.JWT_TOKEN as string,
-						{ expiresIn: "30min" }
+						{ expiresIn: "1m" }
 					);
-					Token.create({token: refreshToken})
+					Token.create({token: refreshToken, UserId: user.id})
 					const message: string = `L'Utilisateur a été touvé.`;
 					res.json({
 						message,
