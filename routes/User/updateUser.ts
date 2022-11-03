@@ -2,8 +2,8 @@ import { Application } from "express";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception";
 import { user } from "../../types/user";
-const bcrypt = require("bcrypt");
 
+const bcrypt = require("bcrypt");
 const { User } = require("../../database/connect");
 
 /**
