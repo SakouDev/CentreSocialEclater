@@ -47,6 +47,7 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 require('./routes/Security/login')(app)
 require('./routes/Security/protected')(app)
+require('./routes/Security/refreshToken')(app)
 
 //Users
 

@@ -32,9 +32,11 @@ function checkAccessToken(
 		}
 		jwt.verify(accessToken, process.env.JWT_Token as string);
 		res.status(200);
+		next()
 	} catch (error) {
 		if (error == "TokenExpiredError: jwt expired") {
-			res.status(401).json({message: "Le token est expiré" });
+			res.status(401).json({message: error });
+			// if token expired send to refreshtoken route
 		}else {
 			res.status(401).json({message: error})
 		}
