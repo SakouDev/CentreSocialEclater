@@ -43,9 +43,10 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-//Login
+//Security
 
-require('./routes/Login/login')(app)
+require('./routes/Security/login')(app)
+require('./routes/Security/protected')(app)
 
 //Users
 
@@ -53,7 +54,7 @@ require('./routes/User/findAllUsers')(app)
 require('./routes/User/findUserByPk')(app)
 require('./routes/User/createUser')(app)
 require('./routes/User/updateUser')(app)
-require('./routes/User/deleteUser')(app)
+require('./routes/User/deleteUser')(app) 
 
 //Disponibilite
 

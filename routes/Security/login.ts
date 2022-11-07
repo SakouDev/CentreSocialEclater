@@ -1,13 +1,12 @@
 import "dotenv/config";
 import { Application } from "express";
 import { ValidationError } from "sequelize";
-import { user, userId } from "../../types/user";
-import { token } from "../../types/token";
+import { userId } from "../../types/user";
 import { ApiException } from "../../types/exception";
 import jwt from "jsonwebtoken";
 
 const bcrypt = require("bcrypt")
-const { User } = require("../../database/connect");
+const { User, Token  } = require("../../database/connect");
 
 export interface ProcessEnv {
 	[key: string]: string | undefined;
@@ -16,15 +15,15 @@ export interface ProcessEnv {
 /**
  * @swagger
  * tags:
- *      name: Login
- *      description: manage le login
+ *      name: Security
+ *      description: manage Security
  */
 
 /**
  * @openapi
  * /api/login:
  *  post:
- *      tags: [Login]
+ *      tags: [Security]
  *      description: Login d'un utilisateur (User)
  *      consumes:
  *       - application/json
@@ -39,8 +38,8 @@ export interface ProcessEnv {
  *          description: La requête s'est bien déroulé
  */
 module.exports = (app: Application) => {
-	app.post("/api/login", (req, res) => {
-		User.findOne({ where: { mail: req.body.mail } })
+	app.post("/api/login", (req, res, next) => {
+		User.scope('withPassword').findOne({ where: { mail: req.body.mail } })
 			.then(async (user: userId) => {
 				const checkPassword = await bcrypt.compare(
 					req.body.password,
@@ -57,6 +56,7 @@ module.exports = (app: Application) => {
 						process.env.JWT_TOKEN as string,
 						{ expiresIn: "30min" }
 					);
+					Token.create({token: refreshToken})
 					const message: string = `L'Utilisateur a été touvé.`;
 					res.json({
 						message,
