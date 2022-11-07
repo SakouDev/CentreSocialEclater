@@ -1,16 +1,13 @@
-const cors = require('cors')
-const express = require("express")
-
-const app = express()
-
-app.use(cors())
-
-const swaggerJsDoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
-const sequelize = require('./database/connect')
-
+import cors from 'cors'
+import express from "express"
+import swaggerUi from 'swagger-ui-express'
 import {Response, Request} from 'express'
 
+const swaggerJsDoc = require('swagger-jsdoc')
+const sequelize = require('./database/connect')
+
+const app = express()
+app.use(cors())
 app.use(express.json())
 sequelize.initDb()
 
@@ -43,34 +40,17 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
+require('./routes/UserRoutes')(app)
+require('./routes/DisponibiliteRoutes')(app)
+require('./routes/CandidatRoutes')(app)
+require('./routes/EmployeurRoutes')(app)
+require('./routes/DiplomeRoutes')(app)
+require('./routes/TokenRoutes')(app)
+
 //Security
 
 require('./routes/Security/login')(app)
 require('./routes/Security/protected')(app)
-
-//Users
-
-require('./routes/UserRoutes')(app)
-
-//Disponibilite
-
-require('./routes/DisponibiliteRoutes')(app)
-
-//Candidats
-
-require('./routes/CandidatRoutes')(app)
-
-// Employeur
-
-require('./routes/EmployeurRoutes')(app)
-
-//Diplome 
-
-require('./routes/DiplomeRoutes')(app)
-
-//Token 
-
-require('./routes/TokenRoutes')(app)
 
 //Forms
 

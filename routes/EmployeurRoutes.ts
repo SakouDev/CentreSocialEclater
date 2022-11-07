@@ -1,6 +1,5 @@
 import { Application } from "express";
-import { UniqueConstraintError, ValidationError } from "sequelize";
-import { diplome } from "../types/diplome";
+import { ValidationError } from "sequelize";
 import { disponibilite } from "../types/disponibilite";
 import { employeur } from "../types/employeur";
 import { ApiException } from "../types/exception";
