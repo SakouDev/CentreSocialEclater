@@ -1,5 +1,5 @@
 
-import {  DataTypes, Sequelize, STRING } from "sequelize"
+import {  DataTypes, Sequelize } from "sequelize"
 
 
 module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
