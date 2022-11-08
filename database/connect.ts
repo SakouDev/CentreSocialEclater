@@ -30,17 +30,19 @@ const UserDispoModel = require("./models/user-disponibilite");
 const UserDiplomeModel = require("./models/user-diplome");
 
 //Connexion Database
-const sequelize = new Sequelize({
-	database: process.env.DB_DATABASE || "TestForVincent",
-	username: process.env.DB_USERNAME || "Test",
-	password: process.env.DB_PASSWORD || "12344",
-	host: process.env.DB_HOST || "localhost",
-	dialect: "postgres",
-	port: process.env.DB_PORT || 5432,
-	dialectOptions: {
-		timezone: "Etc/GMT-2",
-	},
-});
+const sequelize = new Sequelize(
+	"TestForVincent",
+	"Test",
+	"12344",
+	{
+		host: "localhost",
+		dialect: "postgres",
+		port: 5432,
+		dialectOptions: {
+			timezone: "Etc/GMT-2",
+		},
+	}
+);
 
 sequelize
 	.authenticate()
