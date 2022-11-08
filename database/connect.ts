@@ -31,7 +31,7 @@ const UserDispoModel = require("./models/user-disponibilite");
 const UserDiplomeModel = require("./models/user-diplome");
 
 //Connexion Database
-const sequelize = new Sequelize(`${DBlogs.dialect}://${DBlogs.user}:${DBlogs.password}@${DBlogs.host}:${DBlogs.port}/${DBlogs.database}`);
+export const sequelize = new Sequelize(`${DBlogs.dialect}://${DBlogs.user}:${DBlogs.password}@${DBlogs.host}:${DBlogs.port}/${DBlogs.database}`);
 
 sequelize
 	.authenticate()

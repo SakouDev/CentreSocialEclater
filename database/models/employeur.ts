@@ -1,17 +1,15 @@
 
-import {  DataTypes, Sequelize } from "sequelize"
+import {  DataTypes } from "sequelize"
+import {sequelize} from "../connect"
 
-
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
-    
-    return sequelize.define('Employeur', {
+export const Employeur = sequelize.define('Employeur', {
         id: {
-        type: dataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true, 
         },
         name: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : "Veuillez entrer votre nom d'entreprise. Cette valeur est requise"},
@@ -19,7 +17,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         siret: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : 'Veuillez entrer votre SIRET. Cette valeur est requise'},
@@ -27,9 +25,8 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         UserId: {
-            type: dataTypes.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: false,
             primaryKey: false, 
             },
     })
-}

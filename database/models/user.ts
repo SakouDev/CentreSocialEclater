@@ -1,16 +1,15 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
+import {sequelize} from "../connect"
 
-module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
-	return sequelize.define(
-		"User",
+export const User = sequelize.define("User",
 		{
 			id: {
-				type: dataTypes.INTEGER,
+				type: DataTypes.INTEGER,
 				autoIncrement: true,
 				primaryKey: true,
 			},
 			mail: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: false,
 				unique: true,
 				validate: {
@@ -20,7 +19,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 				},
 			},
 			phone: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: true,
 				unique: true,
 				validate: {
@@ -28,18 +27,18 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 				},
 			},
 			visibility: {
-				type: dataTypes.BOOLEAN,
+				type: DataTypes.BOOLEAN,
 				defaultValue: true,
 			},
 			password: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					notNull: { msg: "Le mot de passe est requis" },
 				},
 			},
 			address: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					notNull: { msg: "L'Adresse est requise" },
@@ -47,7 +46,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 				},
 			},
 			zipCode: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					notNull: { msg: "Le code Postal est requis" },
@@ -55,7 +54,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 				},
 			},
 			city: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					notNull: { msg: "La Ville est requise" },
@@ -63,11 +62,11 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 				},
 			},
 			role: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: false,
 			},
 			image: {
-				type: dataTypes.STRING,
+				type: DataTypes.STRING,
 				allowNull: true,
 				validate: {
 					isUrl: true,
@@ -86,4 +85,3 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 			},
 		}
 	);
-};
