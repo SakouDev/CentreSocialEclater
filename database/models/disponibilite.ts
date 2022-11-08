@@ -1,15 +1,15 @@
-import {  DataTypes } from "sequelize"
-import {sequelize} from "../connect"
+import {  DataTypes, Sequelize } from "sequelize"
 
-export const Disponibilite = sequelize.define('Disponibilite', {
+module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+    return sequelize.define('Disponibilite', {
 
         id: {
-            type: DataTypes.INTEGER,
+            type: dataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true, 
         },
         namePeriod: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : 'Veuillez entrer votre Disponibilité. Cette valeur est requise'},
@@ -18,3 +18,4 @@ export const Disponibilite = sequelize.define('Disponibilite', {
         }
 
     })
+}

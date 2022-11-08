@@ -1,10 +1,11 @@
+import {  DataTypes, Sequelize } from "sequelize"
 
-import {  DataTypes } from "sequelize"
-import {sequelize} from "../connect"
 
-export const Token = sequelize.define('Token', {
+module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+    
+    return sequelize.define('Token', {
         token: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : "Veuillez entrer votre Token. Cette valeur est requise"},
@@ -12,7 +13,7 @@ export const Token = sequelize.define('Token', {
             }
         },
         tokenPush: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             // allowNull: false,
             // validate: {
             //     notNull: { msg : 'Veuillez entrer votre Token. Cette valeur est requise'},
@@ -20,6 +21,7 @@ export const Token = sequelize.define('Token', {
             // }
         },
         UserId: {
-            type: DataTypes.INTEGER,
+            type: dataTypes.INTEGER,
         },
     })
+}

@@ -1,15 +1,16 @@
-import {  DataTypes } from "sequelize"
-import {sequelize} from "../connect"
 
-export const Diplome = sequelize.define('Diplome', {
+import {  DataTypes, Sequelize } from "sequelize"
+
+module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+    return sequelize.define('Diplome', {
 
         id: {
-            type: DataTypes.INTEGER,
+            type: dataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true, 
         },
         certificate: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : 'Veuillez entrer un Certificat. Cette valeur est requise'},
@@ -18,3 +19,4 @@ export const Diplome = sequelize.define('Diplome', {
         }
 
     })
+}
