@@ -9,7 +9,7 @@ const sequelize = require('./database/connect')
 const app = express()
 app.use(cors())
 app.use(express.json())
-sequelize.initDb()
+// sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -51,6 +51,7 @@ require('./routes/TokenRoutes')(app)
 
 require('./routes/Security/login')(app)
 require('./routes/Security/protected')(app)
+require('./routes/Security/refreshToken')(app)
 
 //Forms
 
