@@ -1,30 +1,29 @@
-import { DataTypes } from "sequelize"
-import { Sequelize } from 'sequelize'
+import { DataTypes, Sequelize } from "sequelize"
 
 //Table
 import { user } from "../types/user";
 const UserModel = require("./models/user");
-let users = require("../database/mock/mock-user");
+let users = require("./mock/mock-user");
 
 import { candidat } from "../types/candidat";
 const CandidatModel = require("./models/candidat");
-let candidats = require("../database/mock/mock-candidat");
+let candidats = require("./mock/mock-candidat");
 
 import { employeur } from "../types/employeur";
 const EmployeurModel = require("./models/employeur");
-let employeurs = require("../database/mock/mock-employeur");
+let employeurs = require("./mock/mock-employeur");
 
 import { diplome } from "../types/diplome";
 const DiplomeModel = require("./models/diplome");
-let diplomes = require("../database/mock/mock-diplome");
+let diplomes = require("./mock/mock-diplome");
 
 import { disponibilite } from "../types/disponibilite";
 const DisponibiliteModel = require("./models/disponibilite");
-let disponibilites = require("../database/mock/mock-disponibilite");
+let disponibilites = require("./mock/mock-disponibilite");
 
 import { token } from "../types/token";
 const TokenModel = require("./models/token");
-let tokens = require("../database/mock/mock-token");
+let tokens = require("./mock/mock-token");
 
 //Table Jointure
 const UserDispoModel = require("./models/user-disponibilite");
