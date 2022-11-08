@@ -1,4 +1,5 @@
 import { DataTypes, Sequelize } from "sequelize"
+import { DBlogs } from "./DBConfig";
 
 //Table
 import { user } from "../types/user";
@@ -30,19 +31,7 @@ const UserDispoModel = require("./models/user-disponibilite");
 const UserDiplomeModel = require("./models/user-diplome");
 
 //Connexion Database
-const sequelize = new Sequelize(
-	"TestForVincent",
-	"Test",
-	"12344",
-	{
-		host: "localhost",
-		dialect: "postgres",
-		port: 5432,
-		dialectOptions: {
-			timezone: "Etc/GMT-2",
-		},
-	}
-);
+const sequelize = new Sequelize(`${DBlogs.dialect}://${DBlogs.user}:${DBlogs.password}@${DBlogs.host}:${DBlogs.port}/${DBlogs.database}`);
 
 sequelize
 	.authenticate()
