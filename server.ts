@@ -1,7 +1,12 @@
+import {Response, Request} from 'express'
+import './routes'  // test to import from routes/index
+import { candidatRouter } from './routes/Candidat/router'
+
 const cors = require('cors')
 const express = require("express")
 
 const app = express()
+const router = express.Router()
 
 app.use(cors())
 
@@ -9,9 +14,8 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./database/connect')
 
-import {Response, Request} from 'express'
-
 app.use(express.json())
+app.use('/api', router)
 // sequelize.initDb()
 
 const port = process.env.PORT || 5000
@@ -37,70 +41,73 @@ const swaggerOptions = {
             },],
         },
     },
-    apis: [`./routes/*/*.ts`]
+    apis: [`./routes/*/router.ts`]
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-//Security
+router.use('/candidats', candidatRouter)
 
-require('./routes/Security/login')(app)
-require('./routes/Security/protected')(app)
-require('./routes/Security/refreshToken')(app)
+// //Security
 
-//Users
+// require('./routes/Security/login')(app)
+// require('./routes/Security/protected')(app)
+// require('./routes/Security/refreshToken')(app)
+// require('./routes/Security/logout')(app)
 
-require('./routes/User/findAllUsers')(app)
-require('./routes/User/findUserByPk')(app)
-require('./routes/User/createUser')(app)
-require('./routes/User/updateUser')(app)
-require('./routes/User/deleteUser')(app) 
+// //Users
 
-//Disponibilite
+// require('./routes/User/findAllUsers')(app)
+// require('./routes/User/findUserByPk')(app)
+// require('./routes/User/createUser')(app)
+// require('./routes/User/updateUser')(app)
+// require('./routes/User/deleteUser')(app) 
 
-require('./routes/Disponibilite/findAllDisponibilites')(app)
-require('./routes/Disponibilite/findDisponibiliteByPk')(app)
-require('./routes/Disponibilite/createDisponibilite')(app)
-require('./routes/Disponibilite/updateDisponibilite')(app)
-require('./routes/Disponibilite/deleteDisponibilite')(app)
+// //Disponibilite
 
-//Candidats
+// require('./routes/Disponibilite/findAllDisponibilites')(app)
+// require('./routes/Disponibilite/findDisponibiliteByPk')(app)
+// require('./routes/Disponibilite/createDisponibilite')(app)
+// require('./routes/Disponibilite/updateDisponibilite')(app)
+// require('./routes/Disponibilite/deleteDisponibilite')(app)
 
-require('./routes/Candidat/findAllCandidats')(app)
-require('./routes/Candidat/findCandidatByPk')(app)
-require('./routes/Candidat/createCandidat')(app)
-require('./routes/Candidat/updateCandidat')(app)
-require('./routes/Candidat/deleteCandidat')(app)
+// //Candidats
 
-// Employeur
+// require('./routes/Candidat/findAllCandidats')(app)
+// require('./routes/Candidat/findCandidatByPk')(app)
+// require('./routes/Candidat/createCandidat')(app)
+// require('./routes/Candidat/updateCandidat')(app)
+// require('./routes/Candidat/deleteCandidat')(app)
 
-require('./routes/Employeur/findAllEmployeurs')(app)
-require('./routes/Employeur/findEmployeurByPk')(app)
-require('./routes/Employeur/createEmployeur')(app)
-require('./routes/Employeur/updateEmployeur')(app)
-require('./routes/Employeur/deleteEmployeur')(app)
+// // Employeur
 
-//Diplome 
+// require('./routes/Employeur/findAllEmployeurs')(app)
+// require('./routes/Employeur/findEmployeurByPk')(app)
+// require('./routes/Employeur/createEmployeur')(app)
+// require('./routes/Employeur/updateEmployeur')(app)
+// require('./routes/Employeur/deleteEmployeur')(app)
 
-require('./routes/Diplome/findAllDiplomes')(app)
-require('./routes/Diplome/findDiplomeByPk')(app)
-require('./routes/Diplome/createDiplome')(app)
-require('./routes/Diplome/updateDiplome')(app)
-require('./routes/Diplome/deleteDiplome')(app)
+// //Diplome 
 
-//Token 
+// require('./routes/Diplome/findAllDiplomes')(app)
+// require('./routes/Diplome/findDiplomeByPk')(app)
+// require('./routes/Diplome/createDiplome')(app)
+// require('./routes/Diplome/updateDiplome')(app)
+// require('./routes/Diplome/deleteDiplome')(app)
 
-require('./routes/Token/findAllTokens')(app)
-require('./routes/Token/findTokenByPk')(app)
-require('./routes/Token/createToken')(app)
-require('./routes/Token/updateToken')(app)
-require('./routes/Token/deleteToken')(app)
+// //Token 
 
-//Forms
+// require('./routes/Token/findAllTokens')(app)
+// require('./routes/Token/findTokenByPk')(app)
+// require('./routes/Token/createToken')(app)
+// require('./routes/Token/updateToken')(app)
+// require('./routes/Token/deleteToken')(app)
 
-require('./routes/Forms/formCandidatUpdate')(app)
-require('./routes/Forms/formEmployeurUpdate')(app)
+// //Forms
+
+// require('./routes/Forms/formCandidatUpdate')(app)
+// require('./routes/Forms/formEmployeurUpdate')(app)
 
 
 app.use(({res : ApiException}: any) => {
