@@ -1,6 +1,4 @@
-
 import {  DataTypes, Sequelize } from "sequelize"
-
 module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     return sequelize.define('Diplome', {
 
@@ -17,6 +15,5 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : {msg : 'Le Certificat ne peut être vide'}
             }
         }
-
     })
 }

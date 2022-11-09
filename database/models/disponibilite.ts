@@ -16,6 +16,5 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : {msg : 'La Disponibilité ne peut être vide'}
             }
         }
-
     })
 }
