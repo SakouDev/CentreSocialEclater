@@ -1,6 +1,10 @@
 import {Response, Request} from 'express'
 import './routes'  // test to import from routes/index
+
 import { candidatRouter } from './routes/Candidat/router'
+import { employeurRouter } from './routes/Employeur/router'
+import { tokenRouter } from './routes/Token/router'
+import { userRouter } from './routes/User/router'
 
 const cors = require('cors')
 const express = require("express")
@@ -26,6 +30,7 @@ app.listen(port, () => {
 app.get("/", (req :Request, res: Response) => {
     res.send("Pour obtenir le swagger, rendez-vous sur localhost:5000/api/docs")
 })
+
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
@@ -45,9 +50,12 @@ const swaggerOptions = {
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 router.use('/candidats', candidatRouter)
+router.use('/users', userRouter)
+router.use('/tokens', tokenRouter)
+router.use('/employeurs', employeurRouter)
 
 // //Security
 
@@ -55,14 +63,6 @@ router.use('/candidats', candidatRouter)
 // require('./routes/Security/protected')(app)
 // require('./routes/Security/refreshToken')(app)
 // require('./routes/Security/logout')(app)
-
-// //Users
-
-// require('./routes/User/findAllUsers')(app)
-// require('./routes/User/findUserByPk')(app)
-// require('./routes/User/createUser')(app)
-// require('./routes/User/updateUser')(app)
-// require('./routes/User/deleteUser')(app) 
 
 // //Disponibilite
 
@@ -72,22 +72,6 @@ router.use('/candidats', candidatRouter)
 // require('./routes/Disponibilite/updateDisponibilite')(app)
 // require('./routes/Disponibilite/deleteDisponibilite')(app)
 
-// //Candidats
-
-// require('./routes/Candidat/findAllCandidats')(app)
-// require('./routes/Candidat/findCandidatByPk')(app)
-// require('./routes/Candidat/createCandidat')(app)
-// require('./routes/Candidat/updateCandidat')(app)
-// require('./routes/Candidat/deleteCandidat')(app)
-
-// // Employeur
-
-// require('./routes/Employeur/findAllEmployeurs')(app)
-// require('./routes/Employeur/findEmployeurByPk')(app)
-// require('./routes/Employeur/createEmployeur')(app)
-// require('./routes/Employeur/updateEmployeur')(app)
-// require('./routes/Employeur/deleteEmployeur')(app)
-
 // //Diplome 
 
 // require('./routes/Diplome/findAllDiplomes')(app)
@@ -95,14 +79,6 @@ router.use('/candidats', candidatRouter)
 // require('./routes/Diplome/createDiplome')(app)
 // require('./routes/Diplome/updateDiplome')(app)
 // require('./routes/Diplome/deleteDiplome')(app)
-
-// //Token 
-
-// require('./routes/Token/findAllTokens')(app)
-// require('./routes/Token/findTokenByPk')(app)
-// require('./routes/Token/createToken')(app)
-// require('./routes/Token/updateToken')(app)
-// require('./routes/Token/deleteToken')(app)
 
 // //Forms
 

@@ -33,7 +33,7 @@ const { Employeur, User, Disponibilite, UserDispo, Diplome } = require("../../da
   *         in: body
   *         required: true  
   *         type: object
-  *         default: {"Employeur" : {"name": "Simplon","siret": "12356894100789"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "YEAH","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}]}
+  *         default: {"Employeur": {"name": "ECLATER", "siret": "231564156D125"},"User": {"mail": "menfou@test.com", "visibility": true, "password": "blabla", "address": "9 rue du régiment de la chaudière", "zipCode": "62200", "city": "Boulogne-sur Mer", "role": "Employeur", "image": "http://www.rien.com/%22%7D"}, "Disponibilite": [{"id": 1}, {"id": 4}, {"id": 7}]}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé
@@ -41,7 +41,7 @@ const { Employeur, User, Disponibilite, UserDispo, Diplome } = require("../../da
 module.exports = (app: Application) => {
     app.put("/api/form/employeur/:id", async (req, res) => {
         req.body.User.password = await bcrypt.hash(req.body.User.password, 10)
-      
+        
         Employeur.update(req.body.Employeur, {where : {id : req.params.id}}).then ((employeurmenfou : any) => {        
             Employeur.findByPk(req.params.id).then((employeur: employeur) => {
                 User.update(req.body.User, {where : {id : employeur.UserId}}).then((usermenfou : any) => {

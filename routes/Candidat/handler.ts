@@ -77,11 +77,11 @@ const createCandidat = async (req: Request, res: Response) => {
 			Candidat.create(req.body.Candidat).then((candidat: any) => {
 				candidat.setUser(user);
 			});
-			req.body.Disponibilite.map(async (DispoMap: disponibilite) => {
+			req.body.Disponibilite?.map(async (DispoMap: disponibilite) => {
 				const DisponibiliteRow = await Disponibilite.findByPk(DispoMap.id);
 				await user.addDisponibilite(DisponibiliteRow, { through: UserDispo });
 			});
-			req.body.Diplome.map(async (DiploMap: diplome) => {
+			req.body.Diplome?.map(async (DiploMap: diplome) => {
 				const DiplomeRow = await Diplome.findByPk(DiploMap.id);
 				await user.addDiplome(DiplomeRow, { through: UserDiplome });
 			});

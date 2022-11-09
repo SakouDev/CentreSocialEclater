@@ -4,10 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const { User, Token } = require("../../database/connect");
 
-export interface ProcessEnv {
-	[key: string]: string | undefined;
-}
-
 module.exports = (app: Application) => {
 	app.post("/api/refreshToken", (req: Request, res: Response) => {
 		// retrieve the oldRefreshToken from headers 
@@ -25,7 +21,7 @@ module.exports = (app: Application) => {
             }
 
 			// decode the token to retrieve the value
-			const val = jwt.decode(oldRefreshToken, process.env.JWT_TOKEN_SECRET);
+			const val = jwt.decode(oldRefreshToken, process.env.JWT_TOKEN_SECRET );
             const mail = val.mail;
 			const userId = val.id;
 
