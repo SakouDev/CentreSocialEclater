@@ -84,6 +84,10 @@ const initDb = () => {
 
     return sequelize.sync({force: true}).then(()=> {
 
+export const initDb = () => {
+
+    return sequelize.sync({force: true}).then(()=> {
+
         
         diplomes.map((diplome: diplome) => {
             Diplome.create({
@@ -151,8 +155,4 @@ const initDb = () => {
 
         console.log('La base de donné user a bien été initialisée !')
     })
-}
-
-module.exports = {
-    initDb, User, Candidat, Employeur, Diplome, Token, Disponibilite, UserDispo, UserDiplome
 }
