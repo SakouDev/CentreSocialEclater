@@ -72,63 +72,75 @@ Candidat.belongsTo(User, { onDelete: "CASCADE", onUpdate: "CASCADE" });
 User.hasOne(Employeur);
 Employeur.belongsTo(User);
 
-export const initDb = async () => {
+export const initDb = () => {
 
-    await sequelize.sync({ force: true })
-    diplomes.map((diplome: diplome) => {
-        Diplome.create({
-            certificate: diplome.certificate
-        }).then((Luc: { toJSON: () => string} ) => console.log(Luc.toJSON()))
-    })
-    tokens.map((token: token) => {
-        Token.create({
-            token: token.token,
-            tokenPush: token.tokenPush
-        }).then((Luc_1: { toJSON: () => string} ) => console.log(Luc_1.toJSON()))
-    })
-    disponibilites.map((disponibilite: disponibilite) => {
-        Disponibilite.create({
-            namePeriod: disponibilite.namePeriod
-        }).then((Luc_2: { toJSON: () => string} ) => console.log(Luc_2.toJSON()))
-    })
-    users.map((user: user, index: number) => {
-        User.create({
-            mail: user.mail,
-            visibility: user.visibility,
-            password: user.password,
-            address: user.address,
-            zipCode: user.zipCode,
-            city: user.city,
-            role: user.role,
-            image: user.image
-        }).then(async (req: any) => {
+    return sequelize.sync({force: true}).then(()=> {
 
-            console.log(req.toJSON())
-            for (let i = 0; i < 10; i++) {
-                const DisponibiliteRow = await Disponibilite.findByPk(Math.floor(Math.random() * (Object.keys(Disponibilite).length - 1 + 1) + 1))
-                await req.addDisponibilite(DisponibiliteRow, { through: UserDispo })
-            }
-            const DiplomeRow = await Diplome.findByPk(index + 1)
-            await req.addDiplome(DiplomeRow, { through: UserDiplome })
+        
+        diplomes.map((diplome: diplome) => {
+            Diplome.create({
+                certificate: diplome.certificate
+            }).then((Luc: { toJSON: () => string}) => console.log(Luc.toJSON()))
         })
-    })
-    candidats.map((candidat: candidat) => {
-        Candidat.create({
-            UserId: candidat.UserId,
-            firstName: candidat.firstName,
-            lastName: candidat.lastName,
-            birthday: candidat.birthday
-        }).then(async (req_1: any, index_1: number) => {
-            console.log(req_1.toJSON())
 
+        tokens.map((token: token) => {
+            Token.create({
+                token: token.token,
+                tokenPush : token.tokenPush
+            }).then((Luc: { toJSON: () => string}) => console.log(Luc.toJSON()))
         })
+        
+        disponibilites.map((disponibilite: disponibilite) => {
+            Disponibilite.create({
+                namePeriod: disponibilite.namePeriod
+            }).then((Luc: { toJSON: () => string}) => console.log(Luc.toJSON()))
+        })
+        
+        users.map((user: user, index : number) => {
+            User.create({
+                mail: user.mail,
+                visibility: user.visibility,
+                password: user.password,
+                address: user.address,
+                zipCode: user.zipCode,
+                city: user.city,
+                role: user.role,
+                image: user.image
+            }).then(async(req : any) => {
+
+                console.log(req.toJSON())
+                for (let i=0; i<10; i++){
+                    const DisponibiliteRow = await Disponibilite.findByPk(Math.floor(Math.random() * (Object.keys(Disponibilite).length - 1 + 1) + 1));
+                    await req.addDisponibilite(DisponibiliteRow, { through: UserDispo })
+                }
+                const DiplomeRow = await Diplome.findByPk( index + 1 );
+                await req.addDiplome(DiplomeRow, { through: UserDiplome })
+            })
+        })
+
+        candidats.map((candidat: candidat) => {
+            Candidat.create({
+                UserId : candidat.UserId,
+                firstName: candidat.firstName,
+                lastName: candidat.lastName,
+                birthday: candidat.birthday
+            }).then(async(req : any, index : number) => {
+                console.log(req.toJSON())
+
+                // const UserRow = await User.findByPk(candidat.userId);
+                // await req.addUser(UserRow)
+
+            })
+        })
+
+        employeurs.map((employeur: employeur) => {
+            Employeur.create({
+                UserId : employeur.UserId,
+                name: employeur.name,
+                siret: employeur.siret
+            }).then((Luc: { toJSON: () => string }) => console.log(Luc.toJSON()))
+        })
+
+        console.log('La base de donné user a bien été initialisée !')
     })
-    employeurs.map((employeur: employeur) => {
-        Employeur.create({
-            UserId: employeur.UserId,
-            name: employeur.name,
-            siret: employeur.siret
-        }).then((Luc_3: { toJSON: () => string} ) => console.log(Luc_3.toJSON()))
-    })
-    console.log('La base de donné user a bien été initialisée !')
 }
