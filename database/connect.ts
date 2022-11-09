@@ -32,9 +32,9 @@ const UserDiplomeModel = require('../models/user-diplome')
 
 //Connexion Database
 const sequelize = new Sequelize (
-    'TestForVincent',
-    'Test',
-    '12344',
+    'CentreSocial',
+    'postgres',
+    'postgres',
     {
         host:'localhost',
         dialect:'postgres',
