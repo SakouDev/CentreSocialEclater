@@ -1,9 +1,9 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import { disponibilite } from "../types/disponibilite";
-import { userId } from "../types/user";
-import { Disponibilite } from "../database/connect";
+import { ApiException } from "../../types/exception";
+import { disponibilite } from "../../types/disponibilite";
+import { userId } from "../../types/user";
+import { Disponibilite } from "../../database/connect";
 
 /**
  * @swagger

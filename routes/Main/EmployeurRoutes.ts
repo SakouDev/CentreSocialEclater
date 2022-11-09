@@ -1,11 +1,11 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
-import { disponibilite } from "../types/disponibilite";
-import { employeur } from "../types/employeur";
-import { ApiException } from "../types/exception";
+import { disponibilite } from "../../types/disponibilite";
+import { employeur } from "../../types/employeur";
+import { ApiException } from "../../types/exception";
 import bcrypt from 'bcrypt';
-import { employeurId } from "../types/employeur";
-import { Employeur, User, Disponibilite, UserDispo } from "../database/connect";
+import { employeurId } from "../../types/employeur";
+import { Employeur, User, Disponibilite, UserDispo } from "../../database/connect";
 
 /**
  * @swagger

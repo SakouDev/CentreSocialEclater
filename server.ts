@@ -40,12 +40,12 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-require('./routes/UserRoutes')(app)
-require('./routes/DisponibiliteRoutes')(app)
-require('./routes/CandidatRoutes')(app)
-require('./routes/EmployeurRoutes')(app)
-require('./routes/DiplomeRoutes')(app)
-require('./routes/TokenRoutes')(app)
+require('./routes/Main/UserRoutes')(app)
+require('./routes/Main/DisponibiliteRoutes')(app)
+require('./routes/Main/CandidatRoutes')(app)
+require('./routes/Main/EmployeurRoutes')(app)
+require('./routes/Main/DiplomeRoutes')(app)
+require('./routes/Main/TokenRoutes')(app)
 
 //Security
 

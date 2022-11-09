@@ -1,8 +1,8 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception"
-import { token } from "../types/token"
-import { Token } from "../database/connect";
+import { ApiException } from "../../types/exception"
+import { token } from "../../types/token"
+import { Token } from "../../database/connect";
 
 /**
  * @swagger

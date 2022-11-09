@@ -1,9 +1,9 @@
 import { Application } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import { user } from "../types/user";
-import { User } from "../database/connect";
-import { userId } from "../types/user";
+import { ApiException } from "../../types/exception";
+import { user } from "../../types/user";
+import { User } from "../../database/connect";
+import { userId } from "../../types/user";
 import bcrypt from "bcrypt";
 
 /**
