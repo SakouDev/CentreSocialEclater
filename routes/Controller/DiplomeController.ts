@@ -1,8 +1,8 @@
-import { Application } from "express";
+import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception"
-import { diplome } from "../types/diplome"
-import { Diplome } from "../database/connect";
+import { ApiException } from "../../types/exception"
+import { diplome } from "../../types/diplome"
+import { Diplome } from "../../database/connect";
 
 /**
  * @swagger
@@ -29,8 +29,7 @@ import { Diplome } from "../database/connect";
   *        200:
   *          description: La requête s'est bien déroulé
   */
-module.exports = (app: Application) => {
-  app.post("/api/diplomes", (req, res) => {
+export const addDiplome = async (req: Request, res: Response) => {
     Diplome.create(req.body)
       .then((diplome: diplome) => {
         const message: string = `Le Diplome ${req.body.certificate} a bien été crée.`;
@@ -43,8 +42,7 @@ module.exports = (app: Application) => {
         const message = `Le Diplome n'a pas pu être ajouté. Réessayer dans quelques instants.`
         res.status(500).json({message, data : error})
     })
-  });
-};
+  };
 
 /**
   * @openapi
@@ -61,8 +59,7 @@ module.exports = (app: Application) => {
   *        200:
   *          description: La requête s'est bien déroulé
   */
- module.exports = (app :Application) => {
-    app.delete('/api/diplomes/:id', (req, res) => {
+export const removeDiplome = async (req: Request, res: Response) => {
       Diplome.findByPk(req.params.id).then((diplome: diplome) => {
         if (diplome === null){
           const message = "Le Diplome demandé n'existe pas. Réessayer avec un autre identifiant."
@@ -82,8 +79,8 @@ module.exports = (app: Application) => {
         const message = `Le diplome n'a pas pu être supprimé. Réessayer dans quelques instants.`;
         res.status(500).json({ message, data: error });
       });
-    })
-  }
+    }
+  
 
   /**
  * @openapi
@@ -95,8 +92,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulé
  */
-module.exports = (app : Application) => {
-    app.get('/api/diplomes', (req,res) => {
+export const getAllDiplome = async (req: Request, res: Response) => {
         Diplome.findAll()
         .then((diplomes: diplome) => {
             const message : string = 'La liste des Diplomes à bien était récuperée.'
@@ -106,8 +102,8 @@ module.exports = (app : Application) => {
             const message = `La liste des Diplomes n'a pas pu être récupérée. Réessayer dans quelques instants.`
             res.status(500).json({message, data : error})
         })
-    })
-}
+    }
+
 
 /**
   * @openapi
@@ -125,8 +121,7 @@ module.exports = (app : Application) => {
   *        200:
   *          description: La requête s'est bien déroulé
   */
- module.exports = (app : Application) => {
-    app.get('/api/diplomes/:id', (req, res) => {
+ export const getByIdDiplome = async (req: Request, res: Response) => {
       Diplome.findByPk(req.params.id)
         .then((diplome : diplome )=> {
           if (diplome === null){
@@ -141,8 +136,8 @@ module.exports = (app : Application) => {
           const message = "Le Diplome demander n'a pas pu être récuperer. Réessayer dans quelques instants."
           res.status(500).json({message, data: error})
         })
-    })
-  }
+    }
+  
 
   /**
   * @openapi
@@ -167,8 +162,7 @@ module.exports = (app : Application) => {
   *        200:
   *          description: La requête s'est bien déroulé
   */
-module.exports = (app: Application) => {
-    app.put("/api/diplomes/:id", (req, res) => {
+   export const updateDiplome = async (req: Request, res: Response) => {
       const id = req.params.id;
       Diplome.update(req.body, {
         where: { id: id },
@@ -190,6 +184,6 @@ module.exports = (app: Application) => {
           const message = `Le Diplome n'a pas pu être modifié. Réessayer dans quelques instants.`;
           res.status(500).json({ message, data: error });
         });
-    });
-  };
+    };
+
   

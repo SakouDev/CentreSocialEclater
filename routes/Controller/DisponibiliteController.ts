@@ -1,9 +1,9 @@
-import { Application } from "express";
+import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import { disponibilite } from "../types/disponibilite";
-import { userId } from "../types/user";
-import { Disponibilite } from "../database/connect";
+import { ApiException } from "../../types/exception";
+import { disponibilite } from "../../types/disponibilite";
+import { userId } from "../../types/user";
+import { Disponibilite } from "../../database/connect";
 
 /**
  * @swagger
@@ -14,7 +14,7 @@ import { Disponibilite } from "../database/connect";
 
 /**
  * @openapi
- * /api/disponibilite:
+ * /api/disponibilites:
  *  post:
  *      tags: [Disponibilite]
  *      description: Crée une disponibilité
@@ -30,8 +30,7 @@ import { Disponibilite } from "../database/connect";
  *        200:
  *          description: La requête s'est bien déroulée.
  */
-module.exports = (app: Application) => {
-	app.post("/api/disponibilite", (req, res) => {
+ export const addDisponibilite = async (req: Request, res: Response) => {
 		Disponibilite.create(req.body)
 			.then((disponibilite: disponibilite) => {
 				const message: string = `La Disponibilité ${req.body.namePeriod} a bien été crée.`;
@@ -44,12 +43,12 @@ module.exports = (app: Application) => {
 				const message = `La Disponibilité n'a pas pu être ajouté. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
-	});
-};
+	};
+;
 
 /**
  * @openapi
- * /api/disponibilite/{id}:
+ * /api/disponibilites/{id}:
  *  delete:
  *      tags: [Disponibilite]
  *      description: Supprimer une disponibilité
@@ -62,8 +61,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.delete("/api/disponibilite/:id", (req, res) => {
+ export const removeDisponibilite = async (req: Request, res: Response) => {
 		Disponibilite.findByPk(req.params.id)
 			.then((disponibilite: userId) => {
 				if (disponibilite === null) {
@@ -84,12 +82,12 @@ module.exports = (app: Application) => {
 				const message = `La 'Disponibilite' n'a pas pu être supprimé. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
-	});
-};
+	};
+;
 
 /**
  * @openapi
- * /api/disponibilite:
+ * /api/disponibilites:
  *   get:
  *      tags: [Disponibilite]
  *      description: Liste des disponibilités
@@ -97,8 +95,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.get("/api/disponibilite", (req, res) => {
+ export const getAllDisponibilite = async (req: Request, res: Response) => {
 		Disponibilite.findAll()
 			.then((disponibilite: disponibilite) => {
 				const message: string =
@@ -109,12 +106,12 @@ module.exports = (app: Application) => {
 				const message = `La liste des Disponibilités n'a pas pu être récupérée. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
-	});
-};
+	};
+;
 
 /**
  * @openapi
- * /api/disponibilite/{id}:
+ * /api/disponibilites/{id}:
  *  get:
  *      tags: [Disponibilite]
  *      description: Trouver une disponibilité par son Id
@@ -128,8 +125,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.get("/api/disponibilite/:id", (req, res) => {
+ export const getByIdDisponibilite = async (req: Request, res: Response) => {
 		Disponibilite.findByPk(req.params.id)
 			.then((disponibilite: disponibilite) => {
 				if (disponibilite === null) {
@@ -146,12 +142,11 @@ module.exports = (app: Application) => {
 					"La Disponibilité demandé n'a pas pu être récuperé. Réessayer dans quelques instants.";
 				res.status(500).json({ message, data: error });
 			});
-	});
-};
+	};
 
 /**
  * @openapi
- * /api/disponibilite/{id}:
+ * /api/disponibilites/{id}:
  *  put:
  *      tags: [Disponibilite]
  *      description: Modifier une disponibilité
@@ -172,8 +167,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.put("/api/disponibilite/:id", (req, res) => {
+ export const updateDisponibilite = async (req: Request, res: Response) => {
 		const id = req.params.id;
 		Disponibilite.update(req.body, {
 			where: { id: id },
@@ -196,5 +190,5 @@ module.exports = (app: Application) => {
 				const message = `La 'Disponibilite' n'a pas pu être modifié. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
-	});
-};
+	};
+;

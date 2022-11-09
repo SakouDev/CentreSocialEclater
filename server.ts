@@ -2,9 +2,11 @@ import cors from 'cors'
 import express from "express"
 import swaggerUi from 'swagger-ui-express'
 import {Response, Request} from 'express'
+import { candidatRoutes, diplomeRoutes, disponibiliteRoutes, employeurRoutes, tokenRoutes, userRoutes, formRoutes, securityRoutes } from './routes/Routing'
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const sequelize = require('./database/connect')
+
 
 const app = express()
 app.use(cors())
@@ -39,25 +41,14 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-
-require('./routes/UserRoutes')(app)
-require('./routes/DisponibiliteRoutes')(app)
-require('./routes/CandidatRoutes')(app)
-require('./routes/EmployeurRoutes')(app)
-require('./routes/DiplomeRoutes')(app)
-require('./routes/TokenRoutes')(app)
-
-//Security
-
-require('./routes/Security/login')(app)
-require('./routes/Security/protected')(app)
-require('./routes/Security/refreshToken')(app)
-
-//Forms
-
-require('./routes/Forms/formCandidatUpdate')(app)
-require('./routes/Forms/formEmployeurUpdate')(app)
-
+app.use('/api/candidats', candidatRoutes)
+app.use('/api/diplomes', diplomeRoutes)
+app.use('/api/disponibilites', disponibiliteRoutes)
+app.use('/api/employeurs', employeurRoutes)
+app.use('/api/tokens', tokenRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/form', formRoutes)
+app.use('/api', securityRoutes)
 
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'

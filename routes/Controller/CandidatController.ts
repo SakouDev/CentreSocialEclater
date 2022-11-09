@@ -1,11 +1,11 @@
-import { Application } from "express";
+import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
-import { candidat } from "../types/candidat";
-import { diplome } from "../types/diplome";
-import { disponibilite } from "../types/disponibilite";
-import { ApiException } from "../types/exception";
+import { candidat } from "../../types/candidat";
+import { diplome } from "../../types/diplome";
+import { disponibilite } from "../../types/disponibilite";
+import { ApiException } from "../../types/exception";
 import bcrypt from 'bcrypt';
-import { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } from "../database/connect";
+import { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } from "../../database/connect";
 
 /**
  * @swagger
@@ -32,18 +32,17 @@ import { Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplome } from "
   *        200:
   *          description: La requête s'est bien déroulé
   */
-module.exports = (app: Application) => {
-  app.post("/api/candidats", async (req, res) => {
+export const addCandidat = async (req: Request, res: Response) => {
     req.body.User.password = await bcrypt.hash(req.body.User.password, 10)
     User.create(req.body.User).then((user : any) => {
       Candidat.create(req.body.Candidat).then ((candidat : any) => {
         candidat.setUser(user)
       })
-      req.body.Disponibilite.map( async (DispoMap : disponibilite) => {
+      req.body.Disponibilite?.map( async (DispoMap : disponibilite) => {
         const DisponibiliteRow = await Disponibilite.findByPk(DispoMap.id);
         await user.addDisponibilite(DisponibiliteRow, { through: UserDispo })
       })
-      req.body.Diplome.map( async (DiploMap : diplome) => {
+      req.body.Diplome?.map( async (DiploMap : diplome) => {
         const DiplomeRow = await Diplome.findByPk(DiploMap.id);
         await user.addDiplome(DiplomeRow, { through: UserDiplome })
       })
@@ -59,8 +58,7 @@ module.exports = (app: Application) => {
       const message = `Le Candidat n'a pas pu être ajouté. Réessayer dans quelques instants.`
       res.status(500).json({message, data : error})
     })
-  });
-};
+  };
   
 
 /**
@@ -78,8 +76,7 @@ module.exports = (app: Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
-module.exports = (app :Application) => {
-  app.delete('/api/candidats/:id', (req, res) => {
+export const removeCandidat = async (req: Request, res: Response) => {
     Candidat.findByPk(req.params.id).then((candidat: any) => {
       
       if (candidat === null){
@@ -102,8 +99,8 @@ module.exports = (app :Application) => {
       const message = `Le Candidat n'a pas pu être supprimé. Réessayer dans quelques instants.`;
       res.status(500).json({ message, data: error });
     });
-  })
-}
+  }
+
 
 /**
  * @openapi
@@ -115,8 +112,7 @@ module.exports = (app :Application) => {
  *        200:
  *          description: La requête s'est bien déroulé.
  */
- module.exports = (app : Application) => {
-    app.get('/api/candidats', (req,res) => {
+export const getAllCandidat = async (req: Request, res: Response) => {
         Candidat.findAll({include: [
 			{
 				model : User,
@@ -131,8 +127,8 @@ module.exports = (app :Application) => {
             const message = `La liste des candidats n'a pas pu être récupérée. Réessayer dans quelques instants.`
             res.status(500).json({message, data : error})
         })
-    })
-}
+    }
+
 
 /**
   * @openapi
@@ -150,8 +146,7 @@ module.exports = (app :Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
- module.exports = (app : Application) => {
-    app.get('/api/candidats/:id', (req, res) => {
+export const getByIdCandidat = async (req: Request, res: Response) => {
         Candidat.findByPk(req.params.id, {
             include : [
                 {
@@ -183,8 +178,8 @@ module.exports = (app :Application) => {
             const message = "Le Candidat demander n'a pas pu être récuperer. Réessayer dans quelques instants."
             res.status(500).json({message, data: error})
         })
-    })
-}
+    }
+
 
 /**
   * @openapi
@@ -209,8 +204,7 @@ module.exports = (app :Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
- module.exports = (app: Application) => {
-    app.put("/api/candidats/:id", (req, res) => {
+export const updateCandidat = async (req: Request, res: Response) => {
       const id = req.params.id;
       Candidat.update(req.body, {
         where: { id: id },
@@ -232,6 +226,5 @@ module.exports = (app :Application) => {
           const message = `Le Candidat n'a pas pu être modifié. Réessayer dans quelques instants.`;
           res.status(500).json({ message, data: error });
         });
-    });
-  };
+    };
   

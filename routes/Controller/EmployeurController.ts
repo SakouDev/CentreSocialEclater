@@ -1,11 +1,11 @@
-import { Application } from "express";
+import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
-import { disponibilite } from "../types/disponibilite";
-import { employeur } from "../types/employeur";
-import { ApiException } from "../types/exception";
+import { disponibilite } from "../../types/disponibilite";
+import { employeur } from "../../types/employeur";
+import { ApiException } from "../../types/exception";
 import bcrypt from 'bcrypt';
-import { employeurId } from "../types/employeur";
-import { Employeur, User, Disponibilite, UserDispo } from "../database/connect";
+import { employeurId } from "../../types/employeur";
+import { Employeur, User, Disponibilite, UserDispo } from "../../database/connect";
 
 /**
  * @swagger
@@ -32,8 +32,7 @@ import { Employeur, User, Disponibilite, UserDispo } from "../database/connect";
   *        200:
   *          description: La requête s'est bien déroulé.
   */
- module.exports = (app: Application) => {
-  app.post("/api/employeurs", async (req, res) => {
+ export const addEmployeur = async (req: Request, res: Response) => {
     req.body.User.password = await bcrypt.hash(req.body.User.password, 10)
     User.create(req.body.User).then((user : any) => {
       Employeur.create(req.body.Employeur).then ((employeur : any) => {
@@ -55,8 +54,7 @@ import { Employeur, User, Disponibilite, UserDispo } from "../database/connect";
       const message = `L'Employeur n'a pas pu être ajouté. Réessayer dans quelques instants.`
       res.status(500).json({message, data : error})
     })
-  });
-};
+  };
 
 /**
   * @openapi
@@ -73,8 +71,7 @@ import { Employeur, User, Disponibilite, UserDispo } from "../database/connect";
   *        200:
   *          description: La requête s'est bien déroulé.
   */
- module.exports = (app :Application) => {
-    app.delete('/api/employeurs/:id', (req, res) => {
+ export const removeEmployeur = async (req: Request, res: Response) => {
       Employeur.findByPk(req.params.id).then((employeur: employeurId) => {
         if (employeur === null){
           const message = "L'Employeur demandé n'existe pas. Réessayer avec un autre identifiant."
@@ -94,8 +91,7 @@ import { Employeur, User, Disponibilite, UserDispo } from "../database/connect";
         const message = `L'Employeur n'a pas pu être supprimé. Réessayer dans quelques instants.`;
         res.status(500).json({ message, data: error });
       });
-    })
-  }
+    }
 
   /**
  * @openapi
@@ -107,8 +103,7 @@ import { Employeur, User, Disponibilite, UserDispo } from "../database/connect";
  *        200:
  *          description: La requête s'est bien déroulé.
  */
-module.exports = (app : Application) => {
-    app.get('/api/employeurs', (req,res) => {
+   export const getAllEmployeur = async (req: Request, res: Response) => {
         Employeur.findAll({include: [
 			{
 				model : User,
@@ -123,8 +118,8 @@ module.exports = (app : Application) => {
             const message = `La liste des Employeurs n'a pas pu être récupérée. Réessayer dans quelques instants.`
             res.status(500).json({message, data : error})
         })
-    })
-}
+    }
+
 
 /**
   * @openapi
@@ -142,8 +137,7 @@ module.exports = (app : Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
- module.exports = (app : Application) => {
-    app.get('/api/employeurs/:id', (req, res) => {
+ export const getByIdEmployeur = async (req: Request, res: Response) => {
       Employeur.findByPk(req.params.id, {
         include: [
           {
@@ -171,8 +165,8 @@ module.exports = (app : Application) => {
         const message = "L'Employeur demander n'a pas pu être récuperer. Réessayer dans quelques instants."
         res.status(500).json({message, data: error})
       })
-    })
-  }
+    }
+
 
   /**
   * @openapi
@@ -197,8 +191,7 @@ module.exports = (app : Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
-module.exports = (app: Application) => {
-    app.put("/api/employeurs/:id", (req, res) => {
+   export const updateEmployeur = async (req: Request, res: Response) => {
       const id = req.params.id;
       Employeur.update(req.body, {
         where: { id: id },
@@ -220,6 +213,5 @@ module.exports = (app: Application) => {
         const message = `L'Employeur n'a pas pu être modifié. Réessayer dans quelques instants.`;
         res.status(500).json({ message, data: error });
       });
-    });
-  };
+    }
   

@@ -1,9 +1,9 @@
-import { Application } from "express";
+import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import { user } from "../types/user";
-import { User } from "../database/connect";
-import { userId } from "../types/user";
+import { ApiException } from "../../types/exception";
+import { user } from "../../types/user";
+import { User } from "../../database/connect";
+import { userId } from "../../types/user";
 import bcrypt from "bcrypt";
 
 /**
@@ -31,8 +31,7 @@ import bcrypt from "bcrypt";
  *        200:
  *          description: La requête s'est bien déroulée.
  */
-module.exports = (app: Application) => {
-	app.post("/api/users", async (req, res) => {
+ export const addUser = async (req: Request, res: Response) => {
 		User.create({...req.body})
 			.then((user: user) => {
 				const message: string = `L'Utilisateur ${req.body.mail} a bien été crée.`;
@@ -45,8 +44,7 @@ module.exports = (app: Application) => {
 				const message = `L'Utilisateur n'a pas pu être ajouté. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
-	});
-};
+	}
 
 /**
  * @openapi
@@ -63,8 +61,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.delete("/api/users/:id", (req, res) => {
+ export const removeUser = async (req: Request, res: Response) => {
 		User.findByPk(req.params.id)
 			.then((user: userId) => {
 				if (user === null) {
@@ -85,8 +82,7 @@ module.exports = (app: Application) => {
 				const message = `L'Utilisateur' n'a pas pu être supprimé. Réessayer dans quelques instants.`;
 				res.status(500).json({ message, data: error });
 			});
-	});
-};
+	}
 
 /**
  * @openapi
@@ -98,8 +94,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.get("/api/users", (req, res) => {
+ export const getAllUser = async (req: Request, res: Response) => {
 		User.findAll()
 		.then((users: user) => {
 			const message: string =
@@ -110,8 +105,7 @@ module.exports = (app: Application) => {
 			const message = `La liste des Utilisateurs n'a pas pu être récupérée. Réessayer dans quelques instants.`;
 			res.status(500).json({ message, data: error });
 		});
-	});
-};
+	}
 
 /**
  * @openapi
@@ -129,8 +123,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.get("/api/users/:id", (req, res) => {
+ export const getByIdUser = async (req: Request, res: Response) => {
 		User.findByPk(req.params.id)
 		.then((user: user) => {
 			if (user === null) {
@@ -147,8 +140,7 @@ module.exports = (app: Application) => {
 				"L'Utilisateur demandé n'a pas pu être récuperé. Réessayer dans quelques instants.";
 			res.status(500).json({ message, data: error });
 		});
-	});
-};
+	}
 
 /**
  * @openapi
@@ -173,8 +165,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulée.
  */
- module.exports = (app: Application) => {
-	app.put("/api/users/:id", async (req, res) => {
+ export const updateUser = async (req: Request, res: Response) => {
 		const id = req.params.id;
 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
 		User.update({...req.body, password: hashedPassword}, {
@@ -198,5 +189,4 @@ module.exports = (app: Application) => {
 			const message = `L'Utilisateur' n'a pas pu être modifié. Réessayer dans quelques instants.`;
 			res.status(500).json({ message, data: error });
 		});
-	});
-};
+	}

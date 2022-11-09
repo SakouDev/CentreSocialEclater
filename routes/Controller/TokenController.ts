@@ -1,8 +1,8 @@
-import { Application } from "express";
+import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception"
-import { token } from "../types/token"
-import { Token } from "../database/connect";
+import { ApiException } from "../../types/exception"
+import { token } from "../../types/token"
+import { Token } from "../../database/connect";
 
 /**
  * @swagger
@@ -29,8 +29,7 @@ import { Token } from "../database/connect";
   *        200:
   *          description: La requête s'est bien déroulé.
   */
-module.exports = (app: Application) => {
-  app.post("/api/tokens", (req, res) => {
+ export const addToken = async (req: Request, res: Response) => {
     Token.create(req.body)
       .then((token: token) => {
         const message: string = `Le Token ${req.body.name} a bien été crée.`;
@@ -43,8 +42,7 @@ module.exports = (app: Application) => {
         const message = `Le Token n'a pas pu être ajouté. Réessayer dans quelques instants.`
         res.status(500).json({message, data : error})
     })
-  });
-};
+  }
 
 /**
   * @openapi
@@ -61,8 +59,7 @@ module.exports = (app: Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
- module.exports = (app :Application) => {
-    app.delete('/api/tokens/:id', (req, res) => {
+ export const removeToken = async (req: Request, res: Response) => {
       Token.findByPk(req.params.id).then((token: token) => {
         if (token === null){
           const message = "Le Token demandé n'existe pas. Réessayer avec un autre identifiant."
@@ -82,8 +79,7 @@ module.exports = (app: Application) => {
         const message = `Le token n'a pas pu être supprimé. Réessayer dans quelques instants.`;
         res.status(500).json({ message, data: error });
       });
-    })
-  }
+    }
 
   /**
  * @openapi
@@ -95,8 +91,7 @@ module.exports = (app: Application) => {
  *        200:
  *          description: La requête s'est bien déroulé.
  */
-module.exports = (app : Application) => {
-    app.get('/api/tokens', (req,res) => {
+   export const getAllToken = async (req: Request, res: Response) => {
         Token.findAll()
         .then((tokens: token) => {
             const message : string = 'La liste des Tokens à bien était récuperée.'
@@ -106,8 +101,7 @@ module.exports = (app : Application) => {
             const message = `La liste des Tokens n'a pas pu être récupérée. Réessayer dans quelques instants.`
             res.status(500).json({message, data : error})
         })
-    })
-}
+    }
 
 /**
   * @openapi
@@ -125,8 +119,7 @@ module.exports = (app : Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
- module.exports = (app : Application) => {
-    app.get('/api/tokens/:id', (req, res) => {
+ export const getByIdToken = async (req: Request, res: Response) => {
       Token.findByPk(req.params.id)
         .then((token : token )=> {
           if (token === null){
@@ -141,8 +134,7 @@ module.exports = (app : Application) => {
           const message = "Le Token demander n'a pas pu être récuperer. Réessayer dans quelques instants."
           res.status(500).json({message, data: error})
         })
-    })
-  }
+    }
 
   /**
   * @openapi
@@ -167,8 +159,7 @@ module.exports = (app : Application) => {
   *        200:
   *          description: La requête s'est bien déroulé.
   */
-module.exports = (app: Application) => {
-    app.put("/api/tokens/:id", (req, res) => {
+   export const updateToken = async (req: Request, res: Response) => {
       const id = req.params.id;
       Token.update(req.body, {
         where: { id: id },
@@ -190,7 +181,6 @@ module.exports = (app: Application) => {
           const message = `Le Token n'a pas pu être modifié. Réessayer dans quelques instants.`;
           res.status(500).json({ message, data: error });
         });
-    });
-  };
+    }
 
   
