@@ -51,7 +51,6 @@ require('./routes/TokenRoutes')(app)
 
 require('./routes/Security/login')(app)
 require('./routes/Security/protected')(app)
-require('./routes/Security/refreshToken')(app)
 
 //Forms
 
