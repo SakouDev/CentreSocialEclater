@@ -1,7 +1,8 @@
-import { DataTypes } from "sequelize";
+import {  DataTypes, Sequelize } from "sequelize"
 import {sequelize} from "../connect"
 
-export const User = sequelize.define("User",
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
+	return sequelize.define("User",
 		{
 			id: {
 				type: DataTypes.INTEGER,
@@ -84,4 +85,4 @@ export const User = sequelize.define("User",
 				},
 			},
 		}
-	);
+	);}

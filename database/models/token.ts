@@ -1,8 +1,9 @@
 
-import {  DataTypes } from "sequelize"
-import {sequelize} from "../connect"
+import {  DataTypes, Sequelize } from "sequelize"
 
-export const Token = sequelize.define('Token', {
+module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+    
+    return sequelize.define('Token', {
         token: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -22,4 +23,4 @@ export const Token = sequelize.define('Token', {
         UserId: {
             type: DataTypes.INTEGER,
         },
-    })
+    })}
