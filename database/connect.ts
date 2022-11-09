@@ -1,88 +1,76 @@
-import { DataTypes } from "sequelize"
-const {Sequelize} = require('sequelize')
+import { DataTypes, Sequelize } from "sequelize"
+import { DBlogs } from "./DBConfig";
 
 //Table
-import { user } from "../types/user"
-const UserModel = require('../models/user')
-let users = require('../database/mock/mock-user')
+import { user } from "../types/user";
+const UserModel = require("./models/user");
+let users = require("./mock/mock-user");
 
-import { candidat } from "../types/candidat"
-const CandidatModel = require('../models/candidat')
-let candidats = require('../database/mock/mock-candidat')
+import { candidat } from "../types/candidat";
+const CandidatModel = require("./models/candidat");
+let candidats = require("./mock/mock-candidat");
 
-import { employeur } from "../types/employeur"
-const EmployeurModel = require('../models/employeur')
-let employeurs = require('../database/mock/mock-employeur')
+import { employeur } from "../types/employeur";
+const EmployeurModel = require("./models/employeur");
+let employeurs = require("./mock/mock-employeur");
 
-import { diplome } from "../types/diplome"
-const DiplomeModel = require('../models/diplome')
-let diplomes = require('../database/mock/mock-diplome')
+import { diplome } from "../types/diplome";
+const DiplomeModel = require("./models/diplome");
+let diplomes = require("./mock/mock-diplome");
 
-import { disponibilite } from "../types/disponibilite"
-const DisponibiliteModel = require('../models/disponibilite')
-let disponibilites = require('../database/mock/mock-disponibilite')
+import { disponibilite } from "../types/disponibilite";
+const DisponibiliteModel = require("./models/disponibilite");
+let disponibilites = require("./mock/mock-disponibilite");
 
-import { token } from "../types/token"
-const TokenModel = require('../models/token')
-let tokens = require('../database/mock/mock-token')
+import { token } from "../types/token";
+const TokenModel = require("./models/token");
+let tokens = require("./mock/mock-token");
 
 //Table Jointure
-const UserDispoModel = require('../models/user-disponibilite')
-const UserDiplomeModel = require('../models/user-diplome')
+const UserDispoModel = require("./models/user-disponibilite");
+const UserDiplomeModel = require("./models/user-diplome");
 
 //Connexion Database
-const sequelize = new Sequelize (
-    'TestForVincent',
-    'postgres',
-    '12344',
-    {
-        host:'localhost',
-        dialect:'postgres',
-        port: 5432,
-        dialectOptions: {
-            timezone: 'Etc/GMT-2'
-        }
-    }
-)
+export const sequelize = new Sequelize(`${DBlogs.dialect}://${DBlogs.user}:${DBlogs.password}@${DBlogs.host}:${DBlogs.port}/${DBlogs.database}`);
 
-sequelize.authenticate()
-    .then(() => console.log("La connextion à la base de donnée à bien était établie"))
-    .catch((error : Error) => console.error(`Impossible de se connecter à la base de données ${error}`))
-
+sequelize
+	.authenticate()
+	.then(() =>
+		console.log("La connextion à la base de donnée à bien était établie")
+	)
+	.catch((error: Error) =>
+		console.error(`Impossible de se connecter à la base de données ${error}`)
+	);
 
 //Table
-const User = UserModel(sequelize, DataTypes)
-const Candidat = CandidatModel(sequelize, DataTypes)
-const Employeur = EmployeurModel(sequelize, DataTypes)
-const Diplome = DiplomeModel(sequelize, DataTypes)
-const Disponibilite = DisponibiliteModel(sequelize, DataTypes)
-const Token = TokenModel(sequelize, DataTypes)
+export const User = UserModel(sequelize, DataTypes)
+export const Candidat = CandidatModel(sequelize, DataTypes)
+export const Employeur = EmployeurModel(sequelize, DataTypes)
+export const Diplome = DiplomeModel(sequelize, DataTypes)
+export const Disponibilite = DisponibiliteModel(sequelize, DataTypes)
+export const Token = TokenModel(sequelize, DataTypes)
 
 //Table Jointure
-const UserDispo = UserDispoModel(sequelize, DataTypes)
-const UserDiplome = UserDiplomeModel(sequelize, DataTypes)
+export const UserDispo = UserDispoModel(sequelize, DataTypes)
+export const UserDiplome = UserDiplomeModel(sequelize, DataTypes)
 
 
 //UserDispo --> Jointure entre Disponibilite et User
-User.belongsToMany(Disponibilite, {through: UserDispo})
-Disponibilite.belongsToMany(User, {through: UserDispo})
+User.belongsToMany(Disponibilite, { through: UserDispo });
+Disponibilite.belongsToMany(User, { through: UserDispo });
 
 //UserDiplome --> Jointure entre Diplome et User
-User.belongsToMany(Diplome, {through: UserDiplome})
-Diplome.belongsToMany(User, {through: UserDiplome})
+User.belongsToMany(Diplome, { through: UserDiplome });
+Diplome.belongsToMany(User, { through: UserDiplome });
 
-User.hasOne(Token)
-Token.belongsTo(User)
+User.hasOne(Token);
+Token.belongsTo(User);
 
-User.hasOne(Candidat, { onDelete : 'CASCADE', onUpdate : 'CASCADE' })
-Candidat.belongsTo(User, { onDelete : 'CASCADE', onUpdate : 'CASCADE' })
+User.hasOne(Candidat, { onDelete: "CASCADE", onUpdate: "CASCADE" });
+Candidat.belongsTo(User, { onDelete: "CASCADE", onUpdate: "CASCADE" });
 
-User.hasOne(Employeur)
-Employeur.belongsTo(User)
-
-const initDb = () => {
-
-    return sequelize.sync({force: true}).then(()=> {
+User.hasOne(Employeur);
+Employeur.belongsTo(User);
 
 export const initDb = () => {
 
