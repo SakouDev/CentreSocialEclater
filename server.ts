@@ -5,7 +5,6 @@ import {Response, Request} from 'express'
 import { candidatRoutes, diplomeRoutes, disponibiliteRoutes, employeurRoutes, tokenRoutes, userRoutes, formRoutes, securityRoutes } from './routes/Routing'
 
 const swaggerJsDoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./database/connect')
 
 
