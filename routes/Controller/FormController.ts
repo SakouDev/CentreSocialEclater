@@ -34,7 +34,7 @@ const { Employeur, Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplom
   *         in: body
   *         required: true  
   *         type: object
-  *         default: {"Candidat" : {"firstName": "Luc","lastName": "Vigneron","birthday": "27/04/1999"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "YEAH","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}],"Diplome" : [{"id" : 2},{"id" : 4}]}
+  *         default: {"Candidat" : {"firstName": "Luc","lastName": "Vigneron","birthday": "27/04/1999"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "candidat","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}],"Diplome" : [{"id" : 2},{"id" : 4}]}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé
@@ -109,7 +109,7 @@ const { Employeur, Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplom
   *         in: body
   *         required: true  
   *         type: object
-  *         default: {"Employeur" : {"name": "Simplon","siret": "12356894100789"},"User": {"mail": "menfou@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "YEAH","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}]}
+  *         default: {"Employeur" : {"name": "Simplon","siret": "12356894100789"},"User": {"mail": "test@test.com","visibility": true,"password": "blabla","address": "9 rue du régiment de la chaudière","zipCode": 62200,"city": "Boulogne-sur Mer","role": "Employeur","image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}]}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé

@@ -27,7 +27,7 @@ import { Employeur, User, Disponibilite, UserDispo } from "../../database/connec
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"name": "ECLATER", "siret": "231564156D125"}
+  *         default: {"Employeur" : {"name": "Simplon", "siret": "12356894100789"},"User": {"mail": "test@test.com", "visibility": true, "password": "blabla", "address": "9 rue du régiment de la chaudière", "zipCode": 62200, "city": "Boulogne-sur Mer", "role": "Employeur", "image": "http://www.rien.com"},"Disponibilite": [{"id": 1},{"id": 4},{"id": 7}]}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé.
