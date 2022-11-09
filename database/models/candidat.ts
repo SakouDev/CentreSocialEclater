@@ -1,16 +1,15 @@
-
 import {  DataTypes, Sequelize } from "sequelize"
 
 module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     
     return sequelize.define('Candidat', {
         id: {
-        type: DataTypes.INTEGER,
+        type: dataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true, 
         },
         phone: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: true,
             unique: true,
             validate : {
@@ -18,7 +17,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         firstName: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : 'Veuillez entrer votre Prénom. Cette valeur est requise'},
@@ -26,7 +25,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         lastName: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : 'Veuillez entrer votre Nom. Cette valeur est requise'},
@@ -34,7 +33,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         birthday: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : 'Veuillez entrer votre Date de naissance. Cette valeur est requise'},
@@ -42,8 +41,9 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         UserId: {
-            type: DataTypes.INTEGER,
+            type: dataTypes.INTEGER,
             autoIncrement: false,
             primaryKey: false, 
         },
-    })}
+    })
+}

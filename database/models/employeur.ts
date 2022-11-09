@@ -1,16 +1,15 @@
-
 import {  DataTypes, Sequelize } from "sequelize"
 
 module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     
     return sequelize.define('Employeur', {
         id: {
-        type: DataTypes.INTEGER,
+        type: dataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true, 
         },
         name: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : "Veuillez entrer votre nom d'entreprise. Cette valeur est requise"},
@@ -18,7 +17,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         siret: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : 'Veuillez entrer votre SIRET. Cette valeur est requise'},
@@ -26,8 +25,9 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         UserId: {
-            type: DataTypes.INTEGER,
+            type: dataTypes.INTEGER,
             autoIncrement: false,
             primaryKey: false, 
             },
-    })}
+    })
+}
