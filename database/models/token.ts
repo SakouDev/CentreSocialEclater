@@ -1,11 +1,10 @@
-
 import {  DataTypes, Sequelize } from "sequelize"
 
 module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     
     return sequelize.define('Token', {
         token: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg : "Veuillez entrer votre Token. Cette valeur est requise"},
@@ -13,7 +12,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         tokenPush: {
-            type: DataTypes.STRING,
+            type: dataTypes.STRING,
             // allowNull: false,
             // validate: {
             //     notNull: { msg : 'Veuillez entrer votre Token. Cette valeur est requise'},
@@ -21,6 +20,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             // }
         },
         UserId: {
-            type: DataTypes.INTEGER,
+            type: dataTypes.INTEGER,
         },
-    })}
+    })
+}
