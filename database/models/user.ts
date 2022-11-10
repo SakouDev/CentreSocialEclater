@@ -24,7 +24,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 				allowNull: true,
 				unique: true,
 				validate: {
-					isNumeric: true,
+					is: /^$|^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/g
 				},
 			},
 			visibility: {

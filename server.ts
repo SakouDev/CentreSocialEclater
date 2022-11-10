@@ -35,6 +35,19 @@ const swaggerOptions = {
                 description: 'localhost'
             },],
         },
+        securityDefinitions: {
+            bearerAuth: {
+                type: 'apiKey',
+                name: 'Authorization',
+                scheme: 'bearer',
+                in: 'header',
+            },
+        },
+        security: [
+            {
+                bearerAuth: []
+            }
+        ],
     },
     apis: [`./routes/*/*.ts`]
 }
