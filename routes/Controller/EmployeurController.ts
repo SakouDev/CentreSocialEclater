@@ -67,6 +67,7 @@ import { Employeur, User, Disponibilite, UserDispo } from "../../database/connec
   *         in: path
   *         required: true
   *         type: integer
+  *         default: {"Employeur": {"name": "ECLATER", "siret": "231564156D125"}, "User": {"mail": "menfou@test.com", "visibility": true, "password": "blabla", "address": "9 rue du régiment de la chaudière", "zipCode": 62200, "city": "Boulogne-sur Mer", "role": "Employeur", "image": "http://www.rien.com/%22%7D"}, "Disponibilite": [{"id": 1}, {"id": 4}, {"id": 7}]}
   *      responses:
   *        200:
   *          description: La requête s'est bien déroulé.
