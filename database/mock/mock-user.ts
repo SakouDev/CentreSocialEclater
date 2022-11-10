@@ -6,7 +6,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : "62200",
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Candidat",
     image: "http://www.rien.com",
   },
   {
@@ -16,7 +16,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : "62200",
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Candidat",
     image: "http://www.rien.com",
   },
   {
@@ -26,7 +26,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : "62200",
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Candidat",
     image: "http://www.rien.com",
   },
   {
@@ -36,7 +36,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : "62200",
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Candidat",
     image: "http://www.rien.com",
   },
   {
@@ -46,7 +46,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : 62200,
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Employeur",
     image: "http://www.rien.com",
   },
   {
@@ -56,7 +56,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : 62200,
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Employeur",
     image: "http://www.rien.com",
   },
   {
@@ -66,7 +66,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : 62200,
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Employeur",
     image: "http://www.rien.com",
   },
   {
@@ -76,7 +76,7 @@ const users = [
     address : "9 rue du régiment de la chaudière",
     zipCode : "62200",
     city : "Boulogne-sur Mer",
-    role : "",
+    role : "Employeur",
     image: "http://www.rien.com",
   },
 ];
