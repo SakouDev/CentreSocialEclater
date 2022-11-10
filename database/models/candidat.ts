@@ -8,14 +8,6 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         autoIncrement: true,
         primaryKey: true, 
         },
-        phone: {
-            type: dataTypes.STRING,
-            allowNull: true,
-            unique: true,
-            validate : {
-                isNumeric:true,
-            }
-        },
         firstName: {
             type: dataTypes.STRING,
             allowNull: false,
