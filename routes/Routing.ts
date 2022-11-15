@@ -8,7 +8,8 @@ const employeurController = require('./Controller/EmployeurController');
 const tokenController = require('./Controller/TokenController');
 const userController = require('./Controller/UserController'); //DEAD ROUTES
 const formController = require('./Controller/FormController')
-const securityController = require ('./Controller/SecurityController')
+const securityController = require('./Controller/SecurityController')
+const emailController = require('./Controller/EmailController')
 
 export const candidatRoutes = Router();
 
@@ -69,3 +70,7 @@ securityRoutes.post('/login', securityController.loginUser);
 securityRoutes.delete('/tokens/:id', securityController.logoutUser); //WARNING Possible Conflit
 securityRoutes.post('/protected', checkAccessToken, securityController.protectedRoute);
 securityRoutes.post('/refreshtoken', securityController.refreshTokens);
+
+export const emailRoutes = Router();
+
+emailRoutes.post('/', emailController.sendEmail);

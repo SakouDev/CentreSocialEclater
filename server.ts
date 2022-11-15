@@ -2,7 +2,7 @@ import cors from 'cors'
 import express from "express"
 import swaggerUi from 'swagger-ui-express'
 import {Response, Request} from 'express'
-import { candidatRoutes, diplomeRoutes, disponibiliteRoutes, employeurRoutes, tokenRoutes, userRoutes, formRoutes, securityRoutes } from './routes/Routing'
+import { candidatRoutes, diplomeRoutes, disponibiliteRoutes, employeurRoutes, tokenRoutes, userRoutes, formRoutes, securityRoutes, emailRoutes } from './routes/Routing'
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const sequelize = require('./database/connect')
@@ -62,6 +62,7 @@ app.use('/api/tokens', tokenRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/form', formRoutes)
 app.use('/api', securityRoutes)
+app.use('/api/email', emailRoutes)
 
 app.use(({res : ApiException}: any) => {
     const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'

@@ -1,5 +1,5 @@
 import { DataTypes, Sequelize } from "sequelize"
-import { DBlogs } from "./DBConfig";
+import { DBlogs } from "../Config";
 
 //Table
 import { user } from "../types/user";
