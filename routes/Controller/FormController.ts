@@ -44,7 +44,7 @@ const { Employeur, Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplom
         Candidat.update(req.body.Candidat, {where : {id : req.params.id}}).then (() => {        
             Candidat.findByPk(req.params.id).then((candidat: candidat) => {
                 User.update(req.body.User, {where : {id : candidat.UserId}}).then(() => {
-                    User.findByPk(req.params.id).then((user: any) => {
+                    User.findByPk(candidat.UserId).then((user: any) => {
 
                         UserDispo.destroy({where: { UserId: user.id }})
                         req.body.Disponibilite?.map( async (DispoMap : disponibilite) => {
@@ -120,7 +120,7 @@ const { Employeur, Candidat, User, Disponibilite, UserDispo, Diplome, UserDiplom
         Employeur.update(req.body.Employeur, {where : {id : req.params.id}}).then ((employeurmenfou : any) => {        
             Employeur.findByPk(req.params.id).then((employeur: employeur) => {
                 User.update(req.body.User, {where : {id : employeur.UserId}}).then((usermenfou : any) => {
-                    User.findByPk(req.params.id).then((user: any) => {
+                    User.findByPk(employeur.UserId).then((user: any) => {
 
                         UserDispo.destroy({where: { UserId: user.id }})
                         req.body.Disponibilite?.map( async (DispoMap : disponibilite) => {
