@@ -17,11 +17,9 @@ app.use(express.json())
 
 console.log(process.env.MOCK_DB)
 
-console.log("Type",typeof process.env.MOCK_DB)
-
 console.log("String",process.env.MOCK_DB == "true")
 
-process.env.MOCK_DB && console.log("IL ACCEPTE EN BOOL")
+process.env.MOCK_DB == "true" && console.log("IL ACCEPTE TRUE ONLY")
 
 // sequelize.initDb()
 
