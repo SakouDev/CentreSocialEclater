@@ -15,7 +15,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-console.log(process.env.MOCK_DB)
+console.log(process.env.MOCK_DB || "Test MOCK .env")
 
 // sequelize.initDb()
 
