@@ -15,11 +15,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-console.log(process.env.MOCK_DB)
-
-console.log("String",process.env.MOCK_DB == "true")
-
-process.env.MOCK_DB == "true" && console.log("IL ACCEPTE TRUE ONLY")
+process.env.MOCK_DB == "true" && sequelize.initDb()
 
 // sequelize.initDb()
 
