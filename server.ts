@@ -15,7 +15,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-console.log(process.env.MOCK_DB || "Test MOCK .env")
+console.log(process.env.MOCK_DB)
+
+console.log("Type",typeof process.env.MOCK_DB)
+
+console.log("String",process.env.MOCK_DB == "true")
+
+process.env.MOCK_DB && console.log("IL ACCEPTE EN BOOL")
 
 // sequelize.initDb()
 
