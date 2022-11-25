@@ -67,7 +67,7 @@ formRoutes.put('/candidat/:id', formController.formCandidat);
 export const securityRoutes = Router();
 
 securityRoutes.post('/login', securityController.loginUser);
-securityRoutes.delete('/tokens/:id', securityController.logoutUser); //WARNING Possible Conflit
+securityRoutes.delete('/logout/:id', securityController.logoutUser); //WARNING Possible Conflit
 securityRoutes.post('/protected', checkAccessToken, securityController.protectedRoute);
 securityRoutes.post('/refreshtoken', securityController.refreshTokens);
 

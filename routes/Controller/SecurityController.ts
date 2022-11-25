@@ -45,7 +45,7 @@ export interface ProcessEnv {
 					user.password
 				);
 				if (checkPassword) {
-					const payload = { id: user.id, email: user.mail };
+					const payload = { id: user.id, email: user.mail, role: user.role };
 					const refreshToken: any = jwt.sign(
 						payload,
 						process.env.JWT_TOKEN_SECRET as string
@@ -53,7 +53,7 @@ export interface ProcessEnv {
 					const accessToken: any = jwt.sign(
 						payload,
 						process.env.JWT_TOKEN as string,
-						{ expiresIn: "30m" }
+						{ expiresIn: "12h" }
 					);
 					Token.create({token: refreshToken, UserId: user.id})
 					const message: string = `L'Utilisateur a été touvé.`;
@@ -61,6 +61,7 @@ export interface ProcessEnv {
 						message,
 						refreshToken: refreshToken,
 						accessToken: accessToken,
+						role: user.role,
 					});
 				} else {
 					res.status(400).json({ message: "Mot de passe Invalide" });
@@ -77,7 +78,7 @@ export interface ProcessEnv {
 
 /**
  * @openapi
- * /api/tokens/{id}:
+ * /api/logout/{id}:
  *  delete:
  *      tags: [Security]
  *      description: Supprimer un token
@@ -90,7 +91,7 @@ export interface ProcessEnv {
  *        200:
  *          description: La requête s'est bien déroulé.
  */
- export const logoutUser = async (req: Request, res: Response) => {
+export const logoutUser = async (req: Request, res: Response) => {
 		Token.findByPk(req.params.id)
 			.then((token: token) => {
 				if (token === null) {
@@ -163,12 +164,13 @@ export const refreshTokens = async (req: Request, res: Response) => {
 			const val = jwt.decode(oldRefreshToken, process.env.JWT_TOKEN_SECRET);
             const mail = val?.mail;
 			const userId = val?.id;
+			const role = val?.role
 
 			// verify that the user exist
             User.findOne({ where: { mail } })
 
 			// create new tokens
-			const payload = { id: userId, email: mail };
+			const payload = { id: userId, email: mail, role: role };
 			const refreshToken: any = jwt.sign(
 				payload,
 				process.env.JWT_TOKEN_SECRET as string
