@@ -8,21 +8,21 @@ const candidats = [
     },
     {
         UserId : 2,
-        lastName : "Ferro",
-        firstName :  "Luc",
-        birthday : "27/04/1999"
+        lastName : "Bobert",
+        firstName :  "Cedat",
+        birthday : "27/04/1949"
     },
     {
         UserId : 3,
-        lastName : "Menfou",
-        firstName :  "Menfou",
-        birthday : "27/04/1999"
+        lastName : "Martine",
+        firstName :  "Menille",
+        birthday : "27/04/1991"
     },
     {
         UserId : 4,
-        lastName : "lalalala",
-        firstName :  "lalalala",
-        birthday : "27/04/1999"
+        lastName : "John",
+        firstName :  "Faraday",
+        birthday : "27/04/1992"
     },
 ]
 
